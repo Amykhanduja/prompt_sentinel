@@ -4,8 +4,12 @@ from preprocessing.base64_decoder import decode_base64_content
 
 def preprocess_prompt(prompt: str):
 
-    prompt = normalize_unicode(prompt)
+    prompt, unicode_flag = normalize_unicode(prompt)
 
-    prompt = decode_base64_content(prompt)
+    prompt, base64_flag = decode_base64_content(prompt)
 
-    return prompt
+    return {
+        "prompt": prompt,
+        "unicode_flag": unicode_flag,
+        "base64_flag": base64_flag
+    }

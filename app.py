@@ -15,20 +15,35 @@ class PromptRequest(BaseModel):
 
 def scan_prompt(prompt: str):
 
-    processed_prompt = preprocess_prompt(prompt)
+    processed = preprocess_prompt(prompt)
+
+    processed_prompt = processed["prompt"]
 
     detections = run_detectors(processed_prompt)
+
+    if processed["unicode_flag"]:
+        detections.append({
+            "technique": "PT-023",
+            "description": "Unicode Obfuscation"
+        })
+
+    if processed["base64_flag"]:
+        detections.append({
+            "technique": "PT-024",
+            "description": "Base64 Obfuscation"
+        })
 
     risk = calculate_risk(detections)
 
     action = decide_action(risk)
+
     if detections:
-       log_alert(
-           prompt,
-           detections,
-           risk,
-           action
-       )
+        log_alert(
+            prompt,
+            detections,
+            risk,
+            action
+        )
 
     return {
         "original_prompt": prompt,

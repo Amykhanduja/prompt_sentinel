@@ -1,9 +1,17 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+
 from preprocessing.pipeline import preprocess_prompt
 from detectors.engine import run_detectors
 from scoring.risk_engine import calculate_risk
 from policies.policy_engine import decide_action
 from logs.alert_logger import log_alert
 
+app = FastAPI(title="PromptSentinel")
+
+
+class PromptRequest(BaseModel):
+    prompt: str
 
 def scan_prompt(prompt: str):
 
@@ -30,7 +38,17 @@ def scan_prompt(prompt: str):
         "action": action
     }
 
+@app.get("/")
+def health_check():
+    return {
+        "service": "PromptSentinel",
+        "status": "running"
+    }
 
+
+@app.post("/scan")
+def scan(request: PromptRequest):
+    return scan_prompt(request.prompt)
 if __name__ == "__main__":
 
     prompt = input("Prompt> ")

@@ -1,9 +1,10 @@
 import unicodedata
 
 
-def normalize_unicode(text: str) -> str:
-    """
-    Normalize unicode characters to their ASCII equivalent where possible.
-    """
+def normalize_unicode(text: str):
 
-    return unicodedata.normalize("NFKC", text)
+    normalized = unicodedata.normalize("NFKC", text)
+
+    changed = normalized != text
+
+    return normalized, changed

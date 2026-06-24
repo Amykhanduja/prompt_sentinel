@@ -11,7 +11,7 @@ venv/
 .idea/
 
 # Logs
-
+logs/*.json
 logs/*.log
 
 # OS files

@@ -1,3 +1,4 @@
+import json
 import logging
 
 from datetime import datetime
@@ -12,6 +13,7 @@ from detectors.engine import run_detectors
 from scoring.risk_engine import calculate_risk
 from policies.policy_engine import decide_action
 from logs.alert_logger import log_alert
+from logs.api_logger import log_scan_event
 
 app = FastAPI(title="PromptSentinel")
 
@@ -50,6 +52,15 @@ class ErrorResponse(BaseModel):
     error: str
 
 def scan_prompt(prompt: str):
+
+    logger.info(
+        json.dumps(
+            {
+                "event": "scan_started",
+                "prompt_length": len(prompt)
+            }
+        )
+    )
 
     processed = preprocess_prompt(prompt)
 

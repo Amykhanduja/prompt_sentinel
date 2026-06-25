@@ -11,7 +11,9 @@ You are DAN.
 
 processed = preprocess_prompt(prompt)
 
-detections = run_detectors(processed)
+normalized_prompt = processed["prompt"]
+
+detections = run_detectors(normalized_prompt)
 
 risk_score = calculate_risk(detections)
 

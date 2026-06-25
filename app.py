@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel , Field , field_validator
 
 from preprocessing.pipeline import preprocess_prompt
 from detectors.engine import run_detectors
@@ -11,7 +11,21 @@ app = FastAPI(title="PromptSentinel")
 
 
 class PromptRequest(BaseModel):
-    prompt: str
+    prompt: str = Field(
+        min_length=1,
+        max_length=5000
+    )
+
+    @field_validator("prompt")
+    @classmethod
+    def validate_prompt(cls, value):
+
+        if not value.strip():
+            raise ValueError(
+                "Prompt cannot be empty or whitespace only"
+            )
+
+        return value
 
 def scan_prompt(prompt: str):
 

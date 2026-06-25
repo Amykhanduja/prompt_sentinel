@@ -11,7 +11,9 @@ You are DAN.
 
 processed = preprocess_prompt(prompt)
 
-results = run_detectors(processed)
+normalized_prompt = processed["prompt"]
+
+results = run_detectors(normalized_prompt)
 
 print("Detections Found:")
 for detection in results:

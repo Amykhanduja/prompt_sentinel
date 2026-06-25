@@ -11,7 +11,7 @@ def test_prompt_too_large():
     }
 
     response = client.post(
-        "/scan",
+        "/api/v1/scan",
         json=payload
     )
 

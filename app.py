@@ -1,4 +1,10 @@
+import logging
+
+from datetime import datetime
+from typing import List
+
 from fastapi import FastAPI
+from fastapi import HTTPException
 from pydantic import BaseModel , Field , field_validator
 
 from preprocessing.pipeline import preprocess_prompt
@@ -9,6 +15,11 @@ from logs.alert_logger import log_alert
 
 app = FastAPI(title="PromptSentinel")
 
+logging.basicConfig(
+    level=logging.INFO
+)
+
+logger = logging.getLogger(__name__)
 
 class PromptRequest(BaseModel):
     prompt: str = Field(
@@ -26,6 +37,17 @@ class PromptRequest(BaseModel):
             )
 
         return value
+
+class ScanResponse(BaseModel):
+    version: str
+    timestamp: str
+    detections: List[dict]
+    risk_score: int
+    severity: str
+    action: str
+
+class ErrorResponse(BaseModel):
+    error: str
 
 def scan_prompt(prompt: str):
 
@@ -60,14 +82,16 @@ def scan_prompt(prompt: str):
         )
 
     return {
-        "original_prompt": prompt,
-        "processed_prompt": processed_prompt,
+        "version": "0.3",
+        "timestamp": datetime.utcnow().isoformat(),
         "detections": detections,
-        "risk": risk,
+        "risk_score": risk["score"],
+        "severity": risk["severity"],
         "action": action
     }
 
-@app.get("/")
+
+@app.get("/api/v1/health")
 def health_check():
     return {
         "service": "PromptSentinel",
@@ -75,9 +99,29 @@ def health_check():
     }
 
 
-@app.post("/scan")
+@app.post(
+     "/api/v1/scan",
+     response_model=ScanResponse
+)
 def scan(request: PromptRequest):
-    return scan_prompt(request.prompt)
+
+    try:
+        return scan_prompt(
+            request.prompt
+        )
+
+    except Exception:
+
+        logger.exception(
+            "Prompt scanning failed"
+        )
+
+        raise HTTPException(
+            status_code=500,
+            detail="Internal scanning error"
+        )
+
+
 if __name__ == "__main__":
 
     prompt = input("Prompt> ")

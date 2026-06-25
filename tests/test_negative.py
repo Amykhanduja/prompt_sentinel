@@ -1,5 +1,12 @@
 from detectors.engine import run_detectors
 
-prompt = "What is Python?"
 
-print(run_detectors(prompt))
+def test_benign_prompt():
+
+    prompt = (
+        "What are the benefits of Python?"
+    )
+
+    detections = run_detectors(prompt)
+
+    assert detections == []

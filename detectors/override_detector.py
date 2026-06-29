@@ -1,3 +1,5 @@
+from utils.pattern_matcher import match_patterns
+
 PATTERNS = [
     "ignore previous instructions",
     "forget all instructions",
@@ -5,20 +7,12 @@ PATTERNS = [
     "ignore all prior directives"
 ]
 
+def detect_override(prompt):
 
-def detect_override(prompt: str):
-
-    prompt = prompt.lower()
-
-    for pattern in PATTERNS:
-
-        if pattern in prompt:
-
-            return {
-                "technique": "PT-009",
-                "name": "Instruction Override",
-                "severity": "high",
-                "confidence": 1.0
-            }
-
-    return None
+    return match_patterns(
+        prompt=prompt,
+        patterns=PATTERNS,
+        technique="PT-009",
+        name="Instruction Override",
+        severity="high"
+    )

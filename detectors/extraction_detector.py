@@ -1,3 +1,5 @@
+from utils.pattern_matcher import match_patterns
+
 PATTERNS = [
     "system prompt",
     "developer message",
@@ -8,17 +10,10 @@ PATTERNS = [
 
 def detect_extraction(prompt):
 
-    prompt = prompt.lower()
-
-    for pattern in PATTERNS:
-
-        if pattern in prompt:
-
-            return {
-                "technique": "PT-013",
-                "name": "System Prompt Extraction",
-                "severity": "high",
-                "confidence": 1.0
-            }
-
-    return None
+    return match_patterns(
+        prompt=prompt,
+        patterns=PATTERNS,
+        technique="PT-013",
+        name="System Prompt Extraction",
+        severity="high"
+    )

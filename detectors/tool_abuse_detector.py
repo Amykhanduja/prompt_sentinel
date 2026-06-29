@@ -1,5 +1,10 @@
+from utils.pattern_matcher import match_patterns
+
+
 PATTERNS = [
-    "use the browser",
+    "call this tool",
+    "use this function",
+     "use the browser",
     "use browser tool",
     "use the terminal",
     "execute this command",
@@ -10,23 +15,20 @@ PATTERNS = [
     "write to file",
     "open this url",
     "send the results",
-    "download this file"
+    "download this file",
+    "run this code",
+    "invoke the tool",
+    "access the api",
+    "make a tool call"
 ]
 
 
 def detect_tool_abuse(prompt: str):
 
-    prompt = prompt.lower()
-
-    for pattern in PATTERNS:
-
-        if pattern in prompt:
-
-            return {
-                "technique": "PT-013",
-                "name": "Tool Abuse",
-                "severity": "high",
-                "confidence": 1.0
-            }
-
-    return None
+    return match_patterns(
+        prompt=prompt,
+        patterns=PATTERNS,
+        technique="PT-029",
+        name="Tool Abuse",
+        severity="high"
+    )

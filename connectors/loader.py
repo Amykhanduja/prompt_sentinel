@@ -5,7 +5,7 @@ from connectors.html_parser import extract_text as extract_html
 from connectors.docx_parser import extract_text as extract_docx
 from connectors.pdf_parser import extract_text as extract_pdf
 from connectors.email_parser import extract_text as extract_email
-
+from connectors.zip_parser import extract_files
 
 def load_file(file_path: str):
 

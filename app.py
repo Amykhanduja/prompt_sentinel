@@ -17,7 +17,7 @@ from scoring.risk_engine import calculate_risk
 from policies.policy_engine import decide_action
 from logs.alert_logger import log_alert
 from logs.api_logger import log_scan_event
-from connectors.loader import load_file
+from connectors.recursive_loader import recursive_load
 
 app = FastAPI(title="PromptSentinel")
 
@@ -107,7 +107,7 @@ def scan_text(text):
 
 def scan_file(file_path: str):
 
-    text = load_file(file_path)
+    text = recursive_load(file_path)
 
     return scan_text(text)
 

@@ -1,10 +1,17 @@
 TECHNIQUE_WEIGHTS = {
-    "PT-009": 30,  # Instruction Override
-    "PT-013": 40,  # System Prompt Extraction
-    "PT-018": 35,  # DAN Jailbreak
-    "PT-023": 15,  # Unicode Obfuscation
-    "PT-024": 15   # Base64 Obfuscation
+    "PT-009": 30,
+    "PT-013": 40,
+    "PT-015": 20,
+    "PT-018": 35,
+    "PT-021": 20,
+    "PT-023": 15,
+    "PT-024": 15,
+    "PT-025": 25,
+    "PT-026": 30,
+    "PT-027": 35,
+    "PT-029": 35
 }
+
 
 def calculate_risk(detections):
 
@@ -14,10 +21,17 @@ def calculate_risk(detections):
 
         technique = detection["technique"]
 
-        total_risk += TECHNIQUE_WEIGHTS.get(
+        weight = TECHNIQUE_WEIGHTS.get(
             technique,
             0
         )
+
+        confidence = detection.get(
+            "confidence",
+            1.0
+        )
+
+        total_risk += weight * confidence
 
     if total_risk >= 80:
         severity = "critical"
@@ -32,6 +46,6 @@ def calculate_risk(detections):
         severity = "low"
 
     return {
-        "score": total_risk,
+        "score": round(total_risk, 2),
         "severity": severity
     }

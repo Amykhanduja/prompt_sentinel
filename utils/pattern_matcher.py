@@ -23,14 +23,13 @@ def match_patterns(
 
             if pattern_type == "regex":
 
-                if re.search(
-                    value,
-                    text
-                ):
+                if re.search(value, text):
+
                     return {
                         "technique": technique,
                         "name": name,
                         "severity": severity,
+                        "confidence": 0.90,
                         "matched": True,
                         "pattern": value
                     }
@@ -38,25 +37,27 @@ def match_patterns(
             else:
 
                 if value.lower() in text:
+
                     return {
                         "technique": technique,
                         "name": name,
                         "severity": severity,
+                        "confidence": 0.80,
                         "matched": True,
                         "pattern": value
                     }
 
-
         else:
 
             if pattern.lower() in text:
+
                 return {
                     "technique": technique,
                     "name": name,
                     "severity": severity,
+                    "confidence": 0.80,
                     "matched": True,
                     "pattern": pattern
                 }
-
 
     return None

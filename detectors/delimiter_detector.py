@@ -1,18 +1,23 @@
 from utils.pattern_matcher import match_patterns
 
-
 PATTERNS = [
-    "```system",
-    "```assistant",
-    "```user",
+    "### system prompt ###",
+    "system prompt",
+
+    "begin instructions",
+    "end instructions",
+
+    "begin system prompt",
+    "end system prompt",
+
     "<system>",
     "</system>",
     "<assistant>",
     "</assistant>",
-    "[system]",
-    "[assistant]"
-]
 
+    "--- system ---",
+    "--- assistant ---"
+]
 def detect_delimiter(prompt: str):
 
     return match_patterns(

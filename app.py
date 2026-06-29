@@ -1,10 +1,13 @@
+import os
 import json
 import logging
+import tempfile
 
 from datetime import datetime
 from typing import List
 
 from fastapi import FastAPI
+from fastapi import UploadFile, File
 from fastapi import HTTPException
 from pydantic import BaseModel , Field , field_validator
 
@@ -14,6 +17,7 @@ from scoring.risk_engine import calculate_risk
 from policies.policy_engine import decide_action
 from logs.alert_logger import log_alert
 from logs.api_logger import log_scan_event
+from connectors.loader import load_file
 
 app = FastAPI(title="PromptSentinel")
 
@@ -51,18 +55,18 @@ class ScanResponse(BaseModel):
 class ErrorResponse(BaseModel):
     error: str
 
-def scan_prompt(prompt: str):
+def scan_text(text):
 
     logger.info(
         json.dumps(
             {
                 "event": "scan_started",
-                "prompt_length": len(prompt)
+                "prompt_length": len(text)
             }
         )
     )
 
-    processed = preprocess_prompt(prompt)
+    processed = preprocess_prompt(text)
 
     processed_prompt = processed["prompt"]
 
@@ -86,7 +90,7 @@ def scan_prompt(prompt: str):
 
     if detections:
         log_alert(
-            prompt,
+            text,
             detections,
             risk,
             action
@@ -101,6 +105,11 @@ def scan_prompt(prompt: str):
         "action": action
     }
 
+def scan_file(file_path: str):
+
+    text = load_file(file_path)
+
+    return scan_text(text)
 
 @app.get("/api/v1/health")
 def health_check():
@@ -110,6 +119,27 @@ def health_check():
     }
 
 
+@app.post("/api/v1/scan-file")
+async def scan_uploaded_file(file: UploadFile = File(...)):
+
+    suffix = os.path.splitext(file.filename)[1]
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
+
+        temp_file.write(await file.read())
+
+        temp_path = temp_file.name
+
+    try:
+
+        result = scan_file(temp_path)
+
+    finally:
+
+        os.remove(temp_path)
+
+    return result
+
 @app.post(
      "/api/v1/scan",
      response_model=ScanResponse
@@ -117,7 +147,7 @@ def health_check():
 def scan(request: PromptRequest):
 
     try:
-        return scan_prompt(
+        return scan_text(
             request.prompt
         )
 
@@ -137,7 +167,8 @@ if __name__ == "__main__":
 
     prompt = input("Prompt> ")
 
-    result = scan_prompt(prompt)
+    result = scan_text(prompt)
 
     print("\n=== Scan Result ===")
     print(result)
+

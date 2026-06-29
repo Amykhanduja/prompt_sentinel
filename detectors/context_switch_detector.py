@@ -1,3 +1,5 @@
+from utils.pattern_matcher import match_patterns
+
 PATTERNS = [
     "new instructions",
     "new task",
@@ -14,17 +16,10 @@ PATTERNS = [
 
 def detect_context_switch(prompt: str):
 
-    prompt = prompt.lower()
-
-    for pattern in PATTERNS:
-
-        if pattern in prompt:
-
-            return {
-                "technique": "PT-010",
-                "name": "Context Switch",
-                "severity": "medium",
-                "confidence": 1.0
-            }
-
-    return None
+    return match_patterns(
+        prompt=prompt,
+        patterns=PATTERNS,
+        technique="PT-026",
+        name="Context switch",
+        severity="medium"
+    )

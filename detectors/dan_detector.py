@@ -1,3 +1,5 @@
+from utils.pattern_matcher import match_patterns
+
 PATTERNS = [
     # Existing DAN patterns
     "you are dan",
@@ -18,17 +20,10 @@ PATTERNS = [
 
 def detect_dan(prompt):
 
-    prompt = prompt.lower()
-
-    for pattern in PATTERNS:
-
-        if pattern in prompt:
-
-            return {
-                "technique": "PT-018",
-                "name": "Roleplay Injection",
-                "severity": "high",
-                "confidence": 1.0
-            }
-
-    return None
+    return match_patterns(
+        prompt=prompt,
+        patterns=PATTERNS,
+        technique="PT-018",
+        name="Roleplay Injection",
+        severity="high"
+    )

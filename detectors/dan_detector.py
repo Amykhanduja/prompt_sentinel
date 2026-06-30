@@ -18,7 +18,7 @@ PATTERNS = [
     "roleplay as"
 ]
 
-def detect_dan(prompt):
+def detect_dan(prompt, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

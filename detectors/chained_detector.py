@@ -29,7 +29,7 @@ PATTERNS = [
 
 ]
 
-def detect_chained(prompt: str):
+def detect_chained(prompt: str, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

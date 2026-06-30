@@ -5,6 +5,7 @@ import tempfile
 
 from datetime import datetime
 from typing import List
+from context.source import ScanSource
 
 from fastapi import FastAPI
 from fastapi import UploadFile, File
@@ -18,6 +19,8 @@ from policies.policy_engine import decide_action
 from logs.alert_logger import log_alert
 from logs.api_logger import log_scan_event
 from connectors.recursive_loader import recursive_load
+from api.coverage import router as coverage_router
+
 
 app = FastAPI(title="PromptSentinel")
 
@@ -55,7 +58,7 @@ class ScanResponse(BaseModel):
 class ErrorResponse(BaseModel):
     error: str
 
-def scan_text(text):
+def scan_text(text, source=ScanSource.USER):
 
     logger.info(
         json.dumps(
@@ -70,25 +73,26 @@ def scan_text(text):
 
     processed_prompt = processed["prompt"]
 
-    detections = run_detectors(processed_prompt)
+    detections = run_detectors(processed_prompt, source)
 
-    if processed["unicode_flag"]:
-        detections.append({
-            "technique": "PT-023",
-            "description": "Unicode Obfuscation"
-        })
+    for detection in detections:
 
-    if processed["base64_flag"]:
-        detections.append({
-            "technique": "PT-024",
-            "description": "Base64 Obfuscation"
-        })
+        detection["source"] = source
 
-    risk = calculate_risk(detections)
+        detection["preprocessing"] = (
+            processed["flags"]
+        )
+
+
+    risk = calculate_risk(
+        detections
+    )
+
 
     action = decide_action(risk)
 
     if detections:
+
         log_alert(
             text,
             detections,
@@ -99,17 +103,23 @@ def scan_text(text):
     return {
         "version": "0.3",
         "timestamp": datetime.utcnow().isoformat(),
+        "prompt": processed_prompt,
         "detections": detections,
         "risk_score": risk["score"],
         "severity": risk["severity"],
-        "action": action
+        "action": action,
+        "source": source,
+        "preprocessing": processed["flags"]
     }
 
 def scan_file(file_path: str):
 
-    text = recursive_load(file_path)
+    content = recursive_load(file_path)
 
-    return scan_text(text)
+    return scan_text(
+        content["text"],
+        content["source"]
+    )
 
 @app.get("/api/v1/health")
 def health_check():
@@ -162,6 +172,10 @@ def scan(request: PromptRequest):
             detail="Internal scanning error"
         )
 
+app.include_router(
+    coverage_router,
+    prefix="/api/v1"
+)
 
 if __name__ == "__main__":
 

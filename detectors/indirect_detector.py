@@ -23,7 +23,7 @@ PATTERNS = [
 ]
 
 
-def detect_indirect(prompt: str):
+def detect_indirect(prompt: str, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

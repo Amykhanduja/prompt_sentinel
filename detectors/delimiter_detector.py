@@ -18,7 +18,7 @@ PATTERNS = [
     "--- system ---",
     "--- assistant ---"
 ]
-def detect_delimiter(prompt: str):
+def detect_delimiter(prompt: str, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

@@ -14,7 +14,7 @@ PATTERNS = [
 ]
 
 
-def detect_context_switch(prompt: str):
+def detect_context_switch(prompt: str, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

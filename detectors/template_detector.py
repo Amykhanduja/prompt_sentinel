@@ -32,7 +32,7 @@ PATTERNS = [
 
 ]
 
-def detect_template(prompt: str):
+def detect_template(prompt: str, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

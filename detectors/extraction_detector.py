@@ -8,7 +8,7 @@ PATTERNS = [
 ]
 
 
-def detect_extraction(prompt):
+def detect_extraction(prompt, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

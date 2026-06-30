@@ -23,7 +23,7 @@ PATTERNS = [
 ]
 
 
-def detect_tool_abuse(prompt: str):
+def detect_tool_abuse(prompt: str, source: str = "user"):
 
     return match_patterns(
         prompt=prompt,

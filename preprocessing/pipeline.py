@@ -1,14 +1,17 @@
-from preprocessing.unicode_normalizer import normalize_unicode
 from preprocessing.base64_decoder import decode_base64_content
 from preprocessing.hex_decoder import decode_hex_content
 from preprocessing.url_decoder import decode_url_content
 from preprocessing.html_entity_decoder import decode_html_entities
 from preprocessing.zero_width_remover import remove_zero_width
+from preprocessing.unicode_normalizer import normalize_unicode
 
 
 def decode_once(prompt: str):
 
     changed = False
+
+    prompt, unicode_flag = normalize_unicode(prompt)
+    changed |= unicode_flag
 
     prompt, base64_flag = decode_base64_content(prompt)
     changed |= base64_flag
@@ -25,10 +28,12 @@ def decode_once(prompt: str):
     prompt, zero_width_flag = remove_zero_width(prompt)
     changed |= zero_width_flag
 
+
     return (
         prompt,
         changed,
         {
+            "unicode_flag": unicode_flag,
             "base64_flag": base64_flag,
             "hex_flag": hex_flag,
             "url_flag": url_flag,
@@ -41,6 +46,7 @@ def decode_once(prompt: str):
 def iterative_decode(prompt: str, max_iterations: int = 5):
 
     flags = {
+        "unicode_flag": False,
         "base64_flag": False,
         "hex_flag": False,
         "url_flag": False,
@@ -48,27 +54,43 @@ def iterative_decode(prompt: str, max_iterations: int = 5):
         "zero_width_flag": False
     }
 
+
     for _ in range(max_iterations):
 
         prompt, changed, current_flags = decode_once(prompt)
 
+
         for key, value in current_flags.items():
-            flags[key] = flags[key] or value
+            flags[key] |= value
+
 
         if not changed:
             break
 
-    return prompt, flags
+
+    return {
+        "prompt": prompt,
+        "flags": flags
+    }
 
 
 def preprocess_prompt(prompt: str):
 
-    prompt, unicode_flag = normalize_unicode(prompt)
+    result = iterative_decode(prompt)
 
-    prompt, flags = iterative_decode(prompt)
+    response = {
+        "prompt": result["prompt"],
 
-    return {
-        "prompt": prompt,
-        "unicode_flag": unicode_flag,
-        **flags
+        # new structure
+        "flags": result["flags"],
+
+        # backward compatibility
+        "unicode_flag": result["flags"]["unicode_flag"],
+        "base64_flag": result["flags"]["base64_flag"],
+        "hex_flag": result["flags"]["hex_flag"],
+        "url_flag": result["flags"]["url_flag"],
+        "html_flag": result["flags"]["html_flag"],
+        "zero_width_flag": result["flags"]["zero_width_flag"],
     }
+
+    return response

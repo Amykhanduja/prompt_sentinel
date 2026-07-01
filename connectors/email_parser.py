@@ -1,12 +1,19 @@
 from email import policy
 from email.parser import BytesParser
 
+from connectors.extraction_result import (
+    ExtractionResult,
+    ExtractedContent,
+)
+from scan_source import ScanSource
 
-def extract_text(file_path: str):
+
+def parse_email(file_path: str) -> ExtractionResult:
 
     with open(file_path, "rb") as file:
-
         message = BytesParser(policy=policy.default).parse(file)
+
+    items = []
 
     text = ""
 
@@ -22,5 +29,13 @@ def extract_text(file_path: str):
 
         text = message.get_content()
 
-    return text
+    if text.strip():
 
+        items.append(
+            ExtractedContent(
+                content=text,
+                source=ScanSource.EMAIL
+            )
+        )
+
+    return ExtractionResult(items=items)

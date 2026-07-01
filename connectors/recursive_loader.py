@@ -2,14 +2,16 @@ import os
 
 from connectors.loader import load_file
 from connectors.zip_parser import extract_files
-
-from context.source import ScanSource
+from connectors.extraction_result import (
+    ExtractionResult,
+    ExtractedContent,
+)
 
 
 MAX_DEPTH = 5
 
 
-def recursive_load(file_path: str, depth: int = 0):
+def recursive_load(file_path: str, depth: int = 0) -> ExtractionResult:
 
     if depth >= MAX_DEPTH:
         raise RecursionError(
@@ -21,7 +23,7 @@ def recursive_load(file_path: str, depth: int = 0):
     # ZIP archives
     if extension == ".zip":
 
-        text = ""
+        items = []
 
         extracted_files = extract_files(file_path)
 
@@ -32,19 +34,10 @@ def recursive_load(file_path: str, depth: int = 0):
                 depth + 1
             )
 
-            extracted_text = result["text"]
+            items.extend(result.items)
 
-            if extracted_text.strip():
-
-                text += extracted_text
-                text += "\n\n"
-
-        return {
-            "text": text.strip(),
-            "source": ScanSource.ZIP
-        }
+        return ExtractionResult(items=items)
 
     # Every other supported file
 
     return load_file(file_path)
-

@@ -1,14 +1,29 @@
 from docx import Document
 
+from connectors.extraction_result import (
+    ExtractionResult,
+    ExtractedContent,
+)
+from scan_source import ScanSource
 
-def extract_text(file_path: str):
+
+def parse_docx(file_path: str) -> ExtractionResult:
 
     document = Document(file_path)
 
-    text = ""
+    text = "\n".join(
+        paragraph.text
+        for paragraph in document.paragraphs
+    )
 
-    for paragraph in document.paragraphs:
-        text += paragraph.text + "\n"
+    items = []
 
-    return text
+    if text.strip():
+        items.append(
+            ExtractedContent(
+                content=text,
+                source=ScanSource.DOCX
+            )
+        )
 
+    return ExtractionResult(items=items)

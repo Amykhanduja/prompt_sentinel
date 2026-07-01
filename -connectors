@@ -1,0 +1,3145 @@
+[34;42m.[0m
+├── [01;32m-connectors[0m
+├── [34;42m__pycache__[0m
+│   └── [01;32mapp.cpython-312.pyc[0m
+├── [34;42mapi[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   └── [01;32mcoverage.cpython-312.pyc[0m
+│   └── [01;32mcoverage.py[0m
+├── [01;32mapp.py[0m
+├── [01;32mattack_taxonomy.md[0m
+├── [34;42mconnectors[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32mdocx_parser.cpython-312.pyc[0m
+│   │   ├── [01;32memail_parser.cpython-312.pyc[0m
+│   │   ├── [01;32mhtml_parser.cpython-312.pyc[0m
+│   │   ├── [01;32mloader.cpython-312.pyc[0m
+│   │   ├── [01;32mmarkdown_parser.cpython-312.pyc[0m
+│   │   ├── [01;32mpdf_parser.cpython-312.pyc[0m
+│   │   ├── [01;32mrecursive_loader.cpython-312.pyc[0m
+│   │   └── [01;32mzip_parser.cpython-312.pyc[0m
+│   ├── [01;32mdocx_parser.py[0m
+│   ├── [01;32memail_parser.py[0m
+│   ├── [01;32mextraction_result.py[0m
+│   ├── [01;32mhtml_parser.py[0m
+│   ├── [01;32mloader.py[0m
+│   ├── [01;32mmarkdown_parser.py[0m
+│   ├── [01;32mpdf_extractor.py[0m
+│   ├── [01;32mpdf_parser.py[0m
+│   ├── [01;32mrecursive_loader.py[0m
+│   └── [01;32mzip_parser.py[0m
+├── [34;42mcontext[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   └── [01;32msource.cpython-312.pyc[0m
+│   └── [01;32msource.py[0m
+├── [34;42mdata[0m
+│   ├── [01;32mdataset.csv[0m
+│   └── [01;32mscan_results.py[0m
+├── [34;42mdetectors[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   ├── [01;32mapi_response_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mapi_wrapper_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mchained_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mcontext_switch_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mdan_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mdelimiter_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mengine.cpython-312.pyc[0m
+│   │   ├── [01;32mextraction_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mformat_token_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mindirect_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mmetadata_detector.cpython-312.pyc[0m
+│   │   ├── [01;32moutput_leakage_detector.cpython-312.pyc[0m
+│   │   ├── [01;32moverride_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mprivileged_identity_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mstored_injection_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mtemplate_detector.cpython-312.pyc[0m
+│   │   ├── [01;32mthought_simulation_detector.cpython-312.pyc[0m
+│   │   └── [01;32mtool_abuse_detector.cpython-312.pyc[0m
+│   ├── [01;32mapi_response_detector.py[0m
+│   ├── [01;32mapi_wrapper_detector.py[0m
+│   ├── [01;32mchained_detector.py[0m
+│   ├── [01;32mcontext_switch_detector.py[0m
+│   ├── [01;32mdan_detector.py[0m
+│   ├── [01;32mdelimiter_detector.py[0m
+│   ├── [01;32mengine.py[0m
+│   ├── [01;32mextraction_detector.py[0m
+│   ├── [01;32mformat_token_detector.py[0m
+│   ├── [01;32mindirect_detector.py[0m
+│   ├── [01;32mindirect_injection_detector.py[0m
+│   ├── [01;32mmetadata_detector.py[0m
+│   ├── [01;32moutput_leakage_detector.py[0m
+│   ├── [01;32moverride_detector.py[0m
+│   ├── [01;32mprivileged_identity_detector.py[0m
+│   ├── [01;32mstored_injection_detector.py[0m
+│   ├── [01;32mtemplate_detector.py[0m
+│   ├── [01;32mthought_simulation_detector.py[0m
+│   ├── [01;32mtool_abuse_detector.py[0m
+│   └── [01;32mwebsite_injection_detector.py[0m
+├── [34;42mlogs[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   ├── [01;32malert_logger.cpython-312.pyc[0m
+│   │   └── [01;32mapi_logger.cpython-312.pyc[0m
+│   ├── [01;32malert_logger.py[0m
+│   ├── [01;32malerts.json[0m
+│   ├── [01;32mapi_logger.py[0m
+│   └── [01;32mstatistics.json[0m
+├── [34;42mpolicies[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   └── [01;32mpolicy_engine.cpython-312.pyc[0m
+│   └── [01;32mpolicy_engine.py[0m
+├── [34;42mpreprocessing[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   ├── [01;32mbase64_decoder.cpython-312.pyc[0m
+│   │   ├── [01;32mhex_decoder.cpython-312.pyc[0m
+│   │   ├── [01;32mhtml_entity_decoder.cpython-312.pyc[0m
+│   │   ├── [01;32mpipeline.cpython-312.pyc[0m
+│   │   ├── [01;32municode_normalizer.cpython-312.pyc[0m
+│   │   ├── [01;32murl_decoder.cpython-312.pyc[0m
+│   │   └── [01;32mzero_width_remover.cpython-312.pyc[0m
+│   ├── [01;32mbase64_decoder.py[0m
+│   ├── [01;32mhex_decoder.py[0m
+│   ├── [01;32mhtml_entity_decoder.py[0m
+│   ├── [01;32mpipeline.py[0m
+│   ├── [01;32municode_normalizer.py[0m
+│   ├── [01;32murl_decoder.py[0m
+│   └── [01;32mzero_width_remover.py[0m
+├── [01;32mrequirements.txt[0m
+├── [34;42mscoring[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32m__init__.cpython-312.pyc[0m
+│   │   └── [01;32mrisk_engine.cpython-312.pyc[0m
+│   └── [01;32mrisk_engine.py[0m
+├── [34;42mtests[0m
+│   ├── [01;32m__init__.py[0m
+│   ├── [01;32mcreate_sample_pdf.py[0m
+│   ├── [01;32msample.html[0m
+│   ├── [01;32msample.md[0m
+│   ├── [01;32msample.pdf[0m
+│   ├── [01;32mtest_api.py[0m
+│   ├── [01;32mtest_api_response.py[0m
+│   ├── [01;32mtest_api_wrapper.py[0m
+│   ├── [01;32mtest_chained.py[0m
+│   ├── [01;32mtest_context_switch.py[0m
+│   ├── [01;32mtest_dan.py[0m
+│   ├── [01;32mtest_dataset.py[0m
+│   ├── [01;32mtest_delimeter.py[0m
+│   ├── [01;32mtest_engine.py[0m
+│   ├── [01;32mtest_evasion.py[0m
+│   ├── [01;32mtest_extraction.py[0m
+│   ├── [01;32mtest_format_token.py[0m
+│   ├── [01;32mtest_full_pipeline.py[0m
+│   ├── [01;32mtest_hex_decoder.py[0m
+│   ├── [01;32mtest_html_entity_decoder.py[0m
+│   ├── [01;32mtest_html_parser.py[0m
+│   ├── [01;32mtest_indirect.py[0m
+│   ├── [01;32mtest_indirect_injection.py[0m
+│   ├── [01;32mtest_loader.py[0m
+│   ├── [01;32mtest_markdown_parser.py[0m
+│   ├── [01;32mtest_metadata.py[0m
+│   ├── [01;32mtest_multi_attack.py[0m
+│   ├── [01;32mtest_negative.py[0m
+│   ├── [01;32mtest_output_leakage.py[0m
+│   ├── [01;32mtest_override.py[0m
+│   ├── [01;32mtest_pdf_parser.py[0m
+│   ├── [01;32mtest_policy.py[0m
+│   ├── [01;32mtest_preprocessing.py[0m
+│   ├── [01;32mtest_privileged_identity.py[0m
+│   ├── [01;32mtest_risk.py[0m
+│   ├── [01;32mtest_risk_pipeline.py[0m
+│   ├── [01;32mtest_scan_file_api.py[0m
+│   ├── [01;32mtest_stored_injection.py[0m
+│   ├── [01;32mtest_template.py[0m
+│   ├── [01;32mtest_thought_simulation.py[0m
+│   ├── [01;32mtest_tool_abuse.py[0m
+│   ├── [01;32mtest_url_decoder.py[0m
+│   ├── [01;32mtest_website_injection.py[0m
+│   └── [01;32mtest_zero_width.py[0m
+├── [34;42mutils[0m
+│   ├── [34;42m__pycache__[0m
+│   │   ├── [01;32mjson_extractor.cpython-312.pyc[0m
+│   │   └── [01;32mpattern_matcher.cpython-312.pyc[0m
+│   ├── [01;32mjson_extractor.py[0m
+│   └── [01;32mpattern_matcher.py[0m
+└── [34;42mvenv[0m
+    ├── [34;42mbin[0m
+    │   ├── [01;32mActivate.ps1[0m
+    │   ├── [01;32mactivate[0m
+    │   ├── [01;32mactivate.csh[0m
+    │   ├── [01;32mactivate.fish[0m
+    │   ├── [01;32mfastapi[0m
+    │   ├── [01;32mhttpx[0m
+    │   ├── [01;32midna[0m
+    │   ├── [01;32mnormalizer[0m
+    │   ├── [01;32mpip[0m
+    │   ├── [01;32mpip3[0m
+    │   ├── [01;32mpip3.12[0m
+    │   ├── [01;32mpy.test[0m
+    │   ├── [01;32mpygmentize[0m
+    │   ├── [01;32mpymupdf[0m
+    │   ├── [01;32mpytest[0m
+    │   ├── [01;36mpython[0m -> [01;32mpython3[0m
+    │   ├── [01;36mpython3[0m -> [01;32m/usr/bin/python3[0m
+    │   ├── [01;36mpython3.12[0m -> [01;32mpython3[0m
+    │   └── [01;32muvicorn[0m
+    ├── [34;42minclude[0m
+    │   └── [34;42mpython3.12[0m
+    ├── [34;42mlib[0m
+    │   └── [34;42mpython3.12[0m
+    │       └── [34;42msite-packages[0m
+    │           ├── [01;32m81d243bd2c585b0f4821__mypyc.cpython-312-x86_64-linux-gnu.so[0m
+    │           ├── [34;42mPIL[0m
+    │           │   ├── [01;32mAvifImagePlugin.py[0m
+    │           │   ├── [01;32mBdfFontFile.py[0m
+    │           │   ├── [01;32mBlpImagePlugin.py[0m
+    │           │   ├── [01;32mBmpImagePlugin.py[0m
+    │           │   ├── [01;32mBufrStubImagePlugin.py[0m
+    │           │   ├── [01;32mContainerIO.py[0m
+    │           │   ├── [01;32mCurImagePlugin.py[0m
+    │           │   ├── [01;32mDcxImagePlugin.py[0m
+    │           │   ├── [01;32mDdsImagePlugin.py[0m
+    │           │   ├── [01;32mEpsImagePlugin.py[0m
+    │           │   ├── [01;32mExifTags.py[0m
+    │           │   ├── [01;32mFitsImagePlugin.py[0m
+    │           │   ├── [01;32mFliImagePlugin.py[0m
+    │           │   ├── [01;32mFontFile.py[0m
+    │           │   ├── [01;32mFpxImagePlugin.py[0m
+    │           │   ├── [01;32mFtexImagePlugin.py[0m
+    │           │   ├── [01;32mGbrImagePlugin.py[0m
+    │           │   ├── [01;32mGdImageFile.py[0m
+    │           │   ├── [01;32mGifImagePlugin.py[0m
+    │           │   ├── [01;32mGimpGradientFile.py[0m
+    │           │   ├── [01;32mGimpPaletteFile.py[0m
+    │           │   ├── [01;32mGribStubImagePlugin.py[0m
+    │           │   ├── [01;32mHdf5StubImagePlugin.py[0m
+    │           │   ├── [01;32mIcnsImagePlugin.py[0m
+    │           │   ├── [01;32mIcoImagePlugin.py[0m
+    │           │   ├── [01;32mImImagePlugin.py[0m
+    │           │   ├── [01;32mImage.py[0m
+    │           │   ├── [01;32mImageChops.py[0m
+    │           │   ├── [01;32mImageCms.py[0m
+    │           │   ├── [01;32mImageColor.py[0m
+    │           │   ├── [01;32mImageDraw.py[0m
+    │           │   ├── [01;32mImageDraw2.py[0m
+    │           │   ├── [01;32mImageEnhance.py[0m
+    │           │   ├── [01;32mImageFile.py[0m
+    │           │   ├── [01;32mImageFilter.py[0m
+    │           │   ├── [01;32mImageFont.py[0m
+    │           │   ├── [01;32mImageGrab.py[0m
+    │           │   ├── [01;32mImageMath.py[0m
+    │           │   ├── [01;32mImageMode.py[0m
+    │           │   ├── [01;32mImageMorph.py[0m
+    │           │   ├── [01;32mImageOps.py[0m
+    │           │   ├── [01;32mImagePalette.py[0m
+    │           │   ├── [01;32mImagePath.py[0m
+    │           │   ├── [01;32mImageQt.py[0m
+    │           │   ├── [01;32mImageSequence.py[0m
+    │           │   ├── [01;32mImageShow.py[0m
+    │           │   ├── [01;32mImageStat.py[0m
+    │           │   ├── [01;32mImageText.py[0m
+    │           │   ├── [01;32mImageTk.py[0m
+    │           │   ├── [01;32mImageTransform.py[0m
+    │           │   ├── [01;32mImageWin.py[0m
+    │           │   ├── [01;32mImtImagePlugin.py[0m
+    │           │   ├── [01;32mIptcImagePlugin.py[0m
+    │           │   ├── [01;32mJpeg2KImagePlugin.py[0m
+    │           │   ├── [01;32mJpegImagePlugin.py[0m
+    │           │   ├── [01;32mJpegPresets.py[0m
+    │           │   ├── [01;32mMcIdasImagePlugin.py[0m
+    │           │   ├── [01;32mMicImagePlugin.py[0m
+    │           │   ├── [01;32mMpegImagePlugin.py[0m
+    │           │   ├── [01;32mMpoImagePlugin.py[0m
+    │           │   ├── [01;32mMspImagePlugin.py[0m
+    │           │   ├── [01;32mPSDraw.py[0m
+    │           │   ├── [01;32mPaletteFile.py[0m
+    │           │   ├── [01;32mPalmImagePlugin.py[0m
+    │           │   ├── [01;32mPcdImagePlugin.py[0m
+    │           │   ├── [01;32mPcfFontFile.py[0m
+    │           │   ├── [01;32mPcxImagePlugin.py[0m
+    │           │   ├── [01;32mPdfImagePlugin.py[0m
+    │           │   ├── [01;32mPdfParser.py[0m
+    │           │   ├── [01;32mPixarImagePlugin.py[0m
+    │           │   ├── [01;32mPngImagePlugin.py[0m
+    │           │   ├── [01;32mPpmImagePlugin.py[0m
+    │           │   ├── [01;32mPsdImagePlugin.py[0m
+    │           │   ├── [01;32mQoiImagePlugin.py[0m
+    │           │   ├── [01;32mSgiImagePlugin.py[0m
+    │           │   ├── [01;32mSpiderImagePlugin.py[0m
+    │           │   ├── [01;32mSunImagePlugin.py[0m
+    │           │   ├── [01;32mTarIO.py[0m
+    │           │   ├── [01;32mTgaImagePlugin.py[0m
+    │           │   ├── [01;32mTiffImagePlugin.py[0m
+    │           │   ├── [01;32mTiffTags.py[0m
+    │           │   ├── [01;32mWalImageFile.py[0m
+    │           │   ├── [01;32mWebPImagePlugin.py[0m
+    │           │   ├── [01;32mWmfImagePlugin.py[0m
+    │           │   ├── [01;32mXVThumbImagePlugin.py[0m
+    │           │   ├── [01;32mXbmImagePlugin.py[0m
+    │           │   ├── [01;32mXpmImagePlugin.py[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [01;32m_avif.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_avif.pyi[0m
+    │           │   ├── [01;32m_binary.py[0m
+    │           │   ├── [01;32m_deprecate.py[0m
+    │           │   ├── [01;32m_imaging.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_imaging.pyi[0m
+    │           │   ├── [01;32m_imagingcms.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_imagingcms.pyi[0m
+    │           │   ├── [01;32m_imagingft.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_imagingft.pyi[0m
+    │           │   ├── [01;32m_imagingmath.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_imagingmath.pyi[0m
+    │           │   ├── [01;32m_imagingmorph.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_imagingmorph.pyi[0m
+    │           │   ├── [01;32m_imagingtk.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_imagingtk.pyi[0m
+    │           │   ├── [01;32m_tkinter_finder.py[0m
+    │           │   ├── [01;32m_typing.py[0m
+    │           │   ├── [01;32m_util.py[0m
+    │           │   ├── [01;32m_version.py[0m
+    │           │   ├── [01;32m_webp.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_webp.pyi[0m
+    │           │   ├── [01;32mfeatures.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   └── [01;32mreport.py[0m
+    │           ├── [34;42m__pycache__[0m
+    │           │   └── [01;32mtyping_extensions.cpython-312.pyc[0m
+    │           ├── [34;42m_pytest[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m_argcomplete.py[0m
+    │           │   ├── [34;42m_code[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mcode.py[0m
+    │           │   │   └── [01;32msource.py[0m
+    │           │   ├── [34;42m_io[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mpprint.py[0m
+    │           │   │   ├── [01;32msaferepr.py[0m
+    │           │   │   ├── [01;32mterminalwriter.py[0m
+    │           │   │   └── [01;32mwcwidth.py[0m
+    │           │   ├── [34;42m_py[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32merror.py[0m
+    │           │   │   └── [01;32mpath.py[0m
+    │           │   ├── [01;32m_version.py[0m
+    │           │   ├── [34;42massertion[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32m_compare_any.py[0m
+    │           │   │   ├── [01;32m_compare_mapping.py[0m
+    │           │   │   ├── [01;32m_compare_sequence.py[0m
+    │           │   │   ├── [01;32m_compare_set.py[0m
+    │           │   │   ├── [01;32m_guards.py[0m
+    │           │   │   ├── [01;32m_typing.py[0m
+    │           │   │   ├── [01;32mcompare_text.py[0m
+    │           │   │   ├── [01;32mhighlight.py[0m
+    │           │   │   ├── [01;32mrewrite.py[0m
+    │           │   │   ├── [01;32mtruncate.py[0m
+    │           │   │   └── [01;32mutil.py[0m
+    │           │   ├── [01;32mcacheprovider.py[0m
+    │           │   ├── [01;32mcapture.py[0m
+    │           │   ├── [01;32mcompat.py[0m
+    │           │   ├── [34;42mconfig[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32margparsing.py[0m
+    │           │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   └── [01;32mfindpaths.py[0m
+    │           │   ├── [01;32mdebugging.py[0m
+    │           │   ├── [01;32mdeprecated.py[0m
+    │           │   ├── [01;32mdoctest.py[0m
+    │           │   ├── [01;32mfaulthandler.py[0m
+    │           │   ├── [01;32mfixtures.py[0m
+    │           │   ├── [01;32mfreeze_support.py[0m
+    │           │   ├── [01;32mhelpconfig.py[0m
+    │           │   ├── [01;32mhookspec.py[0m
+    │           │   ├── [01;32mjunitxml.py[0m
+    │           │   ├── [01;32mlegacypath.py[0m
+    │           │   ├── [01;32mlogging.py[0m
+    │           │   ├── [01;32mmain.py[0m
+    │           │   ├── [34;42mmark[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mexpression.py[0m
+    │           │   │   └── [01;32mstructures.py[0m
+    │           │   ├── [01;32mmonkeypatch.py[0m
+    │           │   ├── [01;32mnodes.py[0m
+    │           │   ├── [01;32moutcomes.py[0m
+    │           │   ├── [01;32mpastebin.py[0m
+    │           │   ├── [01;32mpathlib.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mpytester.py[0m
+    │           │   ├── [01;32mpytester_assertions.py[0m
+    │           │   ├── [01;32mpython.py[0m
+    │           │   ├── [01;32mpython_api.py[0m
+    │           │   ├── [01;32mraises.py[0m
+    │           │   ├── [01;32mrecwarn.py[0m
+    │           │   ├── [01;32mreports.py[0m
+    │           │   ├── [01;32mrunner.py[0m
+    │           │   ├── [01;32mscope.py[0m
+    │           │   ├── [01;32msetuponly.py[0m
+    │           │   ├── [01;32msetupplan.py[0m
+    │           │   ├── [01;32mskipping.py[0m
+    │           │   ├── [01;32mstash.py[0m
+    │           │   ├── [01;32mstepwise.py[0m
+    │           │   ├── [01;32msubtests.py[0m
+    │           │   ├── [01;32mterminal.py[0m
+    │           │   ├── [01;32mterminalprogress.py[0m
+    │           │   ├── [01;32mthreadexception.py[0m
+    │           │   ├── [01;32mtiming.py[0m
+    │           │   ├── [01;32mtmpdir.py[0m
+    │           │   ├── [01;32mtracemalloc.py[0m
+    │           │   ├── [01;32munittest.py[0m
+    │           │   ├── [01;32munraisableexception.py[0m
+    │           │   ├── [01;32mwarning_types.py[0m
+    │           │   └── [01;32mwarnings.py[0m
+    │           ├── [34;42mannotated_doc[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   └── [01;32mmain.cpython-312.pyc[0m
+    │           │   ├── [01;32mmain.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mannotated_doc-0.0.4.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42mannotated_types[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   └── [01;32m__init__.cpython-312.pyc[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   └── [01;32mtest_cases.py[0m
+    │           ├── [34;42mannotated_types-0.7.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42manyio[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mfrom_thread.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mlowlevel.cpython-312.pyc[0m
+    │           │   │   └── [01;32mto_thread.cpython-312.pyc[0m
+    │           │   ├── [34;42m_backends[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32m_asyncio.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_asyncio.py[0m
+    │           │   │   └── [01;32m_trio.py[0m
+    │           │   ├── [34;42m_core[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_contextmanagers.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_eventloop.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_exceptions.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_fileio.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_resources.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_signals.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_sockets.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_streams.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_subprocesses.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_synchronization.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_tasks.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_tempfile.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_testing.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32m_typedattr.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_asyncio_selector_thread.py[0m
+    │           │   │   ├── [01;32m_contextmanagers.py[0m
+    │           │   │   ├── [01;32m_eventloop.py[0m
+    │           │   │   ├── [01;32m_exceptions.py[0m
+    │           │   │   ├── [01;32m_fileio.py[0m
+    │           │   │   ├── [01;32m_resources.py[0m
+    │           │   │   ├── [01;32m_signals.py[0m
+    │           │   │   ├── [01;32m_sockets.py[0m
+    │           │   │   ├── [01;32m_streams.py[0m
+    │           │   │   ├── [01;32m_subprocesses.py[0m
+    │           │   │   ├── [01;32m_synchronization.py[0m
+    │           │   │   ├── [01;32m_tasks.py[0m
+    │           │   │   ├── [01;32m_tempfile.py[0m
+    │           │   │   ├── [01;32m_testing.py[0m
+    │           │   │   └── [01;32m_typedattr.py[0m
+    │           │   ├── [34;42mabc[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_eventloop.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_resources.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_sockets.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_streams.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_subprocesses.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_tasks.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32m_testing.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_eventloop.py[0m
+    │           │   │   ├── [01;32m_resources.py[0m
+    │           │   │   ├── [01;32m_sockets.py[0m
+    │           │   │   ├── [01;32m_streams.py[0m
+    │           │   │   ├── [01;32m_subprocesses.py[0m
+    │           │   │   ├── [01;32m_tasks.py[0m
+    │           │   │   └── [01;32m_testing.py[0m
+    │           │   ├── [01;32mfrom_thread.py[0m
+    │           │   ├── [01;32mfunctools.py[0m
+    │           │   ├── [01;32mitertools.py[0m
+    │           │   ├── [01;32mlowlevel.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mpytest_plugin.py[0m
+    │           │   ├── [34;42mstreams[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mmemory.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mstapled.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mtls.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mbuffered.py[0m
+    │           │   │   ├── [01;32mfile.py[0m
+    │           │   │   ├── [01;32mmemory.py[0m
+    │           │   │   ├── [01;32mstapled.py[0m
+    │           │   │   ├── [01;32mtext.py[0m
+    │           │   │   └── [01;32mtls.py[0m
+    │           │   ├── [01;32mto_interpreter.py[0m
+    │           │   ├── [01;32mto_process.py[0m
+    │           │   └── [01;32mto_thread.py[0m
+    │           ├── [34;42manyio-4.14.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mbeautifulsoup4-4.15.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       ├── [01;32mAUTHORS[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42mbs4[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_deprecation.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_typing.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_warnings.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcss.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mdammit.cpython-312.pyc[0m
+    │           │   │   ├── [01;32melement.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mfilter.cpython-312.pyc[0m
+    │           │   │   └── [01;32mformatter.cpython-312.pyc[0m
+    │           │   ├── [01;32m_deprecation.py[0m
+    │           │   ├── [01;32m_typing.py[0m
+    │           │   ├── [01;32m_warnings.py[0m
+    │           │   ├── [34;42mbuilder[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_html5lib.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_htmlparser.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32m_lxml.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_html5lib.py[0m
+    │           │   │   ├── [01;32m_htmlparser.py[0m
+    │           │   │   └── [01;32m_lxml.py[0m
+    │           │   ├── [01;32mcss.py[0m
+    │           │   ├── [01;32mdammit.py[0m
+    │           │   ├── [01;32mdiagnose.py[0m
+    │           │   ├── [01;32melement.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   ├── [01;32mfilter.py[0m
+    │           │   ├── [01;32mformatter.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mcertifi[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [01;32mcacert.pem[0m
+    │           │   ├── [01;32mcore.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mcertifi-2026.6.17.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mcharset_normalizer[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mapi.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconstant.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mlegacy.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mmodels.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   └── [01;32mversion.cpython-312.pyc[0m
+    │           │   ├── [01;32mapi.py[0m
+    │           │   ├── [01;32mcd.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32mcd.py[0m
+    │           │   ├── [34;42mcli[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   └── [01;32m__main__.py[0m
+    │           │   ├── [01;32mconstant.py[0m
+    │           │   ├── [01;32mlegacy.py[0m
+    │           │   ├── [01;32mmd.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32mmd.py[0m
+    │           │   ├── [01;32mmodels.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mutils.py[0m
+    │           │   └── [01;32mversion.py[0m
+    │           ├── [34;42mcharset_normalizer-3.4.7.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mclick[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_compat.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_utils.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcore.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mdecorators.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mformatting.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mglobals.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mparser.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtermui.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtypes.cpython-312.pyc[0m
+    │           │   │   └── [01;32mutils.cpython-312.pyc[0m
+    │           │   ├── [01;32m_compat.py[0m
+    │           │   ├── [01;32m_termui_impl.py[0m
+    │           │   ├── [01;32m_textwrap.py[0m
+    │           │   ├── [01;32m_utils.py[0m
+    │           │   ├── [01;32m_winconsole.py[0m
+    │           │   ├── [01;32mcore.py[0m
+    │           │   ├── [01;32mdecorators.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   ├── [01;32mformatting.py[0m
+    │           │   ├── [01;32mglobals.py[0m
+    │           │   ├── [01;32mparser.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mshell_completion.py[0m
+    │           │   ├── [01;32mtermui.py[0m
+    │           │   ├── [01;32mtesting.py[0m
+    │           │   ├── [01;32mtypes.py[0m
+    │           │   └── [01;32mutils.py[0m
+    │           ├── [34;42mclick-8.4.1.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.txt[0m
+    │           ├── [34;42mdocx[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mapi.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mblkcntnr.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcomments.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mdocument.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mpackage.cpython-312.pyc[0m
+    │           │   │   ├── [01;32msection.cpython-312.pyc[0m
+    │           │   │   ├── [01;32msettings.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mshape.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mshared.cpython-312.pyc[0m
+    │           │   │   └── [01;32mtable.cpython-312.pyc[0m
+    │           │   ├── [01;32mapi.py[0m
+    │           │   ├── [01;32mblkcntnr.py[0m
+    │           │   ├── [01;32mcomments.py[0m
+    │           │   ├── [34;42mdml[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mcolor.cpython-312.pyc[0m
+    │           │   │   └── [01;32mcolor.py[0m
+    │           │   ├── [01;32mdocument.py[0m
+    │           │   ├── [34;42mdrawing[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   └── [34;42m__pycache__[0m
+    │           │   │       └── [01;32m__init__.cpython-312.pyc[0m
+    │           │   ├── [34;42menum[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mbase.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdml.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32msection.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mshape.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mstyle.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mtable.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mtext.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mbase.py[0m
+    │           │   │   ├── [01;32mdml.py[0m
+    │           │   │   ├── [01;32msection.py[0m
+    │           │   │   ├── [01;32mshape.py[0m
+    │           │   │   ├── [01;32mstyle.py[0m
+    │           │   │   ├── [01;32mtable.py[0m
+    │           │   │   └── [01;32mtext.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   ├── [34;42mimage[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mbmp.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mconstants.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mgif.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mhelpers.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mimage.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mjpeg.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpng.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mtiff.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mbmp.py[0m
+    │           │   │   ├── [01;32mconstants.py[0m
+    │           │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   ├── [01;32mgif.py[0m
+    │           │   │   ├── [01;32mhelpers.py[0m
+    │           │   │   ├── [01;32mimage.py[0m
+    │           │   │   ├── [01;32mjpeg.py[0m
+    │           │   │   ├── [01;32mpng.py[0m
+    │           │   │   └── [01;32mtiff.py[0m
+    │           │   ├── [34;42mopc[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mconstants.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mcoreprops.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32moxml.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpackage.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpackuri.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpart.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mphys_pkg.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpkgreader.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpkgwriter.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mrel.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mshared.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mspec.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconstants.py[0m
+    │           │   │   ├── [01;32mcoreprops.py[0m
+    │           │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   ├── [01;32moxml.py[0m
+    │           │   │   ├── [01;32mpackage.py[0m
+    │           │   │   ├── [01;32mpackuri.py[0m
+    │           │   │   ├── [01;32mpart.py[0m
+    │           │   │   ├── [34;42mparts[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   │   └── [01;32mcoreprops.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mcoreprops.py[0m
+    │           │   │   ├── [01;32mphys_pkg.py[0m
+    │           │   │   ├── [01;32mpkgreader.py[0m
+    │           │   │   ├── [01;32mpkgwriter.py[0m
+    │           │   │   ├── [01;32mrel.py[0m
+    │           │   │   ├── [01;32mshared.py[0m
+    │           │   │   └── [01;32mspec.py[0m
+    │           │   ├── [34;42moxml[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mcomments.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mcoreprops.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdocument.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdrawing.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mns.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mnumbering.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mparser.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32msection.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32msettings.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mshape.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mshared.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32msimpletypes.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mstyles.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mtable.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mxmlchemy.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcomments.py[0m
+    │           │   │   ├── [01;32mcoreprops.py[0m
+    │           │   │   ├── [01;32mdocument.py[0m
+    │           │   │   ├── [01;32mdrawing.py[0m
+    │           │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   ├── [01;32mns.py[0m
+    │           │   │   ├── [01;32mnumbering.py[0m
+    │           │   │   ├── [01;32mparser.py[0m
+    │           │   │   ├── [01;32msection.py[0m
+    │           │   │   ├── [01;32msettings.py[0m
+    │           │   │   ├── [01;32mshape.py[0m
+    │           │   │   ├── [01;32mshared.py[0m
+    │           │   │   ├── [01;32msimpletypes.py[0m
+    │           │   │   ├── [01;32mstyles.py[0m
+    │           │   │   ├── [01;32mtable.py[0m
+    │           │   │   ├── [34;42mtext[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mfont.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mhyperlink.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mpagebreak.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mparagraph.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mparfmt.cpython-312.pyc[0m
+    │           │   │   │   │   └── [01;32mrun.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mfont.py[0m
+    │           │   │   │   ├── [01;32mhyperlink.py[0m
+    │           │   │   │   ├── [01;32mpagebreak.py[0m
+    │           │   │   │   ├── [01;32mparagraph.py[0m
+    │           │   │   │   ├── [01;32mparfmt.py[0m
+    │           │   │   │   └── [01;32mrun.py[0m
+    │           │   │   └── [01;32mxmlchemy.py[0m
+    │           │   ├── [01;32mpackage.py[0m
+    │           │   ├── [34;42mparts[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mcomments.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdocument.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mhdrftr.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mimage.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mnumbering.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32msettings.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mstory.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mstyles.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcomments.py[0m
+    │           │   │   ├── [01;32mdocument.py[0m
+    │           │   │   ├── [01;32mhdrftr.py[0m
+    │           │   │   ├── [01;32mimage.py[0m
+    │           │   │   ├── [01;32mnumbering.py[0m
+    │           │   │   ├── [01;32msettings.py[0m
+    │           │   │   ├── [01;32mstory.py[0m
+    │           │   │   └── [01;32mstyles.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32msection.py[0m
+    │           │   ├── [01;32msettings.py[0m
+    │           │   ├── [01;32mshape.py[0m
+    │           │   ├── [01;32mshared.py[0m
+    │           │   ├── [34;42mstyles[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mlatent.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mstyle.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mstyles.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mlatent.py[0m
+    │           │   │   ├── [01;32mstyle.py[0m
+    │           │   │   └── [01;32mstyles.py[0m
+    │           │   ├── [01;32mtable.py[0m
+    │           │   ├── [34;42mtemplates[0m
+    │           │   │   ├── [01;32mdefault-comments.xml[0m
+    │           │   │   ├── [34;42mdefault-docx-template[0m
+    │           │   │   │   ├── [01;32m[Content_Types].xml[0m
+    │           │   │   │   ├── [34;42m_rels[0m
+    │           │   │   │   ├── [34;42mcustomXml[0m
+    │           │   │   │   │   ├── [34;42m_rels[0m
+    │           │   │   │   │   │   └── [01;32mitem1.xml.rels[0m
+    │           │   │   │   │   ├── [01;32mitem1.xml[0m
+    │           │   │   │   │   └── [01;32mitemProps1.xml[0m
+    │           │   │   │   ├── [34;42mdocProps[0m
+    │           │   │   │   │   ├── [01;32mapp.xml[0m
+    │           │   │   │   │   ├── [01;32mcore.xml[0m
+    │           │   │   │   │   └── [01;32mthumbnail.jpeg[0m
+    │           │   │   │   └── [34;42mword[0m
+    │           │   │   │       ├── [34;42m_rels[0m
+    │           │   │   │       │   └── [01;32mdocument.xml.rels[0m
+    │           │   │   │       ├── [01;32mdocument.xml[0m
+    │           │   │   │       ├── [01;32mfontTable.xml[0m
+    │           │   │   │       ├── [01;32mnumbering.xml[0m
+    │           │   │   │       ├── [01;32msettings.xml[0m
+    │           │   │   │       ├── [01;32mstyles.xml[0m
+    │           │   │   │       ├── [01;32mstylesWithEffects.xml[0m
+    │           │   │   │       ├── [34;42mtheme[0m
+    │           │   │   │       │   └── [01;32mtheme1.xml[0m
+    │           │   │   │       └── [01;32mwebSettings.xml[0m
+    │           │   │   ├── [01;32mdefault-footer.xml[0m
+    │           │   │   ├── [01;32mdefault-header.xml[0m
+    │           │   │   ├── [01;32mdefault-settings.xml[0m
+    │           │   │   ├── [01;32mdefault-styles.xml[0m
+    │           │   │   └── [01;32mdefault.docx[0m
+    │           │   ├── [34;42mtext[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mfont.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mhyperlink.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mpagebreak.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mparagraph.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mparfmt.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mrun.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mtabstops.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mfont.py[0m
+    │           │   │   ├── [01;32mhyperlink.py[0m
+    │           │   │   ├── [01;32mpagebreak.py[0m
+    │           │   │   ├── [01;32mparagraph.py[0m
+    │           │   │   ├── [01;32mparfmt.py[0m
+    │           │   │   ├── [01;32mrun.py[0m
+    │           │   │   └── [01;32mtabstops.py[0m
+    │           │   └── [01;32mtypes.py[0m
+    │           ├── [34;42mfastapi[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mapplications.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mbackground.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconcurrency.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mdatastructures.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mencoders.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexception_handlers.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mlogger.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mparam_functions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mparams.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mrequests.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mresponses.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mrouting.cpython-312.pyc[0m
+    │           │   │   ├── [01;32msse.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtypes.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   └── [01;32mwebsockets.cpython-312.pyc[0m
+    │           │   ├── [34;42m_compat[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mshared.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mv2.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mshared.py[0m
+    │           │   │   └── [01;32mv2.py[0m
+    │           │   ├── [01;32mapplications.py[0m
+    │           │   ├── [01;32mbackground.py[0m
+    │           │   ├── [01;32mcli.py[0m
+    │           │   ├── [01;32mconcurrency.py[0m
+    │           │   ├── [01;32mdatastructures.py[0m
+    │           │   ├── [34;42mdependencies[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mmodels.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mmodels.py[0m
+    │           │   │   └── [01;32mutils.py[0m
+    │           │   ├── [01;32mencoders.py[0m
+    │           │   ├── [01;32mexception_handlers.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   ├── [01;32mlogger.py[0m
+    │           │   ├── [34;42mmiddleware[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32masyncexitstack.cpython-312.pyc[0m
+    │           │   │   ├── [01;32masyncexitstack.py[0m
+    │           │   │   ├── [01;32mcors.py[0m
+    │           │   │   ├── [01;32mgzip.py[0m
+    │           │   │   ├── [01;32mhttpsredirect.py[0m
+    │           │   │   ├── [01;32mtrustedhost.py[0m
+    │           │   │   └── [01;32mwsgi.py[0m
+    │           │   ├── [34;42mopenapi[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mconstants.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdocs.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mmodels.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconstants.py[0m
+    │           │   │   ├── [01;32mdocs.py[0m
+    │           │   │   ├── [01;32mmodels.py[0m
+    │           │   │   └── [01;32mutils.py[0m
+    │           │   ├── [01;32mparam_functions.py[0m
+    │           │   ├── [01;32mparams.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mrequests.py[0m
+    │           │   ├── [01;32mresponses.py[0m
+    │           │   ├── [01;32mrouting.py[0m
+    │           │   ├── [34;42msecurity[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mapi_key.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mbase.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mhttp.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32moauth2.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mopen_id_connect_url.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mapi_key.py[0m
+    │           │   │   ├── [01;32mbase.py[0m
+    │           │   │   ├── [01;32mhttp.py[0m
+    │           │   │   ├── [01;32moauth2.py[0m
+    │           │   │   ├── [01;32mopen_id_connect_url.py[0m
+    │           │   │   └── [01;32mutils.py[0m
+    │           │   ├── [01;32msse.py[0m
+    │           │   ├── [01;32mstaticfiles.py[0m
+    │           │   ├── [01;32mtemplating.py[0m
+    │           │   ├── [01;32mtestclient.py[0m
+    │           │   ├── [01;32mtypes.py[0m
+    │           │   ├── [01;32mutils.py[0m
+    │           │   └── [01;32mwebsockets.py[0m
+    │           ├── [34;42mfastapi-0.138.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42mfitz[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   └── [01;32m__init__.cpython-312.pyc[0m
+    │           │   ├── [01;32mtable.py[0m
+    │           │   └── [01;32mutils.py[0m
+    │           ├── [34;42mh11[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_abnf.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_connection.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_events.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_headers.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_readers.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_receivebuffer.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_state.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_util.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_version.cpython-312.pyc[0m
+    │           │   │   └── [01;32m_writers.cpython-312.pyc[0m
+    │           │   ├── [01;32m_abnf.py[0m
+    │           │   ├── [01;32m_connection.py[0m
+    │           │   ├── [01;32m_events.py[0m
+    │           │   ├── [01;32m_headers.py[0m
+    │           │   ├── [01;32m_readers.py[0m
+    │           │   ├── [01;32m_receivebuffer.py[0m
+    │           │   ├── [01;32m_state.py[0m
+    │           │   ├── [01;32m_util.py[0m
+    │           │   ├── [01;32m_version.py[0m
+    │           │   ├── [01;32m_writers.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mh11-0.16.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE.txt[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mhttpcore[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m_api.py[0m
+    │           │   ├── [34;42m_async[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mconnection.py[0m
+    │           │   │   ├── [01;32mconnection_pool.py[0m
+    │           │   │   ├── [01;32mhttp11.py[0m
+    │           │   │   ├── [01;32mhttp2.py[0m
+    │           │   │   ├── [01;32mhttp_proxy.py[0m
+    │           │   │   ├── [01;32minterfaces.py[0m
+    │           │   │   └── [01;32msocks_proxy.py[0m
+    │           │   ├── [34;42m_backends[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32manyio.py[0m
+    │           │   │   ├── [01;32mauto.py[0m
+    │           │   │   ├── [01;32mbase.py[0m
+    │           │   │   ├── [01;32mmock.py[0m
+    │           │   │   ├── [01;32msync.py[0m
+    │           │   │   └── [01;32mtrio.py[0m
+    │           │   ├── [01;32m_exceptions.py[0m
+    │           │   ├── [01;32m_models.py[0m
+    │           │   ├── [01;32m_ssl.py[0m
+    │           │   ├── [34;42m_sync[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mconnection.py[0m
+    │           │   │   ├── [01;32mconnection_pool.py[0m
+    │           │   │   ├── [01;32mhttp11.py[0m
+    │           │   │   ├── [01;32mhttp2.py[0m
+    │           │   │   ├── [01;32mhttp_proxy.py[0m
+    │           │   │   ├── [01;32minterfaces.py[0m
+    │           │   │   └── [01;32msocks_proxy.py[0m
+    │           │   ├── [01;32m_synchronization.py[0m
+    │           │   ├── [01;32m_trace.py[0m
+    │           │   ├── [01;32m_utils.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mhttpcore-1.0.9.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.md[0m
+    │           ├── [34;42mhttpx[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__version__.py[0m
+    │           │   ├── [01;32m_api.py[0m
+    │           │   ├── [01;32m_auth.py[0m
+    │           │   ├── [01;32m_client.py[0m
+    │           │   ├── [01;32m_config.py[0m
+    │           │   ├── [01;32m_content.py[0m
+    │           │   ├── [01;32m_decoders.py[0m
+    │           │   ├── [01;32m_exceptions.py[0m
+    │           │   ├── [01;32m_main.py[0m
+    │           │   ├── [01;32m_models.py[0m
+    │           │   ├── [01;32m_multipart.py[0m
+    │           │   ├── [01;32m_status_codes.py[0m
+    │           │   ├── [34;42m_transports[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32masgi.py[0m
+    │           │   │   ├── [01;32mbase.py[0m
+    │           │   │   ├── [01;32mdefault.py[0m
+    │           │   │   ├── [01;32mmock.py[0m
+    │           │   │   └── [01;32mwsgi.py[0m
+    │           │   ├── [01;32m_types.py[0m
+    │           │   ├── [01;32m_urlparse.py[0m
+    │           │   ├── [01;32m_urls.py[0m
+    │           │   ├── [01;32m_utils.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mhttpx-0.28.1.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.md[0m
+    │           ├── [34;42midna[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [01;32mcli.py[0m
+    │           │   ├── [01;32mcodec.py[0m
+    │           │   ├── [01;32mcompat.py[0m
+    │           │   ├── [01;32mcore.py[0m
+    │           │   ├── [01;32midnadata.py[0m
+    │           │   ├── [01;32mintranges.py[0m
+    │           │   ├── [01;32mpackage_data.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   └── [01;32muts46data.py[0m
+    │           ├── [34;42midna-3.18.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.md[0m
+    │           ├── [34;42miniconfig[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m_parse.py[0m
+    │           │   ├── [01;32m_version.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42miniconfig-2.3.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mlxml[0m
+    │           │   ├── [01;32mElementInclude.py[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   └── [01;32m__init__.cpython-312.pyc[0m
+    │           │   ├── [01;32m_elementpath.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_elementpath.py[0m
+    │           │   ├── [01;32mapihelpers.pxi[0m
+    │           │   ├── [01;32mbuilder.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32mbuilder.py[0m
+    │           │   ├── [01;32mclasslookup.pxi[0m
+    │           │   ├── [01;32mcleanup.pxi[0m
+    │           │   ├── [01;32mcssselect.py[0m
+    │           │   ├── [01;32mdebug.pxi[0m
+    │           │   ├── [01;32mdocloader.pxi[0m
+    │           │   ├── [01;32mdoctestcompare.py[0m
+    │           │   ├── [01;32mdtd.pxi[0m
+    │           │   ├── [01;32metree.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32metree.h[0m
+    │           │   ├── [01;32metree.pyx[0m
+    │           │   ├── [01;32metree_api.h[0m
+    │           │   ├── [01;32mextensions.pxi[0m
+    │           │   ├── [34;42mhtml[0m
+    │           │   │   ├── [01;32mElementSoup.py[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32m_diffcommand.py[0m
+    │           │   │   ├── [01;32m_difflib.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   │   ├── [01;32m_difflib.py[0m
+    │           │   │   ├── [01;32m_html5builder.py[0m
+    │           │   │   ├── [01;32m_setmixin.py[0m
+    │           │   │   ├── [01;32mbuilder.py[0m
+    │           │   │   ├── [01;32mclean.py[0m
+    │           │   │   ├── [01;32mdefs.py[0m
+    │           │   │   ├── [01;32mdiff.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   │   ├── [01;32mdiff.py[0m
+    │           │   │   ├── [01;32mformfill.py[0m
+    │           │   │   ├── [01;32mhtml5parser.py[0m
+    │           │   │   ├── [01;32msoupparser.py[0m
+    │           │   │   └── [01;32musedoctest.py[0m
+    │           │   ├── [34;42mincludes[0m
+    │           │   │   ├── [01;32m__init__.pxd[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mc14n.pxd[0m
+    │           │   │   ├── [01;32mconfig.pxd[0m
+    │           │   │   ├── [01;32mdtdvalid.pxd[0m
+    │           │   │   ├── [01;32metree_defs.h[0m
+    │           │   │   ├── [01;32metreepublic.pxd[0m
+    │           │   │   ├── [34;42mextlibs[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mlibcharset.h[0m
+    │           │   │   │   ├── [01;32mlocalcharset.h[0m
+    │           │   │   │   ├── [01;32mzconf.h[0m
+    │           │   │   │   └── [01;32mzlib.h[0m
+    │           │   │   ├── [01;32mhtmlparser.pxd[0m
+    │           │   │   ├── [34;42mlibexslt[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mexslt.h[0m
+    │           │   │   │   ├── [01;32mexsltconfig.h[0m
+    │           │   │   │   └── [01;32mexsltexports.h[0m
+    │           │   │   ├── [34;42mlibxml[0m
+    │           │   │   │   ├── [01;32mHTMLparser.h[0m
+    │           │   │   │   ├── [01;32mHTMLtree.h[0m
+    │           │   │   │   ├── [01;32mSAX.h[0m
+    │           │   │   │   ├── [01;32mSAX2.h[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mc14n.h[0m
+    │           │   │   │   ├── [01;32mcatalog.h[0m
+    │           │   │   │   ├── [01;32mchvalid.h[0m
+    │           │   │   │   ├── [01;32mdebugXML.h[0m
+    │           │   │   │   ├── [01;32mdict.h[0m
+    │           │   │   │   ├── [01;32mencoding.h[0m
+    │           │   │   │   ├── [01;32mentities.h[0m
+    │           │   │   │   ├── [01;32mglobals.h[0m
+    │           │   │   │   ├── [01;32mhash.h[0m
+    │           │   │   │   ├── [01;32mlist.h[0m
+    │           │   │   │   ├── [01;32mnanoftp.h[0m
+    │           │   │   │   ├── [01;32mnanohttp.h[0m
+    │           │   │   │   ├── [01;32mparser.h[0m
+    │           │   │   │   ├── [01;32mparserInternals.h[0m
+    │           │   │   │   ├── [01;32mrelaxng.h[0m
+    │           │   │   │   ├── [01;32mschemasInternals.h[0m
+    │           │   │   │   ├── [01;32mschematron.h[0m
+    │           │   │   │   ├── [01;32mthreads.h[0m
+    │           │   │   │   ├── [01;32mtree.h[0m
+    │           │   │   │   ├── [01;32muri.h[0m
+    │           │   │   │   ├── [01;32mvalid.h[0m
+    │           │   │   │   ├── [01;32mxinclude.h[0m
+    │           │   │   │   ├── [01;32mxlink.h[0m
+    │           │   │   │   ├── [01;32mxmlIO.h[0m
+    │           │   │   │   ├── [01;32mxmlautomata.h[0m
+    │           │   │   │   ├── [01;32mxmlerror.h[0m
+    │           │   │   │   ├── [01;32mxmlexports.h[0m
+    │           │   │   │   ├── [01;32mxmlmemory.h[0m
+    │           │   │   │   ├── [01;32mxmlmodule.h[0m
+    │           │   │   │   ├── [01;32mxmlreader.h[0m
+    │           │   │   │   ├── [01;32mxmlregexp.h[0m
+    │           │   │   │   ├── [01;32mxmlsave.h[0m
+    │           │   │   │   ├── [01;32mxmlschemas.h[0m
+    │           │   │   │   ├── [01;32mxmlschemastypes.h[0m
+    │           │   │   │   ├── [01;32mxmlstring.h[0m
+    │           │   │   │   ├── [01;32mxmlunicode.h[0m
+    │           │   │   │   ├── [01;32mxmlversion.h[0m
+    │           │   │   │   ├── [01;32mxmlwriter.h[0m
+    │           │   │   │   ├── [01;32mxpath.h[0m
+    │           │   │   │   ├── [01;32mxpathInternals.h[0m
+    │           │   │   │   └── [01;32mxpointer.h[0m
+    │           │   │   ├── [34;42mlibxslt[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mattributes.h[0m
+    │           │   │   │   ├── [01;32mdocuments.h[0m
+    │           │   │   │   ├── [01;32mextensions.h[0m
+    │           │   │   │   ├── [01;32mextra.h[0m
+    │           │   │   │   ├── [01;32mfunctions.h[0m
+    │           │   │   │   ├── [01;32mimports.h[0m
+    │           │   │   │   ├── [01;32mkeys.h[0m
+    │           │   │   │   ├── [01;32mnamespaces.h[0m
+    │           │   │   │   ├── [01;32mnumbersInternals.h[0m
+    │           │   │   │   ├── [01;32mpattern.h[0m
+    │           │   │   │   ├── [01;32mpreproc.h[0m
+    │           │   │   │   ├── [01;32msecurity.h[0m
+    │           │   │   │   ├── [01;32mtemplates.h[0m
+    │           │   │   │   ├── [01;32mtransform.h[0m
+    │           │   │   │   ├── [01;32mvariables.h[0m
+    │           │   │   │   ├── [01;32mxslt.h[0m
+    │           │   │   │   ├── [01;32mxsltInternals.h[0m
+    │           │   │   │   ├── [01;32mxsltconfig.h[0m
+    │           │   │   │   ├── [01;32mxsltexports.h[0m
+    │           │   │   │   ├── [01;32mxsltlocale.h[0m
+    │           │   │   │   └── [01;32mxsltutils.h[0m
+    │           │   │   ├── [01;32mlxml-version.h[0m
+    │           │   │   ├── [01;32mrelaxng.pxd[0m
+    │           │   │   ├── [01;32mschematron.pxd[0m
+    │           │   │   ├── [01;32mtree.pxd[0m
+    │           │   │   ├── [01;32muri.pxd[0m
+    │           │   │   ├── [01;32mxinclude.pxd[0m
+    │           │   │   ├── [01;32mxmlerror.pxd[0m
+    │           │   │   ├── [01;32mxmlparser.pxd[0m
+    │           │   │   ├── [01;32mxmlschema.pxd[0m
+    │           │   │   ├── [01;32mxpath.pxd[0m
+    │           │   │   └── [01;32mxslt.pxd[0m
+    │           │   ├── [34;42misoschematron[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   └── [34;42mresources[0m
+    │           │   │       ├── [34;42mrng[0m
+    │           │   │       │   └── [01;32miso-schematron.rng[0m
+    │           │   │       └── [34;42mxsl[0m
+    │           │   │           ├── [01;32mRNG2Schtrn.xsl[0m
+    │           │   │           ├── [01;32mXSD2Schtrn.xsl[0m
+    │           │   │           └── [34;42miso-schematron-xslt1[0m
+    │           │   │               ├── [01;32miso_abstract_expand.xsl[0m
+    │           │   │               ├── [01;32miso_dsdl_include.xsl[0m
+    │           │   │               ├── [01;32miso_schematron_message.xsl[0m
+    │           │   │               ├── [01;32miso_schematron_skeleton_for_xslt1.xsl[0m
+    │           │   │               ├── [01;32miso_svrl_for_xslt1.xsl[0m
+    │           │   │               └── [01;32mreadme.txt[0m
+    │           │   ├── [01;32miterparse.pxi[0m
+    │           │   ├── [01;32mlxml.etree.h[0m
+    │           │   ├── [01;32mlxml.etree_api.h[0m
+    │           │   ├── [01;32mnsclasses.pxi[0m
+    │           │   ├── [01;32mobjectify.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32mobjectify.pyx[0m
+    │           │   ├── [01;32mobjectpath.pxi[0m
+    │           │   ├── [01;32mparser.pxi[0m
+    │           │   ├── [01;32mparsertarget.pxi[0m
+    │           │   ├── [01;32mproxy.pxi[0m
+    │           │   ├── [01;32mpublic-api.pxi[0m
+    │           │   ├── [01;32mpyclasslookup.py[0m
+    │           │   ├── [01;32mreadonlytree.pxi[0m
+    │           │   ├── [01;32mrelaxng.pxi[0m
+    │           │   ├── [01;32msax.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32msax.py[0m
+    │           │   ├── [01;32msaxparser.pxi[0m
+    │           │   ├── [01;32mschematron.pxi[0m
+    │           │   ├── [01;32mserializer.pxi[0m
+    │           │   ├── [01;32musedoctest.py[0m
+    │           │   ├── [01;32mxinclude.pxi[0m
+    │           │   ├── [01;32mxmlerror.pxi[0m
+    │           │   ├── [01;32mxmlid.pxi[0m
+    │           │   ├── [01;32mxmlschema.pxi[0m
+    │           │   ├── [01;32mxpath.pxi[0m
+    │           │   ├── [01;32mxslt.pxi[0m
+    │           │   └── [01;32mxsltext.pxi[0m
+    │           ├── [34;42mlxml-6.1.1.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   ├── [01;32mLICENSE.txt[0m
+    │           │   │   └── [01;32mLICENSES.txt[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mmultipart[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32mdecoders.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   └── [01;32mmultipart.py[0m
+    │           ├── [34;42mpackaging[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m_elffile.py[0m
+    │           │   ├── [01;32m_manylinux.py[0m
+    │           │   ├── [01;32m_musllinux.py[0m
+    │           │   ├── [01;32m_parser.py[0m
+    │           │   ├── [01;32m_structures.py[0m
+    │           │   ├── [01;32m_tokenizer.py[0m
+    │           │   ├── [01;32mdependency_groups.py[0m
+    │           │   ├── [01;32mdirect_url.py[0m
+    │           │   ├── [01;32merrors.py[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   └── [01;32m_spdx.py[0m
+    │           │   ├── [01;32mmarkers.py[0m
+    │           │   ├── [01;32mmetadata.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mpylock.py[0m
+    │           │   ├── [01;32mrequirements.py[0m
+    │           │   ├── [01;32mspecifiers.py[0m
+    │           │   ├── [01;32mtags.py[0m
+    │           │   ├── [01;32mutils.py[0m
+    │           │   └── [01;32mversion.py[0m
+    │           ├── [34;42mpackaging-26.2.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       ├── [01;32mLICENSE[0m
+    │           │       ├── [01;32mLICENSE.APACHE[0m
+    │           │       └── [01;32mLICENSE.BSD[0m
+    │           ├── [34;42mpillow-12.2.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   ├── [34;42msboms[0m
+    │           │   │   └── [01;32mauditwheel.cdx.json[0m
+    │           │   ├── [01;32mtop_level.txt[0m
+    │           │   └── [01;32mzip-safe[0m
+    │           ├── [34;42mpillow.libs[0m
+    │           │   ├── [01;32mlibXau-154567c4.so.6.0.0[0m
+    │           │   ├── [01;32mlibavif-a883386a.so.16.4.1[0m
+    │           │   ├── [01;32mlibbrotlicommon-785b7a00.so.1.2.0[0m
+    │           │   ├── [01;32mlibbrotlidec-08d35d18.so.1.2.0[0m
+    │           │   ├── [01;32mlibfreetype-d2d71ad9.so.6.20.6[0m
+    │           │   ├── [01;32mlibharfbuzz-ef65cc8a.so.0.61321.0[0m
+    │           │   ├── [01;32mlibjpeg-8296d2fa.so.62.4.0[0m
+    │           │   ├── [01;32mliblcms2-545f6561.so.2.0.18[0m
+    │           │   ├── [01;32mliblzma-3c942967.so.5.8.3[0m
+    │           │   ├── [01;32mlibopenjp2-f3576751.so.2.5.4[0m
+    │           │   ├── [01;32mlibpng16-65c953c0.so.16.56.0[0m
+    │           │   ├── [01;32mlibsharpyuv-0bacc318.so.0.1.2[0m
+    │           │   ├── [01;32mlibtiff-f4bc73ff.so.6.2.0[0m
+    │           │   ├── [01;32mlibwebp-67ee3789.so.7.2.0[0m
+    │           │   ├── [01;32mlibwebpdemux-eeb71312.so.2.0.17[0m
+    │           │   ├── [01;32mlibwebpmux-20a90b09.so.3.1.2[0m
+    │           │   ├── [01;32mlibxcb-bac6ebc8.so.1.1.0[0m
+    │           │   └── [01;32mlibzstd-6ea785c0.so.1.5.7[0m
+    │           ├── [34;42mpip[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [01;32m__pip-runner__.py[0m
+    │           │   ├── [34;42m_internal[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mbuild_env.py[0m
+    │           │   │   ├── [01;32mcache.py[0m
+    │           │   │   ├── [34;42mcli[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mautocompletion.py[0m
+    │           │   │   │   ├── [01;32mbase_command.py[0m
+    │           │   │   │   ├── [01;32mcmdoptions.py[0m
+    │           │   │   │   ├── [01;32mcommand_context.py[0m
+    │           │   │   │   ├── [01;32mindex_command.py[0m
+    │           │   │   │   ├── [01;32mmain.py[0m
+    │           │   │   │   ├── [01;32mmain_parser.py[0m
+    │           │   │   │   ├── [01;32mparser.py[0m
+    │           │   │   │   ├── [01;32mprogress_bars.py[0m
+    │           │   │   │   ├── [01;32mreq_command.py[0m
+    │           │   │   │   ├── [01;32mspinners.py[0m
+    │           │   │   │   └── [01;32mstatus_codes.py[0m
+    │           │   │   ├── [34;42mcommands[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mcache.py[0m
+    │           │   │   │   ├── [01;32mcheck.py[0m
+    │           │   │   │   ├── [01;32mcompletion.py[0m
+    │           │   │   │   ├── [01;32mconfiguration.py[0m
+    │           │   │   │   ├── [01;32mdebug.py[0m
+    │           │   │   │   ├── [01;32mdownload.py[0m
+    │           │   │   │   ├── [01;32mfreeze.py[0m
+    │           │   │   │   ├── [01;32mhash.py[0m
+    │           │   │   │   ├── [01;32mhelp.py[0m
+    │           │   │   │   ├── [01;32mindex.py[0m
+    │           │   │   │   ├── [01;32minspect.py[0m
+    │           │   │   │   ├── [01;32minstall.py[0m
+    │           │   │   │   ├── [01;32mlist.py[0m
+    │           │   │   │   ├── [01;32mlock.py[0m
+    │           │   │   │   ├── [01;32msearch.py[0m
+    │           │   │   │   ├── [01;32mshow.py[0m
+    │           │   │   │   ├── [01;32muninstall.py[0m
+    │           │   │   │   └── [01;32mwheel.py[0m
+    │           │   │   ├── [01;32mconfiguration.py[0m
+    │           │   │   ├── [34;42mdistributions[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mbase.py[0m
+    │           │   │   │   ├── [01;32minstalled.py[0m
+    │           │   │   │   ├── [01;32msdist.py[0m
+    │           │   │   │   └── [01;32mwheel.py[0m
+    │           │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   ├── [34;42mindex[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mcollector.py[0m
+    │           │   │   │   ├── [01;32mpackage_finder.py[0m
+    │           │   │   │   └── [01;32msources.py[0m
+    │           │   │   ├── [34;42mlocations[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_distutils.py[0m
+    │           │   │   │   ├── [01;32m_sysconfig.py[0m
+    │           │   │   │   └── [01;32mbase.py[0m
+    │           │   │   ├── [01;32mmain.py[0m
+    │           │   │   ├── [34;42mmetadata[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_json.py[0m
+    │           │   │   │   ├── [01;32mbase.py[0m
+    │           │   │   │   ├── [34;42mimportlib[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [01;32m_compat.py[0m
+    │           │   │   │   │   ├── [01;32m_dists.py[0m
+    │           │   │   │   │   └── [01;32m_envs.py[0m
+    │           │   │   │   └── [01;32mpkg_resources.py[0m
+    │           │   │   ├── [34;42mmodels[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mcandidate.py[0m
+    │           │   │   │   ├── [01;32mdirect_url.py[0m
+    │           │   │   │   ├── [01;32mformat_control.py[0m
+    │           │   │   │   ├── [01;32mindex.py[0m
+    │           │   │   │   ├── [01;32minstallation_report.py[0m
+    │           │   │   │   ├── [01;32mlink.py[0m
+    │           │   │   │   ├── [01;32mrelease_control.py[0m
+    │           │   │   │   ├── [01;32mscheme.py[0m
+    │           │   │   │   ├── [01;32msearch_scope.py[0m
+    │           │   │   │   ├── [01;32mselection_prefs.py[0m
+    │           │   │   │   ├── [01;32mtarget_python.py[0m
+    │           │   │   │   └── [01;32mwheel.py[0m
+    │           │   │   ├── [34;42mnetwork[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mauth.py[0m
+    │           │   │   │   ├── [01;32mcache.py[0m
+    │           │   │   │   ├── [01;32mdownload.py[0m
+    │           │   │   │   ├── [01;32mlazy_wheel.py[0m
+    │           │   │   │   ├── [01;32msession.py[0m
+    │           │   │   │   ├── [01;32mutils.py[0m
+    │           │   │   │   └── [01;32mxmlrpc.py[0m
+    │           │   │   ├── [34;42moperations[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [34;42mbuild[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [01;32mbuild_tracker.py[0m
+    │           │   │   │   │   ├── [01;32mmetadata.py[0m
+    │           │   │   │   │   ├── [01;32mmetadata_editable.py[0m
+    │           │   │   │   │   ├── [01;32mwheel.py[0m
+    │           │   │   │   │   └── [01;32mwheel_editable.py[0m
+    │           │   │   │   ├── [01;32mcheck.py[0m
+    │           │   │   │   ├── [01;32mfreeze.py[0m
+    │           │   │   │   ├── [34;42minstall[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   └── [01;32mwheel.py[0m
+    │           │   │   │   └── [01;32mprepare.py[0m
+    │           │   │   ├── [01;32mpyproject.py[0m
+    │           │   │   ├── [34;42mreq[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mconstructors.py[0m
+    │           │   │   │   ├── [01;32mpep723.py[0m
+    │           │   │   │   ├── [01;32mreq_dependency_group.py[0m
+    │           │   │   │   ├── [01;32mreq_file.py[0m
+    │           │   │   │   ├── [01;32mreq_install.py[0m
+    │           │   │   │   ├── [01;32mreq_set.py[0m
+    │           │   │   │   └── [01;32mreq_uninstall.py[0m
+    │           │   │   ├── [34;42mresolution[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mbase.py[0m
+    │           │   │   │   ├── [34;42mlegacy[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   └── [01;32mresolver.py[0m
+    │           │   │   │   └── [34;42mresolvelib[0m
+    │           │   │   │       ├── [01;32m__init__.py[0m
+    │           │   │   │       ├── [01;32mbase.py[0m
+    │           │   │   │       ├── [01;32mcandidates.py[0m
+    │           │   │   │       ├── [01;32mfactory.py[0m
+    │           │   │   │       ├── [01;32mfound_candidates.py[0m
+    │           │   │   │       ├── [01;32mprovider.py[0m
+    │           │   │   │       ├── [01;32mreporter.py[0m
+    │           │   │   │       ├── [01;32mrequirements.py[0m
+    │           │   │   │       └── [01;32mresolver.py[0m
+    │           │   │   ├── [01;32mself_outdated_check.py[0m
+    │           │   │   ├── [34;42mutils[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_jaraco_text.py[0m
+    │           │   │   │   ├── [01;32m_log.py[0m
+    │           │   │   │   ├── [01;32mappdirs.py[0m
+    │           │   │   │   ├── [01;32mcompat.py[0m
+    │           │   │   │   ├── [01;32mcompatibility_tags.py[0m
+    │           │   │   │   ├── [01;32mdatetime.py[0m
+    │           │   │   │   ├── [01;32mdeprecation.py[0m
+    │           │   │   │   ├── [01;32mdirect_url_helpers.py[0m
+    │           │   │   │   ├── [01;32megg_link.py[0m
+    │           │   │   │   ├── [01;32mentrypoints.py[0m
+    │           │   │   │   ├── [01;32mfilesystem.py[0m
+    │           │   │   │   ├── [01;32mfiletypes.py[0m
+    │           │   │   │   ├── [01;32mglibc.py[0m
+    │           │   │   │   ├── [01;32mhashes.py[0m
+    │           │   │   │   ├── [01;32mlogging.py[0m
+    │           │   │   │   ├── [01;32mmisc.py[0m
+    │           │   │   │   ├── [01;32mpackaging.py[0m
+    │           │   │   │   ├── [01;32mpylock.py[0m
+    │           │   │   │   ├── [01;32mretry.py[0m
+    │           │   │   │   ├── [01;32msubprocess.py[0m
+    │           │   │   │   ├── [01;32mtemp_dir.py[0m
+    │           │   │   │   ├── [01;32munpacking.py[0m
+    │           │   │   │   ├── [01;32murls.py[0m
+    │           │   │   │   ├── [01;32mvirtualenv.py[0m
+    │           │   │   │   └── [01;32mwheel.py[0m
+    │           │   │   ├── [34;42mvcs[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mbazaar.py[0m
+    │           │   │   │   ├── [01;32mgit.py[0m
+    │           │   │   │   ├── [01;32mmercurial.py[0m
+    │           │   │   │   ├── [01;32msubversion.py[0m
+    │           │   │   │   └── [01;32mversioncontrol.py[0m
+    │           │   │   └── [01;32mwheel_builder.py[0m
+    │           │   ├── [34;42m_vendor[0m
+    │           │   │   ├── [01;32mREADME.rst[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42mcachecontrol[0m
+    │           │   │   │   ├── [01;32mLICENSE.txt[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_cmd.py[0m
+    │           │   │   │   ├── [01;32madapter.py[0m
+    │           │   │   │   ├── [01;32mcache.py[0m
+    │           │   │   │   ├── [34;42mcaches[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [01;32mfile_cache.py[0m
+    │           │   │   │   │   └── [01;32mredis_cache.py[0m
+    │           │   │   │   ├── [01;32mcontroller.py[0m
+    │           │   │   │   ├── [01;32mfilewrapper.py[0m
+    │           │   │   │   ├── [01;32mheuristics.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   ├── [01;32mserialize.py[0m
+    │           │   │   │   └── [01;32mwrapper.py[0m
+    │           │   │   ├── [34;42mcertifi[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m__main__.py[0m
+    │           │   │   │   ├── [01;32mcacert.pem[0m
+    │           │   │   │   ├── [01;32mcore.py[0m
+    │           │   │   │   └── [01;32mpy.typed[0m
+    │           │   │   ├── [34;42mdistlib[0m
+    │           │   │   │   ├── [01;32mLICENSE.txt[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mcompat.py[0m
+    │           │   │   │   ├── [01;32mresources.py[0m
+    │           │   │   │   ├── [01;32mscripts.py[0m
+    │           │   │   │   ├── [01;32mt32.exe[0m
+    │           │   │   │   ├── [01;32mt64-arm.exe[0m
+    │           │   │   │   ├── [01;32mt64.exe[0m
+    │           │   │   │   ├── [01;32mutil.py[0m
+    │           │   │   │   ├── [01;32mw32.exe[0m
+    │           │   │   │   ├── [01;32mw64-arm.exe[0m
+    │           │   │   │   └── [01;32mw64.exe[0m
+    │           │   │   ├── [34;42mdistro[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m__main__.py[0m
+    │           │   │   │   ├── [01;32mdistro.py[0m
+    │           │   │   │   └── [01;32mpy.typed[0m
+    │           │   │   ├── [34;42midna[0m
+    │           │   │   │   ├── [01;32mLICENSE.md[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mcodec.py[0m
+    │           │   │   │   ├── [01;32mcompat.py[0m
+    │           │   │   │   ├── [01;32mcore.py[0m
+    │           │   │   │   ├── [01;32midnadata.py[0m
+    │           │   │   │   ├── [01;32mintranges.py[0m
+    │           │   │   │   ├── [01;32mpackage_data.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   └── [01;32muts46data.py[0m
+    │           │   │   ├── [34;42mmsgpack[0m
+    │           │   │   │   ├── [01;32mCOPYING[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   │   ├── [01;32mext.py[0m
+    │           │   │   │   └── [01;32mfallback.py[0m
+    │           │   │   ├── [34;42mpackaging[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32mLICENSE.APACHE[0m
+    │           │   │   │   ├── [01;32mLICENSE.BSD[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_elffile.py[0m
+    │           │   │   │   ├── [01;32m_manylinux.py[0m
+    │           │   │   │   ├── [01;32m_musllinux.py[0m
+    │           │   │   │   ├── [01;32m_parser.py[0m
+    │           │   │   │   ├── [01;32m_structures.py[0m
+    │           │   │   │   ├── [01;32m_tokenizer.py[0m
+    │           │   │   │   ├── [01;32mdependency_groups.py[0m
+    │           │   │   │   ├── [01;32mdirect_url.py[0m
+    │           │   │   │   ├── [01;32merrors.py[0m
+    │           │   │   │   ├── [34;42mlicenses[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   └── [01;32m_spdx.py[0m
+    │           │   │   │   ├── [01;32mmarkers.py[0m
+    │           │   │   │   ├── [01;32mmetadata.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   ├── [01;32mpylock.py[0m
+    │           │   │   │   ├── [01;32mrequirements.py[0m
+    │           │   │   │   ├── [01;32mspecifiers.py[0m
+    │           │   │   │   ├── [01;32mtags.py[0m
+    │           │   │   │   ├── [01;32mutils.py[0m
+    │           │   │   │   └── [01;32mversion.py[0m
+    │           │   │   ├── [34;42mpkg_resources[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   └── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42mplatformdirs[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m__main__.py[0m
+    │           │   │   │   ├── [01;32mandroid.py[0m
+    │           │   │   │   ├── [01;32mapi.py[0m
+    │           │   │   │   ├── [01;32mmacos.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   ├── [01;32munix.py[0m
+    │           │   │   │   ├── [01;32mversion.py[0m
+    │           │   │   │   └── [01;32mwindows.py[0m
+    │           │   │   ├── [34;42mpygments[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m__main__.py[0m
+    │           │   │   │   ├── [01;32mconsole.py[0m
+    │           │   │   │   ├── [01;32mfilter.py[0m
+    │           │   │   │   ├── [34;42mfilters[0m
+    │           │   │   │   │   └── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mformatter.py[0m
+    │           │   │   │   ├── [34;42mformatters[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   └── [01;32m_mapping.py[0m
+    │           │   │   │   ├── [01;32mlexer.py[0m
+    │           │   │   │   ├── [34;42mlexers[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [01;32m_mapping.py[0m
+    │           │   │   │   │   └── [01;32mpython.py[0m
+    │           │   │   │   ├── [01;32mmodeline.py[0m
+    │           │   │   │   ├── [01;32mplugin.py[0m
+    │           │   │   │   ├── [01;32mregexopt.py[0m
+    │           │   │   │   ├── [01;32mscanner.py[0m
+    │           │   │   │   ├── [01;32msphinxext.py[0m
+    │           │   │   │   ├── [01;32mstyle.py[0m
+    │           │   │   │   ├── [34;42mstyles[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   └── [01;32m_mapping.py[0m
+    │           │   │   │   ├── [01;32mtoken.py[0m
+    │           │   │   │   ├── [01;32munistring.py[0m
+    │           │   │   │   └── [01;32mutil.py[0m
+    │           │   │   ├── [34;42mpyproject_hooks[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_impl.py[0m
+    │           │   │   │   ├── [34;42m_in_process[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   └── [01;32m_in_process.py[0m
+    │           │   │   │   └── [01;32mpy.typed[0m
+    │           │   │   ├── [34;42mrequests[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m__version__.py[0m
+    │           │   │   │   ├── [01;32m_internal_utils.py[0m
+    │           │   │   │   ├── [01;32madapters.py[0m
+    │           │   │   │   ├── [01;32mapi.py[0m
+    │           │   │   │   ├── [01;32mauth.py[0m
+    │           │   │   │   ├── [01;32mcerts.py[0m
+    │           │   │   │   ├── [01;32mcompat.py[0m
+    │           │   │   │   ├── [01;32mcookies.py[0m
+    │           │   │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   │   ├── [01;32mhelp.py[0m
+    │           │   │   │   ├── [01;32mhooks.py[0m
+    │           │   │   │   ├── [01;32mmodels.py[0m
+    │           │   │   │   ├── [01;32mpackages.py[0m
+    │           │   │   │   ├── [01;32msessions.py[0m
+    │           │   │   │   ├── [01;32mstatus_codes.py[0m
+    │           │   │   │   ├── [01;32mstructures.py[0m
+    │           │   │   │   └── [01;32mutils.py[0m
+    │           │   │   ├── [34;42mresolvelib[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mproviders.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   ├── [01;32mreporters.py[0m
+    │           │   │   │   ├── [34;42mresolvers[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [01;32mabstract.py[0m
+    │           │   │   │   │   ├── [01;32mcriterion.py[0m
+    │           │   │   │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   │   │   └── [01;32mresolution.py[0m
+    │           │   │   │   └── [01;32mstructs.py[0m
+    │           │   │   ├── [34;42mrich[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m__main__.py[0m
+    │           │   │   │   ├── [01;32m_cell_widths.py[0m
+    │           │   │   │   ├── [01;32m_emoji_codes.py[0m
+    │           │   │   │   ├── [01;32m_emoji_replace.py[0m
+    │           │   │   │   ├── [01;32m_export_format.py[0m
+    │           │   │   │   ├── [01;32m_extension.py[0m
+    │           │   │   │   ├── [01;32m_fileno.py[0m
+    │           │   │   │   ├── [01;32m_inspect.py[0m
+    │           │   │   │   ├── [01;32m_log_render.py[0m
+    │           │   │   │   ├── [01;32m_loop.py[0m
+    │           │   │   │   ├── [01;32m_null_file.py[0m
+    │           │   │   │   ├── [01;32m_palettes.py[0m
+    │           │   │   │   ├── [01;32m_pick.py[0m
+    │           │   │   │   ├── [01;32m_ratio.py[0m
+    │           │   │   │   ├── [01;32m_spinners.py[0m
+    │           │   │   │   ├── [01;32m_stack.py[0m
+    │           │   │   │   ├── [01;32m_timer.py[0m
+    │           │   │   │   ├── [01;32m_win32_console.py[0m
+    │           │   │   │   ├── [01;32m_windows.py[0m
+    │           │   │   │   ├── [01;32m_windows_renderer.py[0m
+    │           │   │   │   ├── [01;32m_wrap.py[0m
+    │           │   │   │   ├── [01;32mabc.py[0m
+    │           │   │   │   ├── [01;32malign.py[0m
+    │           │   │   │   ├── [01;32mansi.py[0m
+    │           │   │   │   ├── [01;32mbar.py[0m
+    │           │   │   │   ├── [01;32mbox.py[0m
+    │           │   │   │   ├── [01;32mcells.py[0m
+    │           │   │   │   ├── [01;32mcolor.py[0m
+    │           │   │   │   ├── [01;32mcolor_triplet.py[0m
+    │           │   │   │   ├── [01;32mcolumns.py[0m
+    │           │   │   │   ├── [01;32mconsole.py[0m
+    │           │   │   │   ├── [01;32mconstrain.py[0m
+    │           │   │   │   ├── [01;32mcontainers.py[0m
+    │           │   │   │   ├── [01;32mcontrol.py[0m
+    │           │   │   │   ├── [01;32mdefault_styles.py[0m
+    │           │   │   │   ├── [01;32mdiagnose.py[0m
+    │           │   │   │   ├── [01;32memoji.py[0m
+    │           │   │   │   ├── [01;32merrors.py[0m
+    │           │   │   │   ├── [01;32mfile_proxy.py[0m
+    │           │   │   │   ├── [01;32mfilesize.py[0m
+    │           │   │   │   ├── [01;32mhighlighter.py[0m
+    │           │   │   │   ├── [01;32mjson.py[0m
+    │           │   │   │   ├── [01;32mjupyter.py[0m
+    │           │   │   │   ├── [01;32mlayout.py[0m
+    │           │   │   │   ├── [01;32mlive.py[0m
+    │           │   │   │   ├── [01;32mlive_render.py[0m
+    │           │   │   │   ├── [01;32mlogging.py[0m
+    │           │   │   │   ├── [01;32mmarkup.py[0m
+    │           │   │   │   ├── [01;32mmeasure.py[0m
+    │           │   │   │   ├── [01;32mpadding.py[0m
+    │           │   │   │   ├── [01;32mpager.py[0m
+    │           │   │   │   ├── [01;32mpalette.py[0m
+    │           │   │   │   ├── [01;32mpanel.py[0m
+    │           │   │   │   ├── [01;32mpretty.py[0m
+    │           │   │   │   ├── [01;32mprogress.py[0m
+    │           │   │   │   ├── [01;32mprogress_bar.py[0m
+    │           │   │   │   ├── [01;32mprompt.py[0m
+    │           │   │   │   ├── [01;32mprotocol.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   ├── [01;32mregion.py[0m
+    │           │   │   │   ├── [01;32mrepr.py[0m
+    │           │   │   │   ├── [01;32mrule.py[0m
+    │           │   │   │   ├── [01;32mscope.py[0m
+    │           │   │   │   ├── [01;32mscreen.py[0m
+    │           │   │   │   ├── [01;32msegment.py[0m
+    │           │   │   │   ├── [01;32mspinner.py[0m
+    │           │   │   │   ├── [01;32mstatus.py[0m
+    │           │   │   │   ├── [01;32mstyle.py[0m
+    │           │   │   │   ├── [01;32mstyled.py[0m
+    │           │   │   │   ├── [01;32msyntax.py[0m
+    │           │   │   │   ├── [01;32mtable.py[0m
+    │           │   │   │   ├── [01;32mterminal_theme.py[0m
+    │           │   │   │   ├── [01;32mtext.py[0m
+    │           │   │   │   ├── [01;32mtheme.py[0m
+    │           │   │   │   ├── [01;32mthemes.py[0m
+    │           │   │   │   ├── [01;32mtraceback.py[0m
+    │           │   │   │   └── [01;32mtree.py[0m
+    │           │   │   ├── [34;42mtomli[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_parser.py[0m
+    │           │   │   │   ├── [01;32m_re.py[0m
+    │           │   │   │   ├── [01;32m_types.py[0m
+    │           │   │   │   └── [01;32mpy.typed[0m
+    │           │   │   ├── [34;42mtomli_w[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_writer.py[0m
+    │           │   │   │   └── [01;32mpy.typed[0m
+    │           │   │   ├── [34;42mtruststore[0m
+    │           │   │   │   ├── [01;32mLICENSE[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_api.py[0m
+    │           │   │   │   ├── [01;32m_macos.py[0m
+    │           │   │   │   ├── [01;32m_openssl.py[0m
+    │           │   │   │   ├── [01;32m_ssl_constants.py[0m
+    │           │   │   │   ├── [01;32m_windows.py[0m
+    │           │   │   │   └── [01;32mpy.typed[0m
+    │           │   │   ├── [34;42murllib3[0m
+    │           │   │   │   ├── [01;32mLICENSE.txt[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32m_base_connection.py[0m
+    │           │   │   │   ├── [01;32m_collections.py[0m
+    │           │   │   │   ├── [01;32m_request_methods.py[0m
+    │           │   │   │   ├── [01;32m_version.py[0m
+    │           │   │   │   ├── [01;32mconnection.py[0m
+    │           │   │   │   ├── [01;32mconnectionpool.py[0m
+    │           │   │   │   ├── [34;42mcontrib[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [34;42memscripten[0m
+    │           │   │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   │   ├── [01;32mconnection.py[0m
+    │           │   │   │   │   │   ├── [01;32memscripten_fetch_worker.js[0m
+    │           │   │   │   │   │   ├── [01;32mfetch.py[0m
+    │           │   │   │   │   │   ├── [01;32mrequest.py[0m
+    │           │   │   │   │   │   └── [01;32mresponse.py[0m
+    │           │   │   │   │   ├── [01;32mpyopenssl.py[0m
+    │           │   │   │   │   └── [01;32msocks.py[0m
+    │           │   │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   │   ├── [01;32mfields.py[0m
+    │           │   │   │   ├── [01;32mfilepost.py[0m
+    │           │   │   │   ├── [34;42mhttp2[0m
+    │           │   │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   │   ├── [01;32mconnection.py[0m
+    │           │   │   │   │   └── [01;32mprobe.py[0m
+    │           │   │   │   ├── [01;32mpoolmanager.py[0m
+    │           │   │   │   ├── [01;32mpy.typed[0m
+    │           │   │   │   ├── [01;32mresponse.py[0m
+    │           │   │   │   └── [34;42mutil[0m
+    │           │   │   │       ├── [01;32m__init__.py[0m
+    │           │   │   │       ├── [01;32mconnection.py[0m
+    │           │   │   │       ├── [01;32mproxy.py[0m
+    │           │   │   │       ├── [01;32mrequest.py[0m
+    │           │   │   │       ├── [01;32mresponse.py[0m
+    │           │   │   │       ├── [01;32mretry.py[0m
+    │           │   │   │       ├── [01;32mssl_.py[0m
+    │           │   │   │       ├── [01;32mssl_match_hostname.py[0m
+    │           │   │   │       ├── [01;32mssltransport.py[0m
+    │           │   │   │       ├── [01;32mtimeout.py[0m
+    │           │   │   │       ├── [01;32murl.py[0m
+    │           │   │   │       ├── [01;32mutil.py[0m
+    │           │   │   │       └── [01;32mwait.py[0m
+    │           │   │   └── [01;32mvendor.txt[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mpip-26.1.2.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       ├── [01;32mAUTHORS.txt[0m
+    │           │       ├── [01;32mLICENSE.txt[0m
+    │           │       └── [34;42msrc[0m
+    │           │           └── [34;42mpip[0m
+    │           │               └── [34;42m_vendor[0m
+    │           │                   ├── [34;42mcachecontrol[0m
+    │           │                   │   └── [01;32mLICENSE.txt[0m
+    │           │                   ├── [34;42mcertifi[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mdistlib[0m
+    │           │                   │   └── [01;32mLICENSE.txt[0m
+    │           │                   ├── [34;42mdistro[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42midna[0m
+    │           │                   │   └── [01;32mLICENSE.md[0m
+    │           │                   ├── [34;42mmsgpack[0m
+    │           │                   │   └── [01;32mCOPYING[0m
+    │           │                   ├── [34;42mpackaging[0m
+    │           │                   │   ├── [01;32mLICENSE[0m
+    │           │                   │   ├── [01;32mLICENSE.APACHE[0m
+    │           │                   │   └── [01;32mLICENSE.BSD[0m
+    │           │                   ├── [34;42mpkg_resources[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mplatformdirs[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mpygments[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mpyproject_hooks[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mrequests[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mresolvelib[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mrich[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mtomli[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mtomli_w[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   ├── [34;42mtruststore[0m
+    │           │                   │   └── [01;32mLICENSE[0m
+    │           │                   └── [34;42murllib3[0m
+    │           │                       └── [01;32mLICENSE.txt[0m
+    │           ├── [34;42mpluggy[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m_callers.py[0m
+    │           │   ├── [01;32m_hooks.py[0m
+    │           │   ├── [01;32m_manager.py[0m
+    │           │   ├── [01;32m_result.py[0m
+    │           │   ├── [01;32m_tracing.py[0m
+    │           │   ├── [01;32m_version.py[0m
+    │           │   ├── [01;32m_warnings.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mpluggy-1.6.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [01;32mpy.py[0m
+    │           ├── [34;42mpydantic[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_migration.cpython-312.pyc[0m
+    │           │   │   ├── [01;32maliases.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mannotated_handlers.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcolor.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconfig.cpython-312.pyc[0m
+    │           │   │   ├── [01;32merrors.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mfields.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mfunctional_validators.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mjson_schema.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mmain.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mnetworks.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtype_adapter.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtypes.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mversion.cpython-312.pyc[0m
+    │           │   │   └── [01;32mwarnings.cpython-312.pyc[0m
+    │           │   ├── [34;42m_internal[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_config.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_core_metadata.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_core_utils.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_dataclasses.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_decorators.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_discriminated_union.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_docs_extraction.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_fields.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_forward_ref.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_generate_schema.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_generics.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_import_utils.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_internal_dataclass.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_known_annotated_metadata.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_mock_val_ser.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_model_construction.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_namespace_utils.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_repr.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_schema_gather.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_schema_generation_shared.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_signature.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_typing_extra.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_utils.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32m_validators.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_config.py[0m
+    │           │   │   ├── [01;32m_core_metadata.py[0m
+    │           │   │   ├── [01;32m_core_utils.py[0m
+    │           │   │   ├── [01;32m_dataclasses.py[0m
+    │           │   │   ├── [01;32m_decorators.py[0m
+    │           │   │   ├── [01;32m_decorators_v1.py[0m
+    │           │   │   ├── [01;32m_discriminated_union.py[0m
+    │           │   │   ├── [01;32m_docs_extraction.py[0m
+    │           │   │   ├── [01;32m_fields.py[0m
+    │           │   │   ├── [01;32m_forward_ref.py[0m
+    │           │   │   ├── [01;32m_generate_schema.py[0m
+    │           │   │   ├── [01;32m_generics.py[0m
+    │           │   │   ├── [01;32m_git.py[0m
+    │           │   │   ├── [01;32m_import_utils.py[0m
+    │           │   │   ├── [01;32m_internal_dataclass.py[0m
+    │           │   │   ├── [01;32m_known_annotated_metadata.py[0m
+    │           │   │   ├── [01;32m_mock_val_ser.py[0m
+    │           │   │   ├── [01;32m_model_construction.py[0m
+    │           │   │   ├── [01;32m_namespace_utils.py[0m
+    │           │   │   ├── [01;32m_repr.py[0m
+    │           │   │   ├── [01;32m_schema_gather.py[0m
+    │           │   │   ├── [01;32m_schema_generation_shared.py[0m
+    │           │   │   ├── [01;32m_serializers.py[0m
+    │           │   │   ├── [01;32m_signature.py[0m
+    │           │   │   ├── [01;32m_typing_extra.py[0m
+    │           │   │   ├── [01;32m_utils.py[0m
+    │           │   │   ├── [01;32m_validate_call.py[0m
+    │           │   │   └── [01;32m_validators.py[0m
+    │           │   ├── [01;32m_migration.py[0m
+    │           │   ├── [01;32malias_generators.py[0m
+    │           │   ├── [01;32maliases.py[0m
+    │           │   ├── [01;32mannotated_handlers.py[0m
+    │           │   ├── [01;32mclass_validators.py[0m
+    │           │   ├── [01;32mcolor.py[0m
+    │           │   ├── [01;32mconfig.py[0m
+    │           │   ├── [01;32mdataclasses.py[0m
+    │           │   ├── [01;32mdatetime_parse.py[0m
+    │           │   ├── [01;32mdecorator.py[0m
+    │           │   ├── [34;42mdeprecated[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mclass_validators.py[0m
+    │           │   │   ├── [01;32mconfig.py[0m
+    │           │   │   ├── [01;32mcopy_internals.py[0m
+    │           │   │   ├── [01;32mdecorator.py[0m
+    │           │   │   ├── [01;32mjson.py[0m
+    │           │   │   ├── [01;32mparse.py[0m
+    │           │   │   └── [01;32mtools.py[0m
+    │           │   ├── [01;32menv_settings.py[0m
+    │           │   ├── [01;32merror_wrappers.py[0m
+    │           │   ├── [01;32merrors.py[0m
+    │           │   ├── [34;42mexperimental[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32marguments_schema.py[0m
+    │           │   │   ├── [01;32mmissing_sentinel.py[0m
+    │           │   │   └── [01;32mpipeline.py[0m
+    │           │   ├── [01;32mfields.py[0m
+    │           │   ├── [01;32mfunctional_serializers.py[0m
+    │           │   ├── [01;32mfunctional_validators.py[0m
+    │           │   ├── [01;32mgenerics.py[0m
+    │           │   ├── [01;32mjson.py[0m
+    │           │   ├── [01;32mjson_schema.py[0m
+    │           │   ├── [01;32mmain.py[0m
+    │           │   ├── [01;32mmypy.py[0m
+    │           │   ├── [01;32mnetworks.py[0m
+    │           │   ├── [01;32mparse.py[0m
+    │           │   ├── [34;42mplugin[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32m_loader.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32m_schema_validator.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_loader.py[0m
+    │           │   │   └── [01;32m_schema_validator.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mroot_model.py[0m
+    │           │   ├── [01;32mschema.py[0m
+    │           │   ├── [01;32mtools.py[0m
+    │           │   ├── [01;32mtype_adapter.py[0m
+    │           │   ├── [01;32mtypes.py[0m
+    │           │   ├── [01;32mtyping.py[0m
+    │           │   ├── [01;32mutils.py[0m
+    │           │   ├── [34;42mv1[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mannotated_types.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mclass_validators.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mcolor.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mconfig.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdataclasses.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdatetime_parse.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mdecorator.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32menv_settings.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32merror_wrappers.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32merrors.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mfields.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mjson.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mmain.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mnetworks.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mparse.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mschema.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mtools.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mtypes.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mtyping.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mvalidators.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mversion.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_hypothesis_plugin.py[0m
+    │           │   │   ├── [01;32mannotated_types.py[0m
+    │           │   │   ├── [01;32mclass_validators.py[0m
+    │           │   │   ├── [01;32mcolor.py[0m
+    │           │   │   ├── [01;32mconfig.py[0m
+    │           │   │   ├── [01;32mdataclasses.py[0m
+    │           │   │   ├── [01;32mdatetime_parse.py[0m
+    │           │   │   ├── [01;32mdecorator.py[0m
+    │           │   │   ├── [01;32menv_settings.py[0m
+    │           │   │   ├── [01;32merror_wrappers.py[0m
+    │           │   │   ├── [01;32merrors.py[0m
+    │           │   │   ├── [01;32mfields.py[0m
+    │           │   │   ├── [01;32mgenerics.py[0m
+    │           │   │   ├── [01;32mjson.py[0m
+    │           │   │   ├── [01;32mmain.py[0m
+    │           │   │   ├── [01;32mmypy.py[0m
+    │           │   │   ├── [01;32mnetworks.py[0m
+    │           │   │   ├── [01;32mparse.py[0m
+    │           │   │   ├── [01;32mpy.typed[0m
+    │           │   │   ├── [01;32mschema.py[0m
+    │           │   │   ├── [01;32mtools.py[0m
+    │           │   │   ├── [01;32mtypes.py[0m
+    │           │   │   ├── [01;32mtyping.py[0m
+    │           │   │   ├── [01;32mutils.py[0m
+    │           │   │   ├── [01;32mvalidators.py[0m
+    │           │   │   └── [01;32mversion.py[0m
+    │           │   ├── [01;32mvalidate_call_decorator.py[0m
+    │           │   ├── [01;32mvalidators.py[0m
+    │           │   ├── [01;32mversion.py[0m
+    │           │   └── [01;32mwarnings.py[0m
+    │           ├── [34;42mpydantic-2.13.4.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42mpydantic_core[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   └── [01;32mcore_schema.cpython-312.pyc[0m
+    │           │   ├── [01;32m_pydantic_core.cpython-312-x86_64-linux-gnu.so[0m
+    │           │   ├── [01;32m_pydantic_core.pyi[0m
+    │           │   ├── [01;32mcore_schema.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mpydantic_core-2.46.4.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [34;42msboms[0m
+    │           │       └── [01;32mpydantic-core.cyclonedx.json[0m
+    │           ├── [34;42mpygments[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [01;32mcmdline.py[0m
+    │           │   ├── [01;32mconsole.py[0m
+    │           │   ├── [01;32mfilter.py[0m
+    │           │   ├── [34;42mfilters[0m
+    │           │   │   └── [01;32m__init__.py[0m
+    │           │   ├── [01;32mformatter.py[0m
+    │           │   ├── [34;42mformatters[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32m_mapping.py[0m
+    │           │   │   ├── [01;32mbbcode.py[0m
+    │           │   │   ├── [01;32mgroff.py[0m
+    │           │   │   ├── [01;32mhtml.py[0m
+    │           │   │   ├── [01;32mimg.py[0m
+    │           │   │   ├── [01;32mirc.py[0m
+    │           │   │   ├── [01;32mlatex.py[0m
+    │           │   │   ├── [01;32mother.py[0m
+    │           │   │   ├── [01;32mpangomarkup.py[0m
+    │           │   │   ├── [01;32mrtf.py[0m
+    │           │   │   ├── [01;32msvg.py[0m
+    │           │   │   ├── [01;32mterminal.py[0m
+    │           │   │   └── [01;32mterminal256.py[0m
+    │           │   ├── [01;32mlexer.py[0m
+    │           │   ├── [34;42mlexers[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32m_ada_builtins.py[0m
+    │           │   │   ├── [01;32m_asy_builtins.py[0m
+    │           │   │   ├── [01;32m_cl_builtins.py[0m
+    │           │   │   ├── [01;32m_cocoa_builtins.py[0m
+    │           │   │   ├── [01;32m_csound_builtins.py[0m
+    │           │   │   ├── [01;32m_css_builtins.py[0m
+    │           │   │   ├── [01;32m_googlesql_builtins.py[0m
+    │           │   │   ├── [01;32m_julia_builtins.py[0m
+    │           │   │   ├── [01;32m_lasso_builtins.py[0m
+    │           │   │   ├── [01;32m_lilypond_builtins.py[0m
+    │           │   │   ├── [01;32m_lua_builtins.py[0m
+    │           │   │   ├── [01;32m_luau_builtins.py[0m
+    │           │   │   ├── [01;32m_mapping.py[0m
+    │           │   │   ├── [01;32m_mql_builtins.py[0m
+    │           │   │   ├── [01;32m_mysql_builtins.py[0m
+    │           │   │   ├── [01;32m_openedge_builtins.py[0m
+    │           │   │   ├── [01;32m_php_builtins.py[0m
+    │           │   │   ├── [01;32m_postgres_builtins.py[0m
+    │           │   │   ├── [01;32m_qlik_builtins.py[0m
+    │           │   │   ├── [01;32m_scheme_builtins.py[0m
+    │           │   │   ├── [01;32m_scilab_builtins.py[0m
+    │           │   │   ├── [01;32m_sourcemod_builtins.py[0m
+    │           │   │   ├── [01;32m_sql_builtins.py[0m
+    │           │   │   ├── [01;32m_stan_builtins.py[0m
+    │           │   │   ├── [01;32m_stata_builtins.py[0m
+    │           │   │   ├── [01;32m_tsql_builtins.py[0m
+    │           │   │   ├── [01;32m_usd_builtins.py[0m
+    │           │   │   ├── [01;32m_vbscript_builtins.py[0m
+    │           │   │   ├── [01;32m_vim_builtins.py[0m
+    │           │   │   ├── [01;32mactionscript.py[0m
+    │           │   │   ├── [01;32mada.py[0m
+    │           │   │   ├── [01;32magile.py[0m
+    │           │   │   ├── [01;32malgebra.py[0m
+    │           │   │   ├── [01;32mambient.py[0m
+    │           │   │   ├── [01;32mamdgpu.py[0m
+    │           │   │   ├── [01;32mampl.py[0m
+    │           │   │   ├── [01;32mapdlexer.py[0m
+    │           │   │   ├── [01;32mapl.py[0m
+    │           │   │   ├── [01;32marchetype.py[0m
+    │           │   │   ├── [01;32marrow.py[0m
+    │           │   │   ├── [01;32marturo.py[0m
+    │           │   │   ├── [01;32masc.py[0m
+    │           │   │   ├── [01;32masm.py[0m
+    │           │   │   ├── [01;32masn1.py[0m
+    │           │   │   ├── [01;32mautomation.py[0m
+    │           │   │   ├── [01;32mbare.py[0m
+    │           │   │   ├── [01;32mbasic.py[0m
+    │           │   │   ├── [01;32mbdd.py[0m
+    │           │   │   ├── [01;32mberry.py[0m
+    │           │   │   ├── [01;32mbibtex.py[0m
+    │           │   │   ├── [01;32mblueprint.py[0m
+    │           │   │   ├── [01;32mboa.py[0m
+    │           │   │   ├── [01;32mbqn.py[0m
+    │           │   │   ├── [01;32mbusiness.py[0m
+    │           │   │   ├── [01;32mc_cpp.py[0m
+    │           │   │   ├── [01;32mc_like.py[0m
+    │           │   │   ├── [01;32mcapnproto.py[0m
+    │           │   │   ├── [01;32mcarbon.py[0m
+    │           │   │   ├── [01;32mcddl.py[0m
+    │           │   │   ├── [01;32mchapel.py[0m
+    │           │   │   ├── [01;32mclean.py[0m
+    │           │   │   ├── [01;32mcodeql.py[0m
+    │           │   │   ├── [01;32mcomal.py[0m
+    │           │   │   ├── [01;32mcompiled.py[0m
+    │           │   │   ├── [01;32mconfigs.py[0m
+    │           │   │   ├── [01;32mconsole.py[0m
+    │           │   │   ├── [01;32mcplint.py[0m
+    │           │   │   ├── [01;32mcrystal.py[0m
+    │           │   │   ├── [01;32mcsound.py[0m
+    │           │   │   ├── [01;32mcss.py[0m
+    │           │   │   ├── [01;32md.py[0m
+    │           │   │   ├── [01;32mdalvik.py[0m
+    │           │   │   ├── [01;32mdata.py[0m
+    │           │   │   ├── [01;32mdax.py[0m
+    │           │   │   ├── [01;32mdevicetree.py[0m
+    │           │   │   ├── [01;32mdiff.py[0m
+    │           │   │   ├── [01;32mdns.py[0m
+    │           │   │   ├── [01;32mdotnet.py[0m
+    │           │   │   ├── [01;32mdsls.py[0m
+    │           │   │   ├── [01;32mdylan.py[0m
+    │           │   │   ├── [01;32mecl.py[0m
+    │           │   │   ├── [01;32meiffel.py[0m
+    │           │   │   ├── [01;32melm.py[0m
+    │           │   │   ├── [01;32melpi.py[0m
+    │           │   │   ├── [01;32memail.py[0m
+    │           │   │   ├── [01;32merlang.py[0m
+    │           │   │   ├── [01;32mesoteric.py[0m
+    │           │   │   ├── [01;32mezhil.py[0m
+    │           │   │   ├── [01;32mfactor.py[0m
+    │           │   │   ├── [01;32mfantom.py[0m
+    │           │   │   ├── [01;32mfelix.py[0m
+    │           │   │   ├── [01;32mfift.py[0m
+    │           │   │   ├── [01;32mfloscript.py[0m
+    │           │   │   ├── [01;32mforth.py[0m
+    │           │   │   ├── [01;32mfortran.py[0m
+    │           │   │   ├── [01;32mfoxpro.py[0m
+    │           │   │   ├── [01;32mfreefem.py[0m
+    │           │   │   ├── [01;32mfunc.py[0m
+    │           │   │   ├── [01;32mfunctional.py[0m
+    │           │   │   ├── [01;32mfuthark.py[0m
+    │           │   │   ├── [01;32mgcodelexer.py[0m
+    │           │   │   ├── [01;32mgdscript.py[0m
+    │           │   │   ├── [01;32mgleam.py[0m
+    │           │   │   ├── [01;32mgo.py[0m
+    │           │   │   ├── [01;32mgrammar_notation.py[0m
+    │           │   │   ├── [01;32mgraph.py[0m
+    │           │   │   ├── [01;32mgraphics.py[0m
+    │           │   │   ├── [01;32mgraphql.py[0m
+    │           │   │   ├── [01;32mgraphviz.py[0m
+    │           │   │   ├── [01;32mgsql.py[0m
+    │           │   │   ├── [01;32mhare.py[0m
+    │           │   │   ├── [01;32mhaskell.py[0m
+    │           │   │   ├── [01;32mhaxe.py[0m
+    │           │   │   ├── [01;32mhdl.py[0m
+    │           │   │   ├── [01;32mhexdump.py[0m
+    │           │   │   ├── [01;32mhtml.py[0m
+    │           │   │   ├── [01;32midl.py[0m
+    │           │   │   ├── [01;32migor.py[0m
+    │           │   │   ├── [01;32minferno.py[0m
+    │           │   │   ├── [01;32minstallers.py[0m
+    │           │   │   ├── [01;32mint_fiction.py[0m
+    │           │   │   ├── [01;32miolang.py[0m
+    │           │   │   ├── [01;32mj.py[0m
+    │           │   │   ├── [01;32mjavascript.py[0m
+    │           │   │   ├── [01;32mjmespath.py[0m
+    │           │   │   ├── [01;32mjslt.py[0m
+    │           │   │   ├── [01;32mjson5.py[0m
+    │           │   │   ├── [01;32mjsonnet.py[0m
+    │           │   │   ├── [01;32mjsx.py[0m
+    │           │   │   ├── [01;32mjulia.py[0m
+    │           │   │   ├── [01;32mjvm.py[0m
+    │           │   │   ├── [01;32mkuin.py[0m
+    │           │   │   ├── [01;32mkusto.py[0m
+    │           │   │   ├── [01;32mldap.py[0m
+    │           │   │   ├── [01;32mlean.py[0m
+    │           │   │   ├── [01;32mlilypond.py[0m
+    │           │   │   ├── [01;32mlisp.py[0m
+    │           │   │   ├── [01;32mmacaulay2.py[0m
+    │           │   │   ├── [01;32mmake.py[0m
+    │           │   │   ├── [01;32mmaple.py[0m
+    │           │   │   ├── [01;32mmarkup.py[0m
+    │           │   │   ├── [01;32mmath.py[0m
+    │           │   │   ├── [01;32mmatlab.py[0m
+    │           │   │   ├── [01;32mmaxima.py[0m
+    │           │   │   ├── [01;32mmeson.py[0m
+    │           │   │   ├── [01;32mmime.py[0m
+    │           │   │   ├── [01;32mminecraft.py[0m
+    │           │   │   ├── [01;32mmips.py[0m
+    │           │   │   ├── [01;32mml.py[0m
+    │           │   │   ├── [01;32mmodeling.py[0m
+    │           │   │   ├── [01;32mmodula2.py[0m
+    │           │   │   ├── [01;32mmojo.py[0m
+    │           │   │   ├── [01;32mmonte.py[0m
+    │           │   │   ├── [01;32mmosel.py[0m
+    │           │   │   ├── [01;32mncl.py[0m
+    │           │   │   ├── [01;32mnimrod.py[0m
+    │           │   │   ├── [01;32mnit.py[0m
+    │           │   │   ├── [01;32mnix.py[0m
+    │           │   │   ├── [01;32mnumbair.py[0m
+    │           │   │   ├── [01;32moberon.py[0m
+    │           │   │   ├── [01;32mobjective.py[0m
+    │           │   │   ├── [01;32mooc.py[0m
+    │           │   │   ├── [01;32mopenscad.py[0m
+    │           │   │   ├── [01;32mother.py[0m
+    │           │   │   ├── [01;32mparasail.py[0m
+    │           │   │   ├── [01;32mparsers.py[0m
+    │           │   │   ├── [01;32mpascal.py[0m
+    │           │   │   ├── [01;32mpawn.py[0m
+    │           │   │   ├── [01;32mpddl.py[0m
+    │           │   │   ├── [01;32mperl.py[0m
+    │           │   │   ├── [01;32mphix.py[0m
+    │           │   │   ├── [01;32mphp.py[0m
+    │           │   │   ├── [01;32mpointless.py[0m
+    │           │   │   ├── [01;32mpony.py[0m
+    │           │   │   ├── [01;32mpraat.py[0m
+    │           │   │   ├── [01;32mprocfile.py[0m
+    │           │   │   ├── [01;32mprolog.py[0m
+    │           │   │   ├── [01;32mpromql.py[0m
+    │           │   │   ├── [01;32mprql.py[0m
+    │           │   │   ├── [01;32mptx.py[0m
+    │           │   │   ├── [01;32mpython.py[0m
+    │           │   │   ├── [01;32mq.py[0m
+    │           │   │   ├── [01;32mqlik.py[0m
+    │           │   │   ├── [01;32mqvt.py[0m
+    │           │   │   ├── [01;32mr.py[0m
+    │           │   │   ├── [01;32mrdf.py[0m
+    │           │   │   ├── [01;32mrebol.py[0m
+    │           │   │   ├── [01;32mrego.py[0m
+    │           │   │   ├── [01;32mrell.py[0m
+    │           │   │   ├── [01;32mresource.py[0m
+    │           │   │   ├── [01;32mride.py[0m
+    │           │   │   ├── [01;32mrita.py[0m
+    │           │   │   ├── [01;32mrnc.py[0m
+    │           │   │   ├── [01;32mroboconf.py[0m
+    │           │   │   ├── [01;32mrobotframework.py[0m
+    │           │   │   ├── [01;32mruby.py[0m
+    │           │   │   ├── [01;32mrust.py[0m
+    │           │   │   ├── [01;32msas.py[0m
+    │           │   │   ├── [01;32msavi.py[0m
+    │           │   │   ├── [01;32mscdoc.py[0m
+    │           │   │   ├── [01;32mscripting.py[0m
+    │           │   │   ├── [01;32msgf.py[0m
+    │           │   │   ├── [01;32mshell.py[0m
+    │           │   │   ├── [01;32msieve.py[0m
+    │           │   │   ├── [01;32mslash.py[0m
+    │           │   │   ├── [01;32msmalltalk.py[0m
+    │           │   │   ├── [01;32msmithy.py[0m
+    │           │   │   ├── [01;32msmv.py[0m
+    │           │   │   ├── [01;32msnobol.py[0m
+    │           │   │   ├── [01;32msolidity.py[0m
+    │           │   │   ├── [01;32msoong.py[0m
+    │           │   │   ├── [01;32msophia.py[0m
+    │           │   │   ├── [01;32mspecial.py[0m
+    │           │   │   ├── [01;32mspice.py[0m
+    │           │   │   ├── [01;32msql.py[0m
+    │           │   │   ├── [01;32msrcinfo.py[0m
+    │           │   │   ├── [01;32mstata.py[0m
+    │           │   │   ├── [01;32msupercollider.py[0m
+    │           │   │   ├── [01;32mtablegen.py[0m
+    │           │   │   ├── [01;32mtact.py[0m
+    │           │   │   ├── [01;32mtal.py[0m
+    │           │   │   ├── [01;32mtcl.py[0m
+    │           │   │   ├── [01;32mteal.py[0m
+    │           │   │   ├── [01;32mtemplates.py[0m
+    │           │   │   ├── [01;32mteraterm.py[0m
+    │           │   │   ├── [01;32mtesting.py[0m
+    │           │   │   ├── [01;32mtext.py[0m
+    │           │   │   ├── [01;32mtextedit.py[0m
+    │           │   │   ├── [01;32mtextfmts.py[0m
+    │           │   │   ├── [01;32mtheorem.py[0m
+    │           │   │   ├── [01;32mthingsdb.py[0m
+    │           │   │   ├── [01;32mtlb.py[0m
+    │           │   │   ├── [01;32mtls.py[0m
+    │           │   │   ├── [01;32mtnt.py[0m
+    │           │   │   ├── [01;32mtrafficscript.py[0m
+    │           │   │   ├── [01;32mtyposcript.py[0m
+    │           │   │   ├── [01;32mtypst.py[0m
+    │           │   │   ├── [01;32mul4.py[0m
+    │           │   │   ├── [01;32municon.py[0m
+    │           │   │   ├── [01;32murbi.py[0m
+    │           │   │   ├── [01;32musd.py[0m
+    │           │   │   ├── [01;32mvarnish.py[0m
+    │           │   │   ├── [01;32mverification.py[0m
+    │           │   │   ├── [01;32mverifpal.py[0m
+    │           │   │   ├── [01;32mvip.py[0m
+    │           │   │   ├── [01;32mvyper.py[0m
+    │           │   │   ├── [01;32mweb.py[0m
+    │           │   │   ├── [01;32mwebassembly.py[0m
+    │           │   │   ├── [01;32mwebidl.py[0m
+    │           │   │   ├── [01;32mwebmisc.py[0m
+    │           │   │   ├── [01;32mwgsl.py[0m
+    │           │   │   ├── [01;32mwhiley.py[0m
+    │           │   │   ├── [01;32mwowtoc.py[0m
+    │           │   │   ├── [01;32mwren.py[0m
+    │           │   │   ├── [01;32mx10.py[0m
+    │           │   │   ├── [01;32mxorg.py[0m
+    │           │   │   ├── [01;32myang.py[0m
+    │           │   │   ├── [01;32myara.py[0m
+    │           │   │   └── [01;32mzig.py[0m
+    │           │   ├── [01;32mmodeline.py[0m
+    │           │   ├── [01;32mplugin.py[0m
+    │           │   ├── [01;32mregexopt.py[0m
+    │           │   ├── [01;32mscanner.py[0m
+    │           │   ├── [01;32msphinxext.py[0m
+    │           │   ├── [01;32mstyle.py[0m
+    │           │   ├── [34;42mstyles[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32m_mapping.py[0m
+    │           │   │   ├── [01;32mabap.py[0m
+    │           │   │   ├── [01;32malgol.py[0m
+    │           │   │   ├── [01;32malgol_nu.py[0m
+    │           │   │   ├── [01;32marduino.py[0m
+    │           │   │   ├── [01;32mautumn.py[0m
+    │           │   │   ├── [01;32mborland.py[0m
+    │           │   │   ├── [01;32mbw.py[0m
+    │           │   │   ├── [01;32mcoffee.py[0m
+    │           │   │   ├── [01;32mcolorful.py[0m
+    │           │   │   ├── [01;32mdefault.py[0m
+    │           │   │   ├── [01;32mdracula.py[0m
+    │           │   │   ├── [01;32memacs.py[0m
+    │           │   │   ├── [01;32mfriendly.py[0m
+    │           │   │   ├── [01;32mfriendly_grayscale.py[0m
+    │           │   │   ├── [01;32mfruity.py[0m
+    │           │   │   ├── [01;32mgh_dark.py[0m
+    │           │   │   ├── [01;32mgruvbox.py[0m
+    │           │   │   ├── [01;32migor.py[0m
+    │           │   │   ├── [01;32minkpot.py[0m
+    │           │   │   ├── [01;32mlightbulb.py[0m
+    │           │   │   ├── [01;32mlilypond.py[0m
+    │           │   │   ├── [01;32mlovelace.py[0m
+    │           │   │   ├── [01;32mmanni.py[0m
+    │           │   │   ├── [01;32mmaterial.py[0m
+    │           │   │   ├── [01;32mmonokai.py[0m
+    │           │   │   ├── [01;32mmurphy.py[0m
+    │           │   │   ├── [01;32mnative.py[0m
+    │           │   │   ├── [01;32mnord.py[0m
+    │           │   │   ├── [01;32monedark.py[0m
+    │           │   │   ├── [01;32mparaiso_dark.py[0m
+    │           │   │   ├── [01;32mparaiso_light.py[0m
+    │           │   │   ├── [01;32mpastie.py[0m
+    │           │   │   ├── [01;32mperldoc.py[0m
+    │           │   │   ├── [01;32mrainbow_dash.py[0m
+    │           │   │   ├── [01;32mrrt.py[0m
+    │           │   │   ├── [01;32msas.py[0m
+    │           │   │   ├── [01;32msolarized.py[0m
+    │           │   │   ├── [01;32mstaroffice.py[0m
+    │           │   │   ├── [01;32mstata_dark.py[0m
+    │           │   │   ├── [01;32mstata_light.py[0m
+    │           │   │   ├── [01;32mtango.py[0m
+    │           │   │   ├── [01;32mtrac.py[0m
+    │           │   │   ├── [01;32mvim.py[0m
+    │           │   │   ├── [01;32mvs.py[0m
+    │           │   │   ├── [01;32mxcode.py[0m
+    │           │   │   └── [01;32mzenburn.py[0m
+    │           │   ├── [01;32mtoken.py[0m
+    │           │   ├── [01;32munistring.py[0m
+    │           │   └── [01;32mutil.py[0m
+    │           ├── [34;42mpygments-2.20.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       ├── [01;32mAUTHORS[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42mpymupdf[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_build.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_wxcolors.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mextra.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mmupdf.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mpymupdf.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtable.cpython-312.pyc[0m
+    │           │   │   └── [01;32mutils.cpython-312.pyc[0m
+    │           │   ├── [01;32m_apply_pages.py[0m
+    │           │   ├── [01;32m_build.py[0m
+    │           │   ├── [01;32m_extra.so[0m
+    │           │   ├── [01;32m_mupdf.so[0m
+    │           │   ├── [01;32m_wxcolors.py[0m
+    │           │   ├── [01;32mextra.py[0m
+    │           │   ├── [01;32mlibmupdf.so.27.2[0m
+    │           │   ├── [01;32mlibmupdfcpp.so.27.2[0m
+    │           │   ├── [34;42mmupdf-devel[0m
+    │           │   │   ├── [34;42minclude[0m
+    │           │   │   │   └── [34;42mmupdf[0m
+    │           │   │   │       ├── [01;32mclasses.h[0m
+    │           │   │   │       ├── [01;32mclasses2.h[0m
+    │           │   │   │       ├── [01;32mexceptions.h[0m
+    │           │   │   │       ├── [01;32mextra.h[0m
+    │           │   │   │       ├── [34;42mfitz[0m
+    │           │   │   │       │   ├── [01;32marchive.h[0m
+    │           │   │   │       │   ├── [01;32mband-writer.h[0m
+    │           │   │   │       │   ├── [01;32mbarcode.h[0m
+    │           │   │   │       │   ├── [01;32mbidi.h[0m
+    │           │   │   │       │   ├── [01;32mbitmap.h[0m
+    │           │   │   │       │   ├── [01;32mbuffer.h[0m
+    │           │   │   │       │   ├── [01;32mcolor.h[0m
+    │           │   │   │       │   ├── [01;32mcompress.h[0m
+    │           │   │   │       │   ├── [01;32mcompressed-buffer.h[0m
+    │           │   │   │       │   ├── [01;32mconfig.h[0m
+    │           │   │   │       │   ├── [01;32mcontext.h[0m
+    │           │   │   │       │   ├── [01;32mcrypt.h[0m
+    │           │   │   │       │   ├── [01;32mdeskew.h[0m
+    │           │   │   │       │   ├── [01;32mdevice.h[0m
+    │           │   │   │       │   ├── [01;32mdisplay-list.h[0m
+    │           │   │   │       │   ├── [01;32mdocument.h[0m
+    │           │   │   │       │   ├── [01;32mexport.h[0m
+    │           │   │   │       │   ├── [01;32mfilter.h[0m
+    │           │   │   │       │   ├── [01;32mfont.h[0m
+    │           │   │   │       │   ├── [01;32mgeometry.h[0m
+    │           │   │   │       │   ├── [01;32mgetopt.h[0m
+    │           │   │   │       │   ├── [01;32mglyph-cache.h[0m
+    │           │   │   │       │   ├── [01;32mglyph.h[0m
+    │           │   │   │       │   ├── [01;32mhash.h[0m
+    │           │   │   │       │   ├── [01;32mheap-imp.h[0m
+    │           │   │   │       │   ├── [01;32mheap.h[0m
+    │           │   │   │       │   ├── [01;32mhyphen.h[0m
+    │           │   │   │       │   ├── [01;32mimage.h[0m
+    │           │   │   │       │   ├── [01;32mjson.h[0m
+    │           │   │   │       │   ├── [01;32mlink.h[0m
+    │           │   │   │       │   ├── [01;32mlog.h[0m
+    │           │   │   │       │   ├── [01;32moutline.h[0m
+    │           │   │   │       │   ├── [01;32moutput-svg.h[0m
+    │           │   │   │       │   ├── [01;32moutput.h[0m
+    │           │   │   │       │   ├── [01;32mpath.h[0m
+    │           │   │   │       │   ├── [01;32mpixmap.h[0m
+    │           │   │   │       │   ├── [01;32mpool.h[0m
+    │           │   │   │       │   ├── [01;32mseparation.h[0m
+    │           │   │   │       │   ├── [01;32mshade.h[0m
+    │           │   │   │       │   ├── [01;32mstore.h[0m
+    │           │   │   │       │   ├── [01;32mstory-writer.h[0m
+    │           │   │   │       │   ├── [01;32mstory.h[0m
+    │           │   │   │       │   ├── [01;32mstream.h[0m
+    │           │   │   │       │   ├── [01;32mstring-util.h[0m
+    │           │   │   │       │   ├── [01;32mstructured-text.h[0m
+    │           │   │   │       │   ├── [01;32msystem.h[0m
+    │           │   │   │       │   ├── [01;32mtext.h[0m
+    │           │   │   │       │   ├── [01;32mtrack-usage.h[0m
+    │           │   │   │       │   ├── [01;32mtransition.h[0m
+    │           │   │   │       │   ├── [01;32mtree.h[0m
+    │           │   │   │       │   ├── [01;32mtypes.h[0m
+    │           │   │   │       │   ├── [01;32mutil.h[0m
+    │           │   │   │       │   ├── [01;32mversion.h[0m
+    │           │   │   │       │   ├── [01;32mwrite-pixmap.h[0m
+    │           │   │   │       │   ├── [01;32mwriter.h[0m
+    │           │   │   │       │   └── [01;32mxml.h[0m
+    │           │   │   │       ├── [01;32mfitz.h[0m
+    │           │   │   │       ├── [01;32mfunctions.h[0m
+    │           │   │   │       ├── [34;42mhelpers[0m
+    │           │   │   │       │   ├── [01;32mmu-office-lib.h[0m
+    │           │   │   │       │   ├── [01;32mmu-threads.h[0m
+    │           │   │   │       │   └── [01;32mpkcs7-openssl.h[0m
+    │           │   │   │       ├── [01;32mhtml.h[0m
+    │           │   │   │       ├── [01;32minternal.h[0m
+    │           │   │   │       ├── [01;32mmemento.h[0m
+    │           │   │   │       ├── [34;42mpdf[0m
+    │           │   │   │       │   ├── [01;32mannot.h[0m
+    │           │   │   │       │   ├── [01;32mclean.h[0m
+    │           │   │   │       │   ├── [01;32mcmap.h[0m
+    │           │   │   │       │   ├── [01;32mcrypt.h[0m
+    │           │   │   │       │   ├── [01;32mdocument.h[0m
+    │           │   │   │       │   ├── [01;32mevent.h[0m
+    │           │   │   │       │   ├── [01;32mfont.h[0m
+    │           │   │   │       │   ├── [01;32mform.h[0m
+    │           │   │   │       │   ├── [01;32mimage-rewriter.h[0m
+    │           │   │   │       │   ├── [01;32minterpret.h[0m
+    │           │   │   │       │   ├── [01;32mjavascript.h[0m
+    │           │   │   │       │   ├── [01;32mname-table.h[0m
+    │           │   │   │       │   ├── [01;32mobject.h[0m
+    │           │   │   │       │   ├── [01;32mpage.h[0m
+    │           │   │   │       │   ├── [01;32mparse.h[0m
+    │           │   │   │       │   ├── [01;32mrecolor.h[0m
+    │           │   │   │       │   ├── [01;32mresource.h[0m
+    │           │   │   │       │   ├── [01;32mxref.h[0m
+    │           │   │   │       │   └── [01;32mzugferd.h[0m
+    │           │   │   │       ├── [01;32mpdf.h[0m
+    │           │   │   │       └── [01;32mucdn.h[0m
+    │           │   │   └── [34;42mlib[0m
+    │           │   │       └── [01;32mlibmupdf-threads.a[0m
+    │           │   ├── [01;32mmupdf.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mpymupdf.py[0m
+    │           │   ├── [01;32mtable.py[0m
+    │           │   └── [01;32mutils.py[0m
+    │           ├── [34;42mpymupdf-1.27.2.3.dist-info[0m
+    │           │   ├── [01;32mCOPYING[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mREADME.md[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [01;32mentry_points.txt[0m
+    │           ├── [34;42mpytest[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mpytest-9.1.1.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [01;32mentry_points.txt[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mpython_docx-1.2.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42mpython_multipart[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mdecoders.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   └── [01;32mmultipart.cpython-312.pyc[0m
+    │           │   ├── [01;32mdecoders.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   ├── [01;32mmultipart.py[0m
+    │           │   └── [01;32mpy.typed[0m
+    │           ├── [34;42mpython_multipart-0.0.32.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.txt[0m
+    │           ├── [34;42mreportlab[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42mfonts[0m
+    │           │   │   ├── [01;32m00readme.txt[0m
+    │           │   │   ├── [01;32mDarkGarden-changelog.txt[0m
+    │           │   │   ├── [01;32mDarkGarden-copying-gpl.txt[0m
+    │           │   │   ├── [01;32mDarkGarden-copying.txt[0m
+    │           │   │   ├── [01;32mDarkGarden-readme.txt[0m
+    │           │   │   ├── [01;32mDarkGarden.sfd[0m
+    │           │   │   ├── [01;32mDarkGardenMK.afm[0m
+    │           │   │   ├── [01;32mDarkGardenMK.pfb[0m
+    │           │   │   ├── [01;32mVera.ttf[0m
+    │           │   │   ├── [01;32mVeraBI.ttf[0m
+    │           │   │   ├── [01;32mVeraBd.ttf[0m
+    │           │   │   ├── [01;32mVeraIt.ttf[0m
+    │           │   │   ├── [01;32m_a______.pfb[0m
+    │           │   │   ├── [01;32m_ab_____.pfb[0m
+    │           │   │   ├── [01;32m_abi____.pfb[0m
+    │           │   │   ├── [01;32m_ai_____.pfb[0m
+    │           │   │   ├── [01;32m_eb_____.pfb[0m
+    │           │   │   ├── [01;32m_ebi____.pfb[0m
+    │           │   │   ├── [01;32m_ei_____.pfb[0m
+    │           │   │   ├── [01;32m_er_____.pfb[0m
+    │           │   │   ├── [01;32mbitstream-vera-license.txt[0m
+    │           │   │   ├── [01;32mcallig15.afm[0m
+    │           │   │   ├── [01;32mcallig15.pfb[0m
+    │           │   │   ├── [01;32mcob_____.pfb[0m
+    │           │   │   ├── [01;32mcobo____.pfb[0m
+    │           │   │   ├── [01;32mcom_____.pfb[0m
+    │           │   │   ├── [01;32mcoo_____.pfb[0m
+    │           │   │   ├── [01;32mhb-test.ttf[0m
+    │           │   │   ├── [01;32msy______.pfb[0m
+    │           │   │   ├── [01;32mzd______.pfb[0m
+    │           │   │   ├── [01;32mzx______.pfb[0m
+    │           │   │   └── [01;32mzy______.pfb[0m
+    │           │   ├── [34;42mgraphics[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42mbarcode[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mcode128.py[0m
+    │           │   │   │   ├── [01;32mcode39.py[0m
+    │           │   │   │   ├── [01;32mcode93.py[0m
+    │           │   │   │   ├── [01;32mcommon.py[0m
+    │           │   │   │   ├── [01;32mdmtx.py[0m
+    │           │   │   │   ├── [01;32meanbc.py[0m
+    │           │   │   │   ├── [01;32mecc200datamatrix.py[0m
+    │           │   │   │   ├── [01;32mfourstate.py[0m
+    │           │   │   │   ├── [01;32mlto.py[0m
+    │           │   │   │   ├── [01;32mqr.py[0m
+    │           │   │   │   ├── [01;32mqrencoder.py[0m
+    │           │   │   │   ├── [01;32mtest.py[0m
+    │           │   │   │   ├── [01;32musps.py[0m
+    │           │   │   │   ├── [01;32musps4s.py[0m
+    │           │   │   │   └── [01;32mwidgets.py[0m
+    │           │   │   ├── [34;42mcharts[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mareas.py[0m
+    │           │   │   │   ├── [01;32maxes.py[0m
+    │           │   │   │   ├── [01;32mbarcharts.py[0m
+    │           │   │   │   ├── [01;32mdotbox.py[0m
+    │           │   │   │   ├── [01;32mdoughnut.py[0m
+    │           │   │   │   ├── [01;32mlegends.py[0m
+    │           │   │   │   ├── [01;32mlinecharts.py[0m
+    │           │   │   │   ├── [01;32mlineplots.py[0m
+    │           │   │   │   ├── [01;32mmarkers.py[0m
+    │           │   │   │   ├── [01;32mpiecharts.py[0m
+    │           │   │   │   ├── [01;32mslidebox.py[0m
+    │           │   │   │   ├── [01;32mspider.py[0m
+    │           │   │   │   ├── [01;32mtextlabels.py[0m
+    │           │   │   │   ├── [01;32mutils.py[0m
+    │           │   │   │   └── [01;32mutils3d.py[0m
+    │           │   │   ├── [01;32mrenderPDF.py[0m
+    │           │   │   ├── [01;32mrenderPM.py[0m
+    │           │   │   ├── [01;32mrenderPS.py[0m
+    │           │   │   ├── [01;32mrenderSVG.py[0m
+    │           │   │   ├── [01;32mrenderbase.py[0m
+    │           │   │   ├── [34;42msamples[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [01;32mbubble.py[0m
+    │           │   │   │   ├── [01;32mclustered_bar.py[0m
+    │           │   │   │   ├── [01;32mclustered_column.py[0m
+    │           │   │   │   ├── [01;32mexcelcolors.py[0m
+    │           │   │   │   ├── [01;32mexploded_pie.py[0m
+    │           │   │   │   ├── [01;32mfilled_radar.py[0m
+    │           │   │   │   ├── [01;32mline_chart.py[0m
+    │           │   │   │   ├── [01;32mlinechart_with_markers.py[0m
+    │           │   │   │   ├── [01;32mradar.py[0m
+    │           │   │   │   ├── [01;32mrunall.py[0m
+    │           │   │   │   ├── [01;32mscatter.py[0m
+    │           │   │   │   ├── [01;32mscatter_lines.py[0m
+    │           │   │   │   ├── [01;32mscatter_lines_markers.py[0m
+    │           │   │   │   ├── [01;32msimple_pie.py[0m
+    │           │   │   │   ├── [01;32mstacked_bar.py[0m
+    │           │   │   │   └── [01;32mstacked_column.py[0m
+    │           │   │   ├── [01;32mshapes.py[0m
+    │           │   │   ├── [01;32msvgpath.py[0m
+    │           │   │   ├── [01;32mtestdrawings.py[0m
+    │           │   │   ├── [01;32mtestshapes.py[0m
+    │           │   │   ├── [01;32mtransform.py[0m
+    │           │   │   ├── [01;32mutils.py[0m
+    │           │   │   ├── [01;32mwidgetbase.py[0m
+    │           │   │   └── [34;42mwidgets[0m
+    │           │   │       ├── [01;32m__init__.py[0m
+    │           │   │       ├── [01;32madjustableArrow.py[0m
+    │           │   │       ├── [01;32meventcal.py[0m
+    │           │   │       ├── [01;32mflags.py[0m
+    │           │   │       ├── [01;32mgrids.py[0m
+    │           │   │       ├── [01;32mmarkers.py[0m
+    │           │   │       ├── [01;32msignsandsymbols.py[0m
+    │           │   │       └── [01;32mtable.py[0m
+    │           │   ├── [34;42mlib[0m
+    │           │   │   ├── [01;32mPyFontify.py[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mabag.py[0m
+    │           │   │   ├── [01;32marciv.py[0m
+    │           │   │   ├── [01;32mattrmap.py[0m
+    │           │   │   ├── [01;32mboxstuff.py[0m
+    │           │   │   ├── [01;32mcodecharts.py[0m
+    │           │   │   ├── [01;32mcolors.py[0m
+    │           │   │   ├── [01;32mcorp.py[0m
+    │           │   │   ├── [01;32menums.py[0m
+    │           │   │   ├── [01;32mextformat.py[0m
+    │           │   │   ├── [01;32mfontfinder.py[0m
+    │           │   │   ├── [01;32mfonts.py[0m
+    │           │   │   ├── [01;32mformatters.py[0m
+    │           │   │   ├── [01;32mgeomutils.py[0m
+    │           │   │   ├── [01;32mlogger.py[0m
+    │           │   │   ├── [01;32mnormalDate.py[0m
+    │           │   │   ├── [01;32mpagesizes.py[0m
+    │           │   │   ├── [01;32mpdfencrypt.py[0m
+    │           │   │   ├── [01;32mpygments2xpre.py[0m
+    │           │   │   ├── [01;32mrandomtext.py[0m
+    │           │   │   ├── [01;32mrl_accel.py[0m
+    │           │   │   ├── [01;32mrl_safe_eval.py[0m
+    │           │   │   ├── [01;32mrltempfile.py[0m
+    │           │   │   ├── [01;32mrparsexml.py[0m
+    │           │   │   ├── [01;32msequencer.py[0m
+    │           │   │   ├── [01;32mstyles.py[0m
+    │           │   │   ├── [01;32mtestutils.py[0m
+    │           │   │   ├── [01;32mtextsplit.py[0m
+    │           │   │   ├── [01;32munits.py[0m
+    │           │   │   ├── [01;32mutils.py[0m
+    │           │   │   ├── [01;32mvalidators.py[0m
+    │           │   │   └── [01;32myaml.py[0m
+    │           │   ├── [34;42mpdfbase[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32m_can_cmap_data.py[0m
+    │           │   │   ├── [01;32m_cidfontdata.py[0m
+    │           │   │   ├── [01;32m_fontdata.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_macexpert.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_macroman.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_pdfdoc.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_standard.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_symbol.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_winansi.py[0m
+    │           │   │   ├── [01;32m_fontdata_enc_zapfdingbats.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_courier.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_courierbold.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_courierboldoblique.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_courieroblique.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_helvetica.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_helveticabold.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_helveticaboldoblique.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_helveticaoblique.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_symbol.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_timesbold.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_timesbolditalic.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_timesitalic.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_timesroman.py[0m
+    │           │   │   ├── [01;32m_fontdata_widths_zapfdingbats.py[0m
+    │           │   │   ├── [01;32m_glyphlist.py[0m
+    │           │   │   ├── [01;32macroform.py[0m
+    │           │   │   ├── [01;32mcidfonts.py[0m
+    │           │   │   ├── [01;32mpdfdoc.py[0m
+    │           │   │   ├── [01;32mpdfform.py[0m
+    │           │   │   ├── [01;32mpdfmetrics.py[0m
+    │           │   │   ├── [01;32mpdfpattern.py[0m
+    │           │   │   ├── [01;32mpdfutils.py[0m
+    │           │   │   ├── [01;32mrl_codecs.py[0m
+    │           │   │   └── [01;32mttfonts.py[0m
+    │           │   ├── [34;42mpdfgen[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mcanvas.py[0m
+    │           │   │   ├── [01;32mpathobject.py[0m
+    │           │   │   ├── [01;32mpdfgeom.py[0m
+    │           │   │   ├── [01;32mpdfimages.py[0m
+    │           │   │   └── [01;32mtextobject.py[0m
+    │           │   ├── [34;42mplatypus[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [01;32mdoctemplate.py[0m
+    │           │   │   ├── [01;32mfigures.py[0m
+    │           │   │   ├── [01;32mflowables.py[0m
+    │           │   │   ├── [01;32mframes.py[0m
+    │           │   │   ├── [01;32mmulticol.py[0m
+    │           │   │   ├── [01;32mpara.py[0m
+    │           │   │   ├── [01;32mparagraph.py[0m
+    │           │   │   ├── [01;32mparaparser.py[0m
+    │           │   │   ├── [01;32mtableofcontents.py[0m
+    │           │   │   ├── [01;32mtables.py[0m
+    │           │   │   └── [01;32mxpreformatted.py[0m
+    │           │   ├── [01;32mrl_config.py[0m
+    │           │   └── [01;32mrl_settings.py[0m
+    │           ├── [34;42mreportlab-5.0.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mREQUESTED[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   ├── [34;42mlicenses[0m
+    │           │   │   └── [01;32mLICENSE[0m
+    │           │   └── [01;32mtop_level.txt[0m
+    │           ├── [34;42msoupsieve[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__meta__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m__meta__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcss_match.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcss_parser.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mcss_types.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mpretty.cpython-312.pyc[0m
+    │           │   │   └── [01;32mutil.cpython-312.pyc[0m
+    │           │   ├── [01;32mcss_match.py[0m
+    │           │   ├── [01;32mcss_parser.py[0m
+    │           │   ├── [01;32mcss_types.py[0m
+    │           │   ├── [01;32mpretty.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   └── [01;32mutil.py[0m
+    │           ├── [34;42msoupsieve-2.8.4.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.md[0m
+    │           ├── [34;42mstarlette[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_exception_handler.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_utils.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mapplications.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mbackground.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconcurrency.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconvertors.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mdatastructures.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mformparsers.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mrequests.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mresponses.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mrouting.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mstaticfiles.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mstatus.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mtypes.cpython-312.pyc[0m
+    │           │   │   └── [01;32mwebsockets.cpython-312.pyc[0m
+    │           │   ├── [01;32m_exception_handler.py[0m
+    │           │   ├── [01;32m_utils.py[0m
+    │           │   ├── [01;32mapplications.py[0m
+    │           │   ├── [01;32mauthentication.py[0m
+    │           │   ├── [01;32mbackground.py[0m
+    │           │   ├── [01;32mconcurrency.py[0m
+    │           │   ├── [01;32mconfig.py[0m
+    │           │   ├── [01;32mconvertors.py[0m
+    │           │   ├── [01;32mdatastructures.py[0m
+    │           │   ├── [01;32mendpoints.py[0m
+    │           │   ├── [01;32mexceptions.py[0m
+    │           │   ├── [01;32mformparsers.py[0m
+    │           │   ├── [34;42mmiddleware[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mbase.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32merrors.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mexceptions.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mauthentication.py[0m
+    │           │   │   ├── [01;32mbase.py[0m
+    │           │   │   ├── [01;32mcors.py[0m
+    │           │   │   ├── [01;32merrors.py[0m
+    │           │   │   ├── [01;32mexceptions.py[0m
+    │           │   │   ├── [01;32mgzip.py[0m
+    │           │   │   ├── [01;32mhttpsredirect.py[0m
+    │           │   │   ├── [01;32msessions.py[0m
+    │           │   │   ├── [01;32mtrustedhost.py[0m
+    │           │   │   └── [01;32mwsgi.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mrequests.py[0m
+    │           │   ├── [01;32mresponses.py[0m
+    │           │   ├── [01;32mrouting.py[0m
+    │           │   ├── [01;32mschemas.py[0m
+    │           │   ├── [01;32mstaticfiles.py[0m
+    │           │   ├── [01;32mstatus.py[0m
+    │           │   ├── [01;32mtemplating.py[0m
+    │           │   ├── [01;32mtestclient.py[0m
+    │           │   ├── [01;32mtypes.py[0m
+    │           │   └── [01;32mwebsockets.py[0m
+    │           ├── [34;42mstarlette-1.3.1.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE.md[0m
+    │           ├── [34;42mtyping_extensions-4.15.0.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [01;32mtyping_extensions.py[0m
+    │           ├── [34;42mtyping_inspection[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mintrospection.cpython-312.pyc[0m
+    │           │   │   └── [01;32mtyping_objects.cpython-312.pyc[0m
+    │           │   ├── [01;32mintrospection.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mtyping_objects.py[0m
+    │           │   └── [01;32mtyping_objects.pyi[0m
+    │           ├── [34;42mtyping_inspection-0.4.2.dist-info[0m
+    │           │   ├── [01;32mINSTALLER[0m
+    │           │   ├── [01;32mMETADATA[0m
+    │           │   ├── [01;32mRECORD[0m
+    │           │   ├── [01;32mWHEEL[0m
+    │           │   └── [34;42mlicenses[0m
+    │           │       └── [01;32mLICENSE[0m
+    │           ├── [34;42muvicorn[0m
+    │           │   ├── [01;32m__init__.py[0m
+    │           │   ├── [01;32m__main__.py[0m
+    │           │   ├── [34;42m__pycache__[0m
+    │           │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_compat.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_subprocess.cpython-312.pyc[0m
+    │           │   │   ├── [01;32m_types.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mconfig.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mimporter.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mlogging.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mmain.cpython-312.pyc[0m
+    │           │   │   └── [01;32mserver.cpython-312.pyc[0m
+    │           │   ├── [01;32m_compat.py[0m
+    │           │   ├── [01;32m_subprocess.py[0m
+    │           │   ├── [01;32m_types.py[0m
+    │           │   ├── [01;32mconfig.py[0m
+    │           │   ├── [01;32mimporter.py[0m
+    │           │   ├── [34;42mlifespan[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mon.cpython-312.pyc[0m
+    │           │   │   ├── [01;32moff.py[0m
+    │           │   │   └── [01;32mon.py[0m
+    │           │   ├── [01;32mlogging.py[0m
+    │           │   ├── [34;42mloops[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32masyncio.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mauto.cpython-312.pyc[0m
+    │           │   │   ├── [01;32masyncio.py[0m
+    │           │   │   ├── [01;32mauto.py[0m
+    │           │   │   └── [01;32muvloop.py[0m
+    │           │   ├── [01;32mmain.py[0m
+    │           │   ├── [34;42mmiddleware[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32masgi2.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mmessage_logger.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mproxy_headers.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mwsgi.cpython-312.pyc[0m
+    │           │   │   ├── [01;32masgi2.py[0m
+    │           │   │   ├── [01;32mmessage_logger.py[0m
+    │           │   │   ├── [01;32mproxy_headers.py[0m
+    │           │   │   └── [01;32mwsgi.py[0m
+    │           │   ├── [34;42mprotocols[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mutils.cpython-312.pyc[0m
+    │           │   │   ├── [34;42mhttp[0m
+    │           │   │   │   ├── [01;32m__init__.py[0m
+    │           │   │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mauto.cpython-312.pyc[0m
+    │           │   │   │   │   ├── [01;32mflow_control.cpython-312.pyc[0m
+    │           │   │   │   │   └── [01;32mh11_impl.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mauto.py[0m
+    │           │   │   │   ├── [01;32mflow_control.py[0m
+    │           │   │   │   ├── [01;32mh11_impl.py[0m
+    │           │   │   │   └── [01;32mhttptools_impl.py[0m
+    │           │   │   ├── [01;32mutils.py[0m
+    │           │   │   └── [34;42mwebsockets[0m
+    │           │   │       ├── [01;32m__init__.py[0m
+    │           │   │       ├── [34;42m__pycache__[0m
+    │           │   │       │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │       │   └── [01;32mauto.cpython-312.pyc[0m
+    │           │   │       ├── [01;32mauto.py[0m
+    │           │   │       ├── [01;32mwebsockets_impl.py[0m
+    │           │   │       ├── [01;32mwebsockets_sansio_impl.py[0m
+    │           │   │       └── [01;32mwsproto_impl.py[0m
+    │           │   ├── [01;32mpy.typed[0m
+    │           │   ├── [01;32mserver.py[0m
+    │           │   ├── [34;42msupervisors[0m
+    │           │   │   ├── [01;32m__init__.py[0m
+    │           │   │   ├── [34;42m__pycache__[0m
+    │           │   │   │   ├── [01;32m__init__.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mbasereload.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mmultiprocess.cpython-312.pyc[0m
+    │           │   │   │   ├── [01;32mstatreload.cpython-312.pyc[0m
+    │           │   │   │   └── [01;32mwatchfilesreload.cpython-312.pyc[0m
+    │           │   │   ├── [01;32mbasereload.py[0m
+    │           │   │   ├── [01;32mmultiprocess.py[0m
+    │           │   │   ├── [01;32mstatreload.py[0m
+    │           │   │   └── [01;32mwatchfilesreload.py[0m
+    │           │   └── [01;32mworkers.py[0m
+    │           └── [34;42muvicorn-0.49.0.dist-info[0m
+    │               ├── [01;32mINSTALLER[0m
+    │               ├── [01;32mMETADATA[0m
+    │               ├── [01;32mRECORD[0m
+    │               ├── [01;32mREQUESTED[0m
+    │               ├── [01;32mWHEEL[0m
+    │               ├── [01;32mentry_points.txt[0m
+    │               └── [34;42mlicenses[0m
+    │                   └── [01;32mLICENSE.md[0m
+    ├── [01;36mlib64[0m -> [34;42mlib[0m
+    └── [01;32mpyvenv.cfg[0m
+
+337 directories, 2806 files

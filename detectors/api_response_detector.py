@@ -36,6 +36,5 @@ def detect_api_response_injection(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-036",
-        name="API Response Poisoning",
-        severity="critical"
+        source=source
     )

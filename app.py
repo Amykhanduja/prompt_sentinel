@@ -96,7 +96,7 @@ def scan_text(text, source=ScanSource.USER):
     )
 
 
-    action = decide_action(risk)
+    policy = decide_action(risk)
 
     if detections:
 
@@ -104,7 +104,7 @@ def scan_text(text, source=ScanSource.USER):
             text,
             detections,
             risk,
-            action
+            policy["decision"]
         )
 
     return {
@@ -114,7 +114,8 @@ def scan_text(text, source=ScanSource.USER):
         "detections": detections,
         "risk_score": risk["score"],
         "severity": risk["severity"],
-        "action": action,
+        "action": policy["decision"],
+        "policy_reason": policy["reason"],
         "source": source,
         "preprocessing": processed["flags"]
     }

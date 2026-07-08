@@ -32,6 +32,5 @@ def detect_indirect_injection(
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-012",
-        name="Indirect Prompt Injection",
-        severity="high"
+        source=source
     )

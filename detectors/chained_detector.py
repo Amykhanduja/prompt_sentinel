@@ -35,6 +35,5 @@ def detect_chained(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-027",
-        name="Chained Injection",
-        severity="high"
+        source=source
     )

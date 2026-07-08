@@ -29,6 +29,5 @@ def detect_indirect(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-012",
-        name="Indirect Prompt Injection",
-        severity="high"
+        source=source
     )

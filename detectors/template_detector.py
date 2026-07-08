@@ -38,6 +38,6 @@ def detect_template(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-015",
-        name="Template Injection",
-        severity="medium"
+        source=source
+
     )

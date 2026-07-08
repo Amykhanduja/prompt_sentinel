@@ -2,39 +2,78 @@ def decide_action(risk):
 
     score = risk["score"]
 
-    severity = risk["severity"]
+    technique_count = risk.get(
+        "technique_count",
+        0
+    )
 
-    summary = risk["summary"]
+    summary = risk.get(
+        "summary",
+        {}
+    )
+
+    critical_hits = summary.get(
+        "critical",
+        0
+    )
 
 
-    # Immediate block conditions
-
-    if summary["critical"] >= 1:
-        return "BLOCK"
-
+    # -----------------------
+    # BLOCK
+    # -----------------------
 
     if score >= 100:
-        return "BLOCK"
+
+        return {
+            "decision": "BLOCK",
+            "reason": "critical_score"
+        }
 
 
-    # High confidence warning
+    if critical_hits > 0:
 
-    if severity == "high":
-
-        if summary["high"] >= 2:
-            return "BLOCK"
-
-        return "WARN"
+        return {
+            "decision": "BLOCK",
+            "reason": "critical_detection"
+        }
 
 
-    # Medium findings
+    if (
+        score >= 70
+        and technique_count >= 3
+    ):
 
-    if severity == "medium":
-
-        if summary["medium"] >= 3:
-            return "WARN"
-
-        return "ALLOW"
+        return {
+            "decision": "BLOCK",
+            "reason": "compound_attack"
+        }
 
 
-    return "ALLOW"
+    # -----------------------
+    # WARN
+    # -----------------------
+
+    if score >= 40:
+
+        return {
+            "decision": "WARN",
+            "reason": "medium_risk"
+        }
+
+
+    if technique_count >= 2:
+
+        return {
+            "decision": "WARN",
+            "reason": "multiple_techniques"
+        }
+
+
+    # -----------------------
+    # ALLOW
+    # -----------------------
+
+    return {
+        "decision": "ALLOW",
+        "reason": "low_risk"
+    }

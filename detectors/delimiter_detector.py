@@ -24,6 +24,5 @@ def detect_delimiter(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-026",
-        name="Delimiter Injection",
-        severity="medium"
+        source=source
     )

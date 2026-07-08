@@ -20,6 +20,5 @@ def detect_context_switch(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-026",
-        name="Context switch",
-        severity="medium"
+        source=source
     )

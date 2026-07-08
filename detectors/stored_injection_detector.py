@@ -42,6 +42,5 @@ def detect_stored_injection(prompt: str,source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-031",
-        name="Stored Prompt Injection",
-        severity="critical"
+        source=source
     )

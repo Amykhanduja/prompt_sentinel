@@ -1,6 +1,6 @@
 import json
 import logging
-from datetime import datetime
+from datetime import datetime,UTC
 
 logger = logging.getLogger("promptsentinel")
 
@@ -14,7 +14,7 @@ def log_scan_event(
 ):
 
     event = {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
         "event": "scan_completed",
         "prompt_length": prompt_length,
         "detections": len(detections),

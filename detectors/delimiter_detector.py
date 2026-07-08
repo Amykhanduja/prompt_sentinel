@@ -23,7 +23,7 @@ def detect_delimiter(prompt: str, source: str = "user"):
     return match_patterns(
         prompt=prompt,
         patterns=PATTERNS,
-        technique="PT-027",
+        technique="PT-026",
         name="Delimiter Injection",
         severity="medium"
     )

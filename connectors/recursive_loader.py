@@ -1,43 +1,96 @@
 import os
 
-from connectors.loader import load_file
-from connectors.zip_parser import extract_files
-from connectors.extraction_result import (
-    ExtractionResult,
-    ExtractedContent,
-)
+from connectors.email_parser import parse_email
+from connectors.docx_parser import parse_docx
+from connectors.pdf_parser import parse_pdf
+from connectors.zip_parser import parse_zip
+from connectors.extraction_result import ExtractionResult
+from connectors.text_parser import parse_text
+from connectors.markdown_parser import parse_markdown
+from connectors.html_parser import parse_html
+from context.source import ScanSource
+
+
+PARSER_MAP = {
+    ".pdf": parse_pdf,
+    ".docx": parse_docx,
+    ".html": parse_html,
+    ".htm": parse_html,
+    ".zip": parse_zip,
+    ".eml": parse_email,
+    ".md": parse_markdown,
+    ".markdown": parse_markdown,
+    ".txt": parse_text,
+    ".log": parse_text,
+    ".csv": parse_text
+}
 
 
 MAX_DEPTH = 5
 
 
-def recursive_load(file_path: str, depth: int = 0) -> ExtractionResult:
+def recursive_load(
+    file_path: str,
+    depth: int = 0
+):
 
-    if depth >= MAX_DEPTH:
-        raise RecursionError(
-            f"Maximum recursion depth ({MAX_DEPTH}) exceeded."
+    if depth > MAX_DEPTH:
+        raise ValueError(
+            "Maximum recursion depth exceeded"
         )
 
-    extension = os.path.splitext(file_path)[1].lower()
 
-    # ZIP archives
-    if extension == ".zip":
+    extension = os.path.splitext(
+        file_path
+    )[1].lower()
 
-        items = []
 
-        extracted_files = extract_files(file_path)
+    parser = PARSER_MAP.get(
+        extension
+    )
 
-        for extracted_file in extracted_files:
 
-            result = recursive_load(
-                extracted_file,
+    if parser is None:
+
+        return ExtractionResult(
+            items=[]
+        )
+
+
+    result = parser(
+        file_path
+    )
+
+
+    final_items = []
+
+
+    for item in result.items:
+
+        final_items.append(
+            item
+        )
+
+
+        if (
+            item.source == ScanSource.ZIP
+            and os.path.isfile(item.content)
+        ):
+
+
+        try:
+            nested = recursive_load(
+                item.content,
                 depth + 1
             )
 
-            items.extend(result.items)
+            final_items.extend(
+                nested.items
+            )
+        except Exception:
+             continue
 
-        return ExtractionResult(items=items)
 
-    # Every other supported file
-
-    return load_file(file_path)
+    return ExtractionResult(
+        items=final_items
+    )

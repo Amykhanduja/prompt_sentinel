@@ -5,8 +5,7 @@ def match_patterns(
     prompt: str,
     patterns: list,
     technique: str,
-    name: str,
-    severity: str
+    source: str = "user"
 ):
 
     text = prompt.lower()
@@ -16,6 +15,7 @@ def match_patterns(
         if isinstance(pattern, dict):
 
             value = pattern["value"]
+
             pattern_type = pattern.get(
                 "type",
                 "contains"
@@ -23,15 +23,17 @@ def match_patterns(
 
             if pattern_type == "regex":
 
-                if re.search(value, text):
+                if re.search(
+                    value,
+                    text
+                ):
 
                     return {
                         "technique": technique,
-                        "name": name,
-                        "severity": severity,
                         "confidence": 0.90,
                         "matched": True,
-                        "pattern": value
+                        "pattern": value,
+                        "source": source
                     }
 
             else:
@@ -40,11 +42,10 @@ def match_patterns(
 
                     return {
                         "technique": technique,
-                        "name": name,
-                        "severity": severity,
                         "confidence": 0.80,
                         "matched": True,
-                        "pattern": value
+                        "pattern": value,
+                        "source": source
                     }
 
         else:
@@ -53,11 +54,10 @@ def match_patterns(
 
                 return {
                     "technique": technique,
-                    "name": name,
-                    "severity": severity,
                     "confidence": 0.80,
                     "matched": True,
-                    "pattern": pattern
+                    "pattern": pattern,
+                    "source": source
                 }
 
     return None

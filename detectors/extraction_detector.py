@@ -14,6 +14,5 @@ def detect_extraction(prompt, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-013",
-        name="System Prompt Extraction",
-        severity="high"
+        source=source
     )

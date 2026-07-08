@@ -24,6 +24,5 @@ def detect_dan(prompt, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-018",
-        name="Roleplay Injection",
-        severity="high"
+        source=source
     )

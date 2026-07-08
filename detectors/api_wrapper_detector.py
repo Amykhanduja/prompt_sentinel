@@ -32,8 +32,7 @@ def detect_api_wrapper(prompt: str, source: str = "user"):
             prompt=value,
             patterns=PATTERNS,
             technique="PT-029",
-            name="API Wrapper Injection",
-            severity="high"
+            source=source
         )
 
         if result:

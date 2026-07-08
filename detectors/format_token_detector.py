@@ -33,6 +33,5 @@ def detect_format_token(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-037",
-        name="Format Token Injection",
-        severity="critical"
+        source=source
     )

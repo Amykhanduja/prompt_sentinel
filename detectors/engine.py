@@ -15,6 +15,7 @@ from detectors.format_token_detector import detect_format_token
 from detectors.stored_injection_detector import detect_stored_injection
 from detectors.metadata_detector import detect_metadata_injection
 from detectors.api_response_detector import detect_api_response_injection
+from taxonomy.techniques import get_technique
 
 def run_detectors(prompt: str, source: str ="user"):
 
@@ -42,9 +43,33 @@ def run_detectors(prompt: str, source: str ="user"):
 
     for detector in detectors:
 
-        result = detector(prompt, source)
+    result = detector(
+        prompt,
+        source
+    )
 
-        if result:
-            detections.append(result)
+    if not result:
+        continue
 
-    return detections
+    metadata = get_technique(
+        result["technique"]
+    )
+
+    result.setdefault(
+        "name",
+        metadata["name"]
+    )
+
+    result.setdefault(
+        "severity",
+        metadata["severity"]
+    )
+
+    result.setdefault(
+        "family",
+        metadata["family"]
+    )
+
+    detections.append(
+        result
+    )

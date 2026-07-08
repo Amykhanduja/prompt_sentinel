@@ -29,6 +29,5 @@ def detect_tool_abuse(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-029",
-        name="Tool Abuse",
-        severity="high"
+        source=source
     )

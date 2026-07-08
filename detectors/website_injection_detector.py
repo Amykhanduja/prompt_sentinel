@@ -40,6 +40,5 @@ def detect_website_injection(
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-035",
-        name="Website / Document Injection",
-        severity="critical"
+        source=source
     )

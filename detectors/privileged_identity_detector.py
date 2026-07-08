@@ -30,6 +30,5 @@ def detect_privileged_identity(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-027",
-        name="Privileged Identity Injection",
-        severity="medium"
+        source=source
     )

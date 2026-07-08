@@ -32,6 +32,5 @@ def detect_thought_simulation(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-033",
-        name="Thought Simulation Bypass",
-        severity="medium"
+        source=source
     )

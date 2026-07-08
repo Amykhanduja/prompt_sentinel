@@ -40,6 +40,5 @@ def detect_output_leakage(prompt: str, source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-028",
-        name="Output Leakage Request",
-        severity="high"
+        source=source
     )

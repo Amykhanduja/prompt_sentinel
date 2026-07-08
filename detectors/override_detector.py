@@ -21,6 +21,5 @@ def detect_override(prompt: str , source: str = "user"):
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-009",
-        name="Instruction Override",
-        severity="high"
+        source= source
     )

@@ -41,6 +41,5 @@ def detect_metadata_injection(
         prompt=prompt,
         patterns=PATTERNS,
         technique="PT-034",
-        name="EXIF Metadata Injection",
-        severity="critical"
+        source=source
     )

@@ -6,7 +6,7 @@ from connectors.extraction_result import (
 from context.source import ScanSource
 
 
-def parse_markdown(file_path: str) -> ExtractionResult:
+def parse_text(file_path: str) -> ExtractionResult:
 
     with open(
         file_path,
@@ -25,7 +25,7 @@ def parse_markdown(file_path: str) -> ExtractionResult:
         items.append(
             ExtractedContent(
                 content=text,
-                source=ScanSource.MARKDOWN
+                source=ScanSource.TEXT
             )
         )
 

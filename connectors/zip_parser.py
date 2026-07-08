@@ -2,57 +2,131 @@ import os
 import tempfile
 import zipfile
 
+from connectors.extraction_result import (
+    ExtractionResult,
+    ExtractedContent,
+)
+
+from context.source import ScanSource
+
 
 MAX_FILES = 100
-MAX_TOTAL_SIZE = 100 * 1024 * 1024      # 100 MB
+MAX_TOTAL_SIZE = 100 * 1024 * 1024
 
 
-def extract_files(zip_path: str):
+def parse_zip(file_path: str) -> ExtractionResult:
 
-    if not zipfile.is_zipfile(zip_path):
+    if not zipfile.is_zipfile(file_path):
         raise ValueError("Invalid ZIP file.")
 
-    with zipfile.ZipFile(zip_path, "r") as archive:
+    items = []
+
+    temp_dir = tempfile.mkdtemp()
+
+    with zipfile.ZipFile(file_path, "r") as archive:
 
         members = archive.infolist()
 
-        # Limit number of files
-        if len(members) > MAX_FILES:
-            raise ValueError("ZIP contains too many files.")
 
-        # Limit extracted size
-        total_size = sum(member.file_size for member in members)
+        # -----------------------
+        # Safety checks
+        # -----------------------
+
+        if len(members) > MAX_FILES:
+            raise ValueError(
+                "ZIP contains too many files."
+            )
+
+
+        total_size = sum(
+            member.file_size
+            for member in members
+        )
+
 
         if total_size > MAX_TOTAL_SIZE:
-            raise ValueError("ZIP exceeds maximum allowed size.")
+            raise ValueError(
+                "ZIP exceeds maximum allowed size."
+            )
 
-        temp_dir = tempfile.mkdtemp()
+
+        # -----------------------
+        # Metadata
+        # -----------------------
+
+        for member in members:
+
+            items.append(
+                ExtractedContent(
+                    content=member.filename,
+                    source=ScanSource.ZIP
+                )
+            )
+
+
+            if member.comment:
+
+                items.append(
+                    ExtractedContent(
+                        content=member.comment.decode(
+                            errors="ignore"
+                        ),
+                        source=ScanSource.ZIP
+                    )
+                )
+
+
+        # -----------------------
+        # Extraction
+        # -----------------------
 
         for member in members:
 
             destination = os.path.abspath(
-                os.path.join(temp_dir, member.filename)
+                os.path.join(
+                    temp_dir,
+                    member.filename
+                )
             )
+
 
             if not destination.startswith(
                 os.path.abspath(temp_dir)
             ):
                 raise ValueError(
-                     "Unsafe ZIP archive (Zip Slip detected)."
+                    "Unsafe ZIP archive (Zip Slip detected)."
                 )
 
-            archive.extract(member, temp_dir)
+
+            archive.extract(
+                member,
+                temp_dir
+            )
 
 
-
-    extracted_files = []
+    # -----------------------
+    # Return extracted paths
+    # recursive loader handles parsing
+    # -----------------------
 
     for root, _, files in os.walk(temp_dir):
 
         for file in files:
 
-            extracted_files.append(
-                os.path.join(root, file)
+            extracted_path = os.path.join(
+                root,
+                file
             )
 
-    return extracted_files
+
+            items.append(
+                ExtractedContent(
+                    content=extracted_path,
+                    source=ScanSource.ZIP
+                )
+            )
+
+
+    return ExtractionResult(
+        items=items
+    )

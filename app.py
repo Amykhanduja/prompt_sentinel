@@ -1,9 +1,10 @@
 import os
+import sys
 import json
 import logging
 import tempfile
 
-from datetime import datetime
+from datetime import datetime,UTC
 from typing import List
 from context.source import ScanSource
 
@@ -48,15 +49,21 @@ class PromptRequest(BaseModel):
         return value
 
 class ScanResponse(BaseModel):
+
     version: str
     timestamp: str
-    detections: List[dict]
+    prompt: str
+
+    detections: list
     risk_score: int
     severity: str
     action: str
 
-class ErrorResponse(BaseModel):
-    error: str
+    source: str
+    preprocessing: dict
+
+    risk_summary: dict
+    technique_count: int
 
 def scan_text(text, source=ScanSource.USER):
 
@@ -102,7 +109,7 @@ def scan_text(text, source=ScanSource.USER):
 
     return {
         "version": "0.3",
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
         "prompt": processed_prompt,
         "detections": detections,
         "risk_score": risk["score"],
@@ -120,6 +127,89 @@ def scan_file(file_path: str):
         content["text"],
         content["source"]
     )
+
+def scan_text(text, source=ScanSource.USER):
+
+    logger.info(
+        json.dumps(
+            {
+                "event": "scan_started",
+                "prompt_length": len(text)
+            }
+        )
+    )
+
+    processed = preprocess_prompt(text)
+
+    processed_prompt = processed["prompt"]
+
+    detections = run_detectors(processed_prompt, source)
+
+    for detection in detections:
+
+        detection["source"] = source
+
+        detection["preprocessing"] = (
+            processed["flags"]
+        )
+
+
+    risk = calculate_risk(
+        detections
+    )
+
+
+    action = decide_action(risk)
+
+    if detections:
+
+        log_alert(
+            text,
+            detections,
+            risk,
+            action
+        )
+
+    return {
+        "version": "0.3",
+        "timestamp": datetime.now(UTC).isoformat(),
+        "prompt": processed_prompt,
+        "detections": detections,
+
+        "risk_score": risk["score"],
+        "severity": risk["severity"],
+        "risk_summary": risk["summary"],
+        "technique_count": risk["technique_count"],
+        "evidence_groups": risk["evidence_groups"],
+        "risk_breakdown": risk["breakdown"],
+
+        "action": action,
+        "source": source,
+        "preprocessing": processed["flags"]
+    }
+
+def scan_file(file_path: str):
+
+    result = recursive_load(file_path)
+
+
+    responses = []
+
+
+    for item in result.items:
+
+        responses.append(
+            scan_text(
+                item.content,
+                item.source
+            )
+        )
+
+
+    return {
+        "file": file_path,
+        "results": responses
+    }
 
 @app.get("/api/v1/health")
 def health_check():
@@ -179,10 +269,23 @@ app.include_router(
 
 if __name__ == "__main__":
 
-    prompt = input("Prompt> ")
 
-    result = scan_text(prompt)
+    if len(sys.argv) > 1:
+
+        file_path = sys.argv[1]
+
+        result = scan_file(
+            file_path
+        )
+
+    else:
+
+        prompt = input("Prompt> ")
+
+        result = scan_text(
+            prompt
+        )
+
 
     print("\n=== Scan Result ===")
     print(result)
-

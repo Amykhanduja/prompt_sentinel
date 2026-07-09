@@ -15,13 +15,47 @@ from detectors.format_token_detector import detect_format_token
 from detectors.stored_injection_detector import detect_stored_injection
 from detectors.metadata_detector import detect_metadata_injection
 from detectors.api_response_detector import detect_api_response_injection
+
+from semantic.semantic_engine import detect_semantic
+
 from taxonomy.techniques import get_technique
 
-def run_detectors(prompt: str, source: str ="user"):
+
+def enrich_detection(detection: dict):
+    """
+    Adds taxonomy metadata to a detection.
+    """
+
+    metadata = get_technique(
+        detection["technique"]
+    )
+
+    detection.setdefault(
+        "name",
+        metadata["name"]
+    )
+
+    detection.setdefault(
+        "severity",
+        metadata["severity"]
+    )
+
+    detection.setdefault(
+        "family",
+        metadata["family"]
+    )
+
+    return detection
+
+
+def run_detectors(
+    prompt: str,
+    source: str = "user"
+):
 
     detections = []
 
-    detectors = [
+    regex_detectors = [
         detect_override,
         detect_extraction,
         detect_dan,
@@ -38,38 +72,40 @@ def run_detectors(prompt: str, source: str ="user"):
         detect_stored_injection,
         detect_format_token,
         detect_metadata_injection,
-        detect_api_response_injection
+        detect_api_response_injection,
     ]
 
-    for detector in detectors:
+    # --------------------------------------------------
+    # Regex Detection
+    # --------------------------------------------------
 
-    result = detector(
+    for detector in regex_detectors:
+
+        result = detector(
+            prompt,
+            source
+        )
+
+        if not result:
+            continue
+
+        detections.append(
+            enrich_detection(result)
+        )
+
+    # --------------------------------------------------
+    # Semantic Detection
+    # --------------------------------------------------
+
+    semantic_results = detect_semantic(
         prompt,
         source
     )
 
-    if not result:
-        continue
+    for result in semantic_results:
 
-    metadata = get_technique(
-        result["technique"]
-    )
+        detections.append(
+            enrich_detection(result)
+        )
 
-    result.setdefault(
-        "name",
-        metadata["name"]
-    )
-
-    result.setdefault(
-        "severity",
-        metadata["severity"]
-    )
-
-    result.setdefault(
-        "family",
-        metadata["family"]
-    )
-
-    detections.append(
-        result
-    )
+    return detections

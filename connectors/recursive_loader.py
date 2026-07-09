@@ -78,17 +78,17 @@ def recursive_load(
         ):
 
 
-        try:
-            nested = recursive_load(
-                item.content,
-                depth + 1
-            )
+           try:
+               nested = recursive_load(
+                   item.content,
+                   depth + 1
+               )
 
-            final_items.extend(
-                nested.items
-            )
-        except Exception:
-             continue
+               final_items.extend(
+                   nested.items
+               )
+           except Exception:
+                continue
 
 
     return ExtractionResult(

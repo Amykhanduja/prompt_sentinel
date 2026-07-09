@@ -6,9 +6,8 @@ from taxonomy.techniques import TECHNIQUES
 
 EXAMPLES_DIR = Path(__file__).parent / "examples"
 
-VALID_TECHNIQUES = set(
-    TECHNIQUES.keys()
-)
+VALID_TECHNIQUES = set(TECHNIQUES.keys())
+
 
 def load_knowledge_base() -> dict:
     """
@@ -19,9 +18,7 @@ def load_knowledge_base() -> dict:
 
     required_fields = {
         "technique",
-        "name",
-        "canonical_examples",
-        "paraphrase_examples"
+        "name"
     }
 
     for file_path in sorted(
@@ -37,7 +34,7 @@ def load_knowledge_base() -> dict:
             data = json.load(file)
 
         # --------------------------------------------------
-        # Required fields validation
+        # Required fields
         # --------------------------------------------------
 
         missing = required_fields - data.keys()
@@ -60,7 +57,7 @@ def load_knowledge_base() -> dict:
             )
 
         # --------------------------------------------------
-        # Duplicate technique validation
+        # Duplicate validation
         # --------------------------------------------------
 
         if technique in knowledge_base:
@@ -69,44 +66,44 @@ def load_knowledge_base() -> dict:
             )
 
         # --------------------------------------------------
-        # Type validation
+        # Validate every *_examples field
         # --------------------------------------------------
 
-        if not isinstance(
-            data["canonical_examples"],
-            list
-        ):
-            raise TypeError(
-                f"{file_path.name}: "
-                f"'canonical_examples' must be a list."
+        example_fields = {}
+
+        for field, value in data.items():
+
+            if not field.endswith("_examples"):
+                continue
+
+            if not isinstance(value, list):
+                raise TypeError(
+                    f"{file_path.name}: '{field}' must be a list."
+                )
+
+            if not all(
+                isinstance(example, str)
+                for example in value
+            ):
+                raise TypeError(
+                    f"{file_path.name}: Every item in '{field}' must be a string."
+                )
+
+            example_fields[field] = value
+
+        if "canonical_examples" not in example_fields:
+            raise ValueError(
+                f"{file_path.name}: Missing 'canonical_examples'."
             )
 
-        if not isinstance(
-            data["paraphrase_examples"],
-            list
-        ):
-            raise TypeError(
-                f"{file_path.name}: "
-                f"'paraphrase_examples' must be a list."
+        if "paraphrase_examples" not in example_fields:
+            raise ValueError(
+                f"{file_path.name}: Missing 'paraphrase_examples'."
             )
 
-        if not all(
-            isinstance(example, str)
-            for example in data["canonical_examples"]
-        ):
-            raise TypeError(
-                f"{file_path.name}: "
-                f"Every canonical example must be a string."
-            )
-
-        if not all(
-            isinstance(example, str)
-            for example in data["paraphrase_examples"]
-        ):
-            raise TypeError(
-                f"{file_path.name}: "
-                f"Every paraphrase example must be a string."
-            )
+        data["example_fields"] = list(
+            example_fields.keys()
+        )
 
         knowledge_base[technique] = data
 
@@ -122,7 +119,6 @@ def get_knowledge_base() -> dict:
     """
 
     return KNOWLEDGE_BASE
-
 
 def get_technique(technique: str) -> dict | None:
     """
@@ -154,3 +150,43 @@ def techniques() -> list[str]:
     """
 
     return sorted(KNOWLEDGE_BASE.keys())
+
+ALL_EXAMPLE_FIELDS = (
+    "canonical_examples",
+    "paraphrase_examples",
+    "polite_examples",
+    "aggressive_examples",
+    "negative_examples",
+    "roleplay_examples",
+    "indirect_examples"
+)
+
+
+def get_positive_examples(entry: dict) -> list:
+    """
+    Returns every positive semantic example for a technique.
+    """
+
+    examples = []
+
+    for field in ALL_EXAMPLE_FIELDS:
+
+        if field == "negative_examples":
+            continue
+
+        examples.extend(
+            entry.get(field, [])
+        )
+
+    return examples
+
+
+def get_negative_examples(entry: dict) -> list:
+    """
+    Returns every negative semantic example for a technique.
+    """
+
+    return entry.get(
+        "negative_examples",
+        []
+    )

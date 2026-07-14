@@ -5,8 +5,9 @@ from semantic.embeddings import (
 
 from semantic.similarity import (
     best_match,
+    rank_matches,
+    cosine_similarity
 )
-
 from semantic.knowledge_base import (
     get_knowledge_base,get_positive_examples,
     get_negative_examples
@@ -50,7 +51,7 @@ class SemanticEngine:
                  "examples": examples,
                  "embeddings": embeddings,
                  "negative_examples": get_negative_examples(entry),
-                 "negative_embeddings": negative_embeddings
+                 "negative_embeddings": negative_embeddings,
                  "threshold": entry.get("threshold",DEFAULT_SIMILARITY_THRESHOLD)
              }
 
@@ -86,7 +87,7 @@ class SemanticEngine:
             if not rankings:
                 continue
 
-             best_index, best_similarity = rankings[0]
+            best_index, best_similarity = rankings[0]
 
         # ---------------------------------
         # Technique threshold
@@ -206,7 +207,7 @@ class SemanticEngine:
         )
 
         return detections
-
+_ENGINE = SemanticEngine()
 def detect_semantic(
     prompt: str,
     source: str = "input"

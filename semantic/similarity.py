@@ -173,4 +173,4 @@ def passes_negative_filter(
         positive_similarity >
         negative_similarity + margin
     )
-}
+

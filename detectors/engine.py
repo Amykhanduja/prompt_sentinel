@@ -20,6 +20,8 @@ from semantic.semantic_engine import detect_semantic
 
 from taxonomy.techniques import get_technique
 
+from fusion import fuse_detections
+
 
 def enrich_detection(detection: dict):
     """
@@ -53,9 +55,10 @@ def run_detectors(
     source: str = "user"
 ):
 
-    detections = []
+    regex_detections = []
 
     regex_detectors = [
+
         detect_override,
         detect_extraction,
         detect_dan,
@@ -72,12 +75,13 @@ def run_detectors(
         detect_stored_injection,
         detect_format_token,
         detect_metadata_injection,
-        detect_api_response_injection,
+        detect_api_response_injection
+
     ]
 
-    # --------------------------------------------------
+    # ------------------------------------------
     # Regex Detection
-    # --------------------------------------------------
+    # ------------------------------------------
 
     for detector in regex_detectors:
 
@@ -89,23 +93,32 @@ def run_detectors(
         if not result:
             continue
 
-        detections.append(
+        regex_detections.append(
             enrich_detection(result)
         )
 
-    # --------------------------------------------------
+    # ------------------------------------------
     # Semantic Detection
-    # --------------------------------------------------
+    # ------------------------------------------
 
-    semantic_results = detect_semantic(
+    semantic_detections = detect_semantic(
         prompt,
         source
     )
 
-    for result in semantic_results:
+    for detection in semantic_detections:
 
-        detections.append(
-            enrich_detection(result)
+        enrich_detection(
+            detection
         )
+
+    # ------------------------------------------
+    # Fusion
+    # ------------------------------------------
+
+    detections = fuse_detections(
+        regex_detections,
+        semantic_detections
+    )
 
     return detections

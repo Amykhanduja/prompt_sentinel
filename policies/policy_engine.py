@@ -1,79 +1,114 @@
-def decide_action(risk):
+from typing import Dict
+
+
+POLICY = {
+
+    "allow": {
+        "max_score": 29
+    },
+
+    "warn": {
+        "max_score": 59
+    },
+
+    "review": {
+        "max_score": 99
+    },
+
+    "block": {
+        "max_score": float("inf")
+    }
+
+}
+
+
+def evaluate_policy(risk: Dict) -> Dict:
+    """
+    Decide the action based on the calculated risk.
+    """
 
     score = risk["score"]
 
-    technique_count = risk.get(
-        "technique_count",
-        0
-    )
+    severity = risk["severity"]
 
-    summary = risk.get(
-        "summary",
-        {}
-    )
+    techniques = risk["technique_count"]
 
-    critical_hits = summary.get(
-        "critical",
-        0
-    )
+    confidence = risk["average_confidence"]
 
+    critical = risk["summary"]["critical"]
 
-    # -----------------------
-    # BLOCK
-    # -----------------------
+    high = risk["summary"]["high"]
 
-    if score >= 100:
+    # -----------------------------------------
+    # Hard overrides
+    # -----------------------------------------
 
-        return {
-            "decision": "BLOCK",
-            "reason": "critical_score"
-        }
+    if critical >= 2:
 
+        action = "block"
 
-    if critical_hits > 0:
+        reason = (
+            "Multiple critical techniques detected."
+        )
 
-        return {
-            "decision": "BLOCK",
-            "reason": "critical_detection"
-        }
+    elif severity == "critical":
 
+        action = "block"
 
-    if (
-        score >= 70
-        and technique_count >= 3
-    ):
+        reason = (
+            "Critical prompt injection detected."
+        )
 
-        return {
-            "decision": "BLOCK",
-            "reason": "compound_attack"
-        }
+    elif high >= 3:
 
+        action = "review"
 
-    # -----------------------
-    # WARN
-    # -----------------------
+        reason = (
+            "Multiple high-risk techniques detected."
+        )
 
-    if score >= 40:
+    # -----------------------------------------
+    # Score-based policy
+    # -----------------------------------------
 
-        return {
-            "decision": "WARN",
-            "reason": "medium_risk"
-        }
+    else:
 
+        if score <= POLICY["allow"]["max_score"]:
 
-    if technique_count >= 2:
+            action = "allow"
 
-        return {
-            "decision": "WARN",
-            "reason": "multiple_techniques"
-        }
+            reason = "Low risk."
 
+        elif score <= POLICY["warn"]["max_score"]:
 
-    # -----------------------
-    # ALLOW
-    # -----------------------
+            action = "warn"
+
+            reason = "Moderate risk."
+
+        elif score <= POLICY["review"]["max_score"]:
+
+            action = "review"
+
+            reason = "High risk."
+
+        else:
+
+            action = "block"
+
+            reason = "Critical risk."
 
     return {
-        "decision": "ALLOW",
-        "reason": "low_risk"
+
+        "action": action,
+
+        "reason": reason,
+
+        "score": score,
+
+        "severity": severity,
+
+        "confidence": confidence,
+
+        "technique_count": techniques
+
     }

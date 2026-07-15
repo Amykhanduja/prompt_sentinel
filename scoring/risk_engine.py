@@ -1,23 +1,26 @@
 from context.source import ScanSource
 
+
 TECHNIQUE_WEIGHTS = {
-    "PT-009": 30,   # Instruction Override
-    "PT-012": 30,   # Indirect Prompt Injection
-    "PT-013": 40,   # System Prompt Extraction
-    "PT-015": 20,   #
-    "PT-018": 35,   # Roleplay Injection
+
+    "PT-009": 30,
+    "PT-012": 30,
+    "PT-013": 40,
+    "PT-015": 20,
+    "PT-018": 35,
     "PT-021": 20,
     "PT-023": 15,
     "PT-024": 15,
     "PT-025": 25,
     "PT-026": 30,
-    "PT-027": 35,   # Privileged Identity
-    "PT-028": 45,   # Output Leakage
-    "PT-029": 35,   # API Wrapper
-    "PT-031": 40,   # Stored Prompt Injection
-    "PT-033": 20,   # Thought Simulation
-    "PT-037": 50,   # Format Token Injection
+    "PT-027": 35,
+    "PT-028": 45,
+    "PT-029": 35,
+    "PT-031": 40,
+    "PT-033": 20,
+    "PT-037": 50,
 }
+
 
 COMPOUND_RULES = [
 
@@ -47,36 +50,40 @@ COMPOUND_RULES = [
 
 ]
 
+
 SOURCE_WEIGHTS = {
 
     ScanSource.USER: 1.0,
 
-    ScanSource.PDF: 1.1,
-    ScanSource.PDF_METADATA: 0.5,
-    ScanSource.PDF_FORM: 1.0,
-    ScanSource.PDF_ANNOTATION: 0.8,
+    ScanSource.PDF: 1.10,
+    ScanSource.PDF_METADATA: 0.50,
+    ScanSource.PDF_FORM: 1.00,
+    ScanSource.PDF_ANNOTATION: 0.80,
 
-    ScanSource.DOCX: 1.0,
-    ScanSource.DOCX_METADATA: 0.5,
+    ScanSource.DOCX: 1.00,
+    ScanSource.DOCX_METADATA: 0.50,
 
-    ScanSource.HTML: 1.0,
-    ScanSource.HTML_COMMENT: 0.8,
-    ScanSource.HTML_SCRIPT: 1.2,
-    ScanSource.HTML_STYLE: 0.3,
-    ScanSource.HTML_METADATA: 0.5,
+    ScanSource.HTML: 1.00,
+    ScanSource.HTML_COMMENT: 0.80,
+    ScanSource.HTML_SCRIPT: 1.20,
+    ScanSource.HTML_STYLE: 0.30,
+    ScanSource.HTML_METADATA: 0.50,
 
-    ScanSource.EMAIL: 1.0,
-    ScanSource.EMAIL_SUBJECT: 1.1,
-    ScanSource.EMAIL_HEADER: 0.5,
-    ScanSource.EMAIL_HTML: 1.0,
-    ScanSource.EMAIL_ATTACHMENT: 1.0,
+    ScanSource.EMAIL: 1.00,
+    ScanSource.EMAIL_SUBJECT: 1.10,
+    ScanSource.EMAIL_HEADER: 0.50,
+    ScanSource.EMAIL_HTML: 1.00,
+    ScanSource.EMAIL_ATTACHMENT: 1.00,
 
-    ScanSource.API_RESPONSE: 1.0,
+    ScanSource.API_RESPONSE: 1.00,
 
-    ScanSource.ZIP: 1.0,
+    ScanSource.ZIP: 1.00,
 
-    ScanSource.UNKNOWN: 1.0,
+    ScanSource.UNKNOWN: 1.00,
 }
+
+
+FUSION_BONUS = 1.15
 
 
 def calculate_risk(detections):
@@ -85,40 +92,42 @@ def calculate_risk(detections):
 
     techniques = set()
 
+    confidence_sum = 0.0
+
     evidence_groups = {}
 
-    risk_breakdown = []
+    breakdown = []
 
     severity_summary = {
+
         "critical": 0,
         "high": 0,
         "medium": 0,
         "low": 0
     }
 
-    confidence_sum = 0.0
-
     for detection in detections:
 
         technique = detection["technique"]
+
+        if technique in techniques:
+            continue
+
+        techniques.add(
+            technique
+        )
 
         pattern = detection.get(
             "pattern",
             technique
         )
 
-        if pattern not in evidence_groups:
-
-            evidence_groups[pattern] = []
-
-        evidence_groups[pattern].append(
+        evidence_groups.setdefault(
+            pattern,
+            []
+        ).append(
             technique
         )
-
-        if technique in techniques:
-            continue
-
-        techniques.add(technique)
 
         base_score = TECHNIQUE_WEIGHTS.get(
             technique,
@@ -132,34 +141,50 @@ def calculate_risk(detections):
 
         confidence_sum += confidence
 
-        source = detection.get(
-            "source",
-            ScanSource.UNKNOWN
+        sources = detection.get(
+            "sources"
         )
 
-        source_multiplier = SOURCE_WEIGHTS.get(
-            source,
-            1.0
+        if not sources:
+
+            sources = [
+                detection.get(
+                    "source",
+                    ScanSource.UNKNOWN
+                )
+            ]
+
+        source_multiplier = max(
+
+            SOURCE_WEIGHTS.get(
+                source,
+                1.0
+            )
+
+            for source in sources
+        )
+
+        detectors = detection.get(
+            "detectors",
+            []
+        )
+
+        fusion_multiplier = (
+            FUSION_BONUS
+            if len(detectors) > 1
+            else 1.0
         )
 
         final_score = int(
-            base_score *
-            confidence *
-            source_multiplier
+
+            base_score
+            * confidence
+            * source_multiplier
+            * fusion_multiplier
+
         )
 
         score += final_score
-
-        risk_breakdown.append(
-            {
-                "technique": technique,
-                "base_score": base_score,
-                "confidence": confidence,
-                "source": source,
-                "source_multiplier": source_multiplier,
-                "final_score": final_score
-            }
-        )
 
         severity = detection["severity"]
 
@@ -167,31 +192,48 @@ def calculate_risk(detections):
 
             severity_summary[severity] += 1
 
+        breakdown.append({
 
-    # -----------------------
-    # Compound rules
-    # -----------------------
+            "technique": technique,
+
+            "base_score": base_score,
+
+            "confidence": round(
+                confidence,
+                3
+            ),
+
+            "sources": sources,
+
+            "detectors": detectors,
+
+            "source_multiplier": source_multiplier,
+
+            "fusion_multiplier": fusion_multiplier,
+
+            "final_score": final_score
+
+        })
 
     for rule in COMPOUND_RULES:
 
         if all(
-            item in techniques
-            for item in rule["requires"]
+
+            technique in techniques
+
+            for technique in rule["requires"]
+
         ):
 
             score += rule["bonus"]
 
-            risk_breakdown.append(
-                {
-                    "compound": rule["requires"],
-                    "bonus": rule["bonus"]
-                }
-            )
+            breakdown.append({
 
+                "compound": rule["requires"],
 
-    # -----------------------
-    # Duplicate penalty
-    # -----------------------
+                "bonus": rule["bonus"]
+
+            })
 
     duplicate_penalty = 0
 
@@ -200,28 +242,40 @@ def calculate_risk(detections):
         if len(matches) > 1:
 
             duplicate_penalty += (
+
                 len(matches) - 1
+
             ) * 5
-    duplicate_penalty = min(duplicate_penalty,15)
+
+    duplicate_penalty = min(
+        duplicate_penalty,
+        15
+    )
 
     score -= duplicate_penalty
 
-    score = max(score, 0)
-
-    if duplicate_penalty:
-        risk_breakdown.append(
-            {
-                "duplicate_penalty": duplicate_penalty
-            }
-        )
-
-
-    average_confidence = (
-        confidence_sum / len(techniques)
-        if techniques
-        else 0
+    score = max(
+        score,
+        0
     )
 
+    if duplicate_penalty:
+
+        breakdown.append({
+
+            "duplicate_penalty": duplicate_penalty
+
+        })
+
+    average_confidence = (
+
+        confidence_sum / len(techniques)
+
+        if techniques
+
+        else 0
+
+    )
 
     if score >= 100:
 
@@ -238,7 +292,6 @@ def calculate_risk(detections):
     else:
 
         overall = "low"
-
 
     return {
 
@@ -258,9 +311,9 @@ def calculate_risk(detections):
 
         "average_confidence": round(
             average_confidence,
-            2
+            3
         ),
 
-        "breakdown": risk_breakdown
+        "breakdown": breakdown
 
     }

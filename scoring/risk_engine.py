@@ -141,6 +141,9 @@ def calculate_risk(detections):
             "confidence",
             1.0
         )
+        
+        if isinstance(confidence, str) and confidence.endswith("%"):
+            confidence = float(confidence.strip("%")) / 100.0
 
         confidence_sum += confidence
 

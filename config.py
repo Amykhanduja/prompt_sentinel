@@ -12,6 +12,17 @@ EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 EMBEDDING_BATCH_SIZE = 32
 
 # =============================================================================
+# Semantic Detector Mode
+# =============================================================================
+
+# Options: "nearest_neighbor", "classifier"
+SEMANTIC_MODE = "classifier"
+
+# If SEMANTIC_MODE is "classifier", specify the model type.
+# Options: "logistic_regression", "linear_svm", "mlp"
+CLASSIFIER_TYPE = "logistic_regression"
+
+# =============================================================================
 # Cross Encoder Reranking
 # =============================================================================
 

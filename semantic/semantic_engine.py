@@ -62,6 +62,12 @@ class SemanticEngine:
         top_k: int = 3
     ) -> list:
 
+        from semantic.embeddings import PROVIDER_VERSION
+        if not hasattr(self, "provider_version") or self.provider_version != PROVIDER_VERSION:
+            self.semantic_index = {}
+            self._build_index()
+            self.provider_version = PROVIDER_VERSION
+
         if not prompt.strip():
             return []
 

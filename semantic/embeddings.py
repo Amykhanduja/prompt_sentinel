@@ -1,84 +1,64 @@
-from sentence_transformers import SentenceTransformer
-import torch
-from config import EMBEDDING_MODEL,FORCE_CPU, NORMALIZE_EMBEDDINGS
+from config import EMBEDDING_MODEL
+from semantic.providers import MiniLMProvider, BGEProvider, GTEProvider
 
-_MODEL = None
-
-
+_PROVIDER = None
+PROVIDER_VERSION = 0
 
 
-def _get_device() -> str:
+def set_provider(model_name: str):
     """
-    Returns the best available device.
+    Sets the active embedding provider and increments the version
+    so the semantic engine knows to rebuild the knowledge base.
     """
-    if FORCE_CPU:
-        return "cpu"
+    global _PROVIDER, PROVIDER_VERSION
+    name_lower = model_name.lower()
+    
+    if "bge" in name_lower:
+        _PROVIDER = BGEProvider()
+    elif "gte" in name_lower:
+        _PROVIDER = GTEProvider()
+    else:
+        _PROVIDER = MiniLMProvider()
+        
+    PROVIDER_VERSION += 1
 
-    if torch.cuda.is_available():
-        return "cuda"
 
-    return "cpu"
-
-
-def load_model() -> SentenceTransformer:
+def load_provider():
     """
-    Lazily loads and caches the embedding model.
+    Lazily loads and caches the embedding provider.
     """
-
-    global _MODEL
-
-    if _MODEL is None:
-
-        device = _get_device()
-
-        _MODEL = SentenceTransformer(
-            EMBEDDING_MODEL,
-            device=device
-        )
-
-    return _MODEL
+    global _PROVIDER
+    if _PROVIDER is None:
+        set_provider(EMBEDDING_MODEL)
+    return _PROVIDER
 
 
 def get_embedding(text: str):
     """
     Returns an embedding vector for a single text.
     """
-
     if not text:
         return None
-
-    model = load_model()
-
-    return model.encode(
-        text,
-        convert_to_numpy=True,
-        normalize_embeddings=NORMALIZE_EMBEDDINGS
-    )
+    provider = load_provider()
+    return provider.get_embedding(text)
 
 
 def get_embeddings(texts: list[str]):
     """
     Returns embeddings for multiple texts.
     """
-
     if not texts:
         return []
-
-    model = load_model()
-
-    return model.encode(
-        texts,
-        convert_to_numpy=True,
-        normalize_embeddings=NORMALIZE_EMBEDDINGS
-    )
+    provider = load_provider()
+    return provider.get_embeddings(texts)
 
 
 def model_name() -> str:
     """
     Returns the currently configured embedding model.
     """
-
-    return MODEL_NAME
+    provider = load_provider()
+    return provider.get_name()
 
 
 def unload_model():
@@ -86,7 +66,7 @@ def unload_model():
     Frees the cached model.
     Useful for tests.
     """
-
-    global _MODEL
-
-    _MODEL = None
+    global _PROVIDER
+    if _PROVIDER is not None:
+        _PROVIDER.unload()
+        _PROVIDER = None

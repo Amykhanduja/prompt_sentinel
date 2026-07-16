@@ -15,13 +15,14 @@ from semantic.knowledge_base import (
 
 from config import (
     DEFAULT_SIMILARITY_THRESHOLD,
-    ENABLE_CROSS_ENCODER
+    ENABLE_CROSS_ENCODER,
+    SEMANTIC_MODE
 )
 
 
 class SemanticEngine:
     """
-    Semantic detector based on embedding similarity and optional cross encoder reranking.
+    Semantic detector based on embedding similarity or true classifier.
     """
 
     def __init__(self):
@@ -48,6 +49,11 @@ class SemanticEngine:
                  "negative_embeddings": negative_embeddings,
                  "threshold": entry.get("threshold", DEFAULT_SIMILARITY_THRESHOLD)
              }
+             
+        from config import SEMANTIC_MODE
+        if SEMANTIC_MODE == "classifier":
+            from semantic.classifier import train_classifier
+            train_classifier(self.semantic_index)
 
     def detect(
         self,
@@ -57,6 +63,8 @@ class SemanticEngine:
     ) -> list:
 
         from semantic.embeddings import PROVIDER_VERSION
+        from config import SEMANTIC_MODE
+        
         if not hasattr(self, "provider_version") or self.provider_version != PROVIDER_VERSION:
             self.semantic_index = {}
             self._build_index()
@@ -67,17 +75,65 @@ class SemanticEngine:
 
         prompt_embedding = get_embedding(prompt)
         
+        if SEMANTIC_MODE == "classifier":
+            return self._detect_classifier(prompt, prompt_embedding, source)
+        else:
+            return self._detect_nearest_neighbor(prompt, prompt_embedding, source, top_k)
+            
+    def _detect_classifier(self, prompt: str, prompt_embedding, source: str) -> list:
+        from semantic.classifier import predict
+        
+        pred = predict(prompt_embedding)
+        if not pred:
+            return []
+            
+        predicted_pt = pred["predicted_pt"]
+        if predicted_pt == "SAFE":
+            return []
+            
+        detections = []
+        for class_info in pred["top_3_classes"]:
+            tech = class_info["technique"]
+            if tech == "SAFE":
+                continue
+                
+            prob = class_info["probability"]
+            if prob < 0.16: # filter noise
+                continue
+                
+            detection = {
+                "technique": tech,
+                "confidence": round(pred["confidence"], 3),
+                "probability": round(prob, 3),
+                "top_3_classes": pred["top_3_classes"],
+                "source": source,
+                "detector": "semantic_classifier",
+                "match_explanation": {
+                    "predicted_class": predicted_pt,
+                    "probability": round(prob, 3),
+                    "confidence": round(pred["confidence"], 3)
+                }
+            }
+            detections.append(detection)
+        
+        return detections
+
+    def _detect_nearest_neighbor(
+        self,
+        prompt: str,
+        prompt_embedding,
+        source: str,
+        top_k: int
+    ) -> list:
         # 1. Retrieve Top-20 candidates GLOBALLY across all techniques
         retrieval_k = 20 if ENABLE_CROSS_ENCODER else top_k
         
         global_candidates = []
         for technique, data in self.semantic_index.items():
             rankings = rank_matches(prompt_embedding, data["embeddings"])
-            # We take Top-20 per technique first to reduce sorting overhead
             for idx, orig_sim in rankings[:retrieval_k]:
                 global_candidates.append((technique, idx, orig_sim))
                 
-        # Sort globally by embedding similarity and take Top-20 overall
         global_candidates.sort(key=lambda x: x[2], reverse=True)
         global_candidates = global_candidates[:retrieval_k]
 
@@ -94,7 +150,6 @@ class SemanticEngine:
                 reranked_global_candidates.append((tech, idx, score, orig_sim))
                 
             reranked_global_candidates.sort(key=lambda x: x[2], reverse=True)
-            # Take Top-3 overall
             final_candidates = reranked_global_candidates[:top_k]
         else:
             final_candidates = [(tech, idx, sim, sim) for tech, idx, sim in global_candidates[:top_k]]
@@ -112,7 +167,6 @@ class SemanticEngine:
         for technique, candidates in technique_groups.items():
             best_index, best_score, best_orig_sim = candidates[0]
             
-            # Use original embedding similarity for threshold check to maintain backwards compatibility and threshold tuning
             threshold = self.semantic_index[technique].get("threshold", DEFAULT_SIMILARITY_THRESHOLD)
             if best_orig_sim < threshold:
                 continue

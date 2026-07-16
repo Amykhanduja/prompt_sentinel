@@ -21,21 +21,11 @@ def detect_metadata_injection(
     source: str = "user"
 ):
 
-    print("SOURCE =", source)
-
-    print(
-        source == ScanSource.PDF_METADATA,
-        source == ScanSource.DOCX_METADATA
-    )
-
     if source not in [
         ScanSource.PDF_METADATA,
         ScanSource.DOCX_METADATA
     ]:
-        print("RETURNING NONE")
         return None
-
-    print("CALLING MATCHER")
 
     return match_patterns(
         prompt=prompt,

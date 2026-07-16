@@ -156,6 +156,29 @@ def parse_docx(file_path: str) -> ExtractionResult:
             )
         )
 
+    # Embedded OLE objects
+    import tempfile
+    import os
+    temp_dir = tempfile.mkdtemp()
+    
+    for rel in document.part.rels.values():
+        if "oleObject" in rel.reltype or "package" in rel.reltype:
+            try:
+                if hasattr(rel, "target_part") and rel.target_part and hasattr(rel.target_part, "blob"):
+                    blob = rel.target_part.blob
+                    partname = rel.target_part.partname
+                    filename = os.path.basename(str(partname))
+                    filepath = os.path.join(temp_dir, filename)
+                    with open(filepath, "wb") as f:
+                        f.write(blob)
+                    items.append(
+                        ExtractedContent(
+                            content=filepath,
+                            source=ScanSource.DOCX_EMBEDDED
+                        )
+                    )
+            except Exception:
+                continue
 
     return ExtractionResult(
         items=items

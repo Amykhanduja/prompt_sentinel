@@ -27,13 +27,14 @@ def decode_base64_content(text: str):
                 continue
 
             decoded_chunks.append(decoded)
+            text = text.replace(item, decoded)
 
         except Exception:
             pass
 
     if decoded_chunks:
         return (
-           text + "\n" + "\n".join(decoded_chunks),
+           text,
            True
         )
 

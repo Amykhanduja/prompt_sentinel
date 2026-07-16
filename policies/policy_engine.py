@@ -1,6 +1,8 @@
 from typing import Dict
+import logging, json
+from datetime import datetime, UTC
 
-
+logger = logging.getLogger("promptsentinel")
 POLICY = {
 
     "allow": {
@@ -97,7 +99,7 @@ def evaluate_policy(risk: Dict) -> Dict:
 
             reason = "Critical risk."
 
-    return {
+    result = {
 
         "action": action,
 
@@ -112,3 +114,12 @@ def evaluate_policy(risk: Dict) -> Dict:
         "technique_count": techniques
 
     }
+
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "policy_completed",
+        "action": result["action"],
+        "reason": result["reason"]
+    }))
+
+    return result

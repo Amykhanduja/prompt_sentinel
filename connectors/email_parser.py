@@ -67,6 +67,9 @@ def parse_email(file_path: str) -> ExtractionResult:
     # -----------------------
 
     if message.is_multipart():
+        import os
+        import tempfile
+        temp_dir = tempfile.mkdtemp()
 
         for part in message.walk():
 
@@ -83,13 +86,17 @@ def parse_email(file_path: str) -> ExtractionResult:
                 filename = part.get_filename()
 
                 if filename:
-
-                    items.append(
-                        ExtractedContent(
-                            content=filename,
-                            source=ScanSource.EMAIL_ATTACHMENT
+                    filepath = os.path.join(temp_dir, filename)
+                    payload = part.get_payload(decode=True)
+                    if payload:
+                        with open(filepath, "wb") as f:
+                            f.write(payload)
+                        items.append(
+                            ExtractedContent(
+                                content=filepath,
+                                source=ScanSource.EMAIL_ATTACHMENT
+                            )
                         )
-                    )
 
                 continue
 

@@ -43,7 +43,7 @@ def decode_once(prompt: str):
     )
 
 
-def iterative_decode(prompt: str, max_iterations: int = 5):
+def iterative_decode(prompt: str, max_iterations: int = 20):
 
     flags = {
         "unicode_flag": False,
@@ -56,15 +56,14 @@ def iterative_decode(prompt: str, max_iterations: int = 5):
 
 
     for _ in range(max_iterations):
+        old_prompt = prompt
 
         prompt, changed, current_flags = decode_once(prompt)
-
 
         for key, value in current_flags.items():
             flags[key] |= value
 
-
-        if not changed:
+        if prompt == old_prompt:
             break
 
 
@@ -92,5 +91,14 @@ def preprocess_prompt(prompt: str):
         "html_flag": result["flags"]["html_flag"],
         "zero_width_flag": result["flags"]["zero_width_flag"],
     }
+
+    import logging, json
+    from datetime import datetime, UTC
+    logger = logging.getLogger("promptsentinel")
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "preprocessing_completed",
+        "flags_changed": any(result["flags"].values())
+    }))
 
     return response

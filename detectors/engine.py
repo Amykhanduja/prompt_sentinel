@@ -22,6 +22,9 @@ from taxonomy.techniques import get_technique
 
 from fusion import fuse_detections
 
+import logging, json
+from datetime import datetime, UTC
+logger = logging.getLogger("promptsentinel")
 
 def enrich_detection(detection: dict):
     """
@@ -54,6 +57,11 @@ def run_detectors(
     prompt: str,
     source: str = "user"
 ):
+
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "detection_started"
+    }))
 
     regex_detections = []
 
@@ -97,6 +105,12 @@ def run_detectors(
             enrich_detection(result)
         )
 
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "regex_completed",
+        "regex_detections_count": len(regex_detections)
+    }))
+
     # ------------------------------------------
     # Semantic Detection
     # ------------------------------------------
@@ -112,6 +126,12 @@ def run_detectors(
             detection
         )
 
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "semantic_completed",
+        "semantic_detections_count": len(semantic_detections)
+    }))
+
     # ------------------------------------------
     # Fusion
     # ------------------------------------------
@@ -120,5 +140,11 @@ def run_detectors(
         regex_detections,
         semantic_detections
     )
+
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "fusion_completed",
+        "total_detections": len(detections)
+    }))
 
     return detections

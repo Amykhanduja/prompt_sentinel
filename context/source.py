@@ -17,6 +17,7 @@ class ScanSource:
     DOCX_HEADER = "docx_header"
     DOCX_FOOTER = "docx_footer"
     DOCX_TABLE = "docx_table"
+    DOCX_EMBEDDED = "docx_embedded"
 
 
     # HTML

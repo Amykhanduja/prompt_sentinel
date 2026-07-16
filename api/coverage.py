@@ -25,8 +25,14 @@ DETECTOR_COVERAGE = [
     },
 
     {
-        "technique": "PT-027",
+        "technique": "PT-040",
         "name": "Privileged Identity Injection",
+        "status": "implemented"
+    },
+
+    {
+        "technique": "PT-027",
+        "name": "Chained Injection",
         "status": "implemented"
     },
 

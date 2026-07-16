@@ -128,19 +128,13 @@ class SemanticEngine:
         # Confidence score
         # ---------------------------------
 
-            confidence = (
-                best_similarity - threshold
-            ) / (
-                1.0 - threshold
-            )
+            confidence = best_similarity - negative_similarity
 
-            confidence = max(
-                0.0,
-                min(
-                    confidence,
-                    1.0
-                )
-            )
+            MIN_CONFIDENCE = 0.20
+            if confidence < MIN_CONFIDENCE:
+                continue
+
+            confidence = max(0.0, min(confidence, 1.0))
 
         # ---------------------------------
         # Detection

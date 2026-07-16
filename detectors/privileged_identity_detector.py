@@ -29,6 +29,6 @@ def detect_privileged_identity(prompt: str, source: str = "user"):
     return match_patterns(
         prompt=prompt,
         patterns=PATTERNS,
-        technique="PT-027",
+        technique="PT-040",
         source=source
     )

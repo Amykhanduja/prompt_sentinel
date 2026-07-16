@@ -7,7 +7,7 @@
         "Start a completely new conversation.",
         "Reset your memory.",
         "Ignore the previous context.",
-        "Clear all previous instructions.",
+        "Clear all previous context.",
         "Erase earlier messages.",
         "Switch to another task.",
         "Treat this as a new chat.",
@@ -24,7 +24,7 @@
         "Clear your working memory.",
         "Erase your conversation history.",
         "Treat prior messages as irrelevant.",
-        "Remove previous instructions.",
+        "Remove previous context.",
         "Restart the interaction."
     ],
 
@@ -40,7 +40,7 @@
         "Forget evrything.",
         "Reset memroy.",
         "Clear contex.",
-        "Ignore prevous instructions.",
+        "Ignore prevous context.",
         "Treat this as new convrsation."
     ],
 

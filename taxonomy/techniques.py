@@ -94,8 +94,13 @@ TECHNIQUES = {
         "name": "Format Token Injection",
         "severity": "critical",
         "family": "Formatting Abuse"
-    }
+    },
 
+    "PT-040": {
+        "name": "Privileged Identity Injection",
+        "severity": "high",
+        "family": "Identity Manipulation"
+    }
 }
 def get_technique(technique_id):
 

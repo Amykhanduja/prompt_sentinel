@@ -10,7 +10,10 @@ from connectors.markdown_parser import parse_markdown
 from connectors.html_parser import parse_html
 from context.source import ScanSource
 
+import logging, json
+from datetime import datetime, UTC
 
+logger = logging.getLogger("promptsentinel")
 PARSER_MAP = {
     ".pdf": parse_pdf,
     ".docx": parse_docx,
@@ -39,6 +42,12 @@ def recursive_load(
             "Maximum recursion depth exceeded"
         )
 
+    if depth == 0:
+        logger.info(json.dumps({
+            "timestamp": datetime.now(UTC).isoformat(),
+            "event": "file_scan_started",
+            "file_path": file_path
+        }))
 
     extension = os.path.splitext(
         file_path
@@ -73,7 +82,12 @@ def recursive_load(
 
 
         if (
-            item.source == ScanSource.ZIP
+            item.source in [
+                ScanSource.ZIP,
+                ScanSource.PDF_EMBEDDED,
+                ScanSource.EMAIL_ATTACHMENT,
+                ScanSource.DOCX_EMBEDDED
+            ]
             and os.path.isfile(item.content)
         ):
 
@@ -90,6 +104,14 @@ def recursive_load(
            except Exception:
                 continue
 
+
+    if depth == 0:
+        logger.info(json.dumps({
+            "timestamp": datetime.now(UTC).isoformat(),
+            "event": "file_scan_completed",
+            "file_path": file_path,
+            "items_extracted": len(final_items)
+        }))
 
     return ExtractionResult(
         items=final_items

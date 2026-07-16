@@ -68,8 +68,12 @@ def parse_pdf(file_path: str) -> ExtractionResult:
         # -------------------------
         # 3. Embedded Files
         # -------------------------
+        
+        import os
+        import tempfile
 
         if document.embfile_count() > 0:
+            temp_dir = tempfile.mkdtemp()
 
             for name in document.embfile_names():
 
@@ -83,19 +87,17 @@ def parse_pdf(file_path: str) -> ExtractionResult:
                         embedded,
                         bytes
                     ):
+                        
+                        filepath = os.path.join(temp_dir, name)
+                        with open(filepath, "wb") as f:
+                            f.write(embedded)
 
-                        decoded = embedded.decode(
-                            errors="ignore"
-                        )
-
-                        if decoded.strip():
-
-                            items.append(
-                                ExtractedContent(
-                                    content=decoded,
-                                    source=ScanSource.PDF
-                                )
+                        items.append(
+                            ExtractedContent(
+                                content=filepath,
+                                source=ScanSource.PDF_EMBEDDED
                             )
+                        )
 
                 except Exception:
 

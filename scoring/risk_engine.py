@@ -1,6 +1,8 @@
 from context.source import ScanSource
+import logging, json
+from datetime import datetime, UTC
 
-
+logger = logging.getLogger("promptsentinel")
 TECHNIQUE_WEIGHTS = {
 
     "PT-009": 30,
@@ -293,7 +295,7 @@ def calculate_risk(detections):
 
         overall = "low"
 
-    return {
+    result = {
 
         "score": score,
 
@@ -317,3 +319,12 @@ def calculate_risk(detections):
         "breakdown": breakdown
 
     }
+
+    logger.info(json.dumps({
+        "timestamp": datetime.now(UTC).isoformat(),
+        "event": "risk_completed",
+        "score": result["score"],
+        "severity": result["severity"]
+    }))
+
+    return result

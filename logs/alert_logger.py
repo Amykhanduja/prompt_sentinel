@@ -9,24 +9,6 @@ STATS_FILE = "logs/statistics.json"
 
 def log_alert(prompt, detections, risk, action):
 
-    alert = {
-        "alert_id": str(uuid.uuid4()),
-        "timestamp": datetime.now(UTC).isoformat(),
-        "prompt": prompt,
-        "detections": [d["technique"] for d in detections],
-        "risk": {
-            "score": risk["score"],
-            "severity": risk["severity"],
-            "summary": risk["summary"],
-            "technique_count": risk["technique_count"],
-            "average_confidence": risk["average_confidence"],
-            "evidence_groups": risk["evidence_groups"],
-            "breakdown": risk["breakdown"]
-        },
-        "severity": risk["severity"],
-        "action": action
-        }
-
     if not os.path.exists(ALERT_FILE):
         with open(ALERT_FILE, "w") as f:
             json.dump([], f)
@@ -34,10 +16,28 @@ def log_alert(prompt, detections, risk, action):
     with open(ALERT_FILE, "r") as f:
         alerts = json.load(f)
 
-    alerts.append(alert)
+    new_alerts = []
+    timestamp = datetime.now(UTC).isoformat()
+    for d in detections:
+        alert = {
+            "alert_id": str(uuid.uuid4()),
+            "timestamp": timestamp,
+            "prompt": prompt,
+            "technique": d.get("technique"),
+            "severity": d.get("severity"),
+            "confidence": d.get("confidence", 1.0),
+            "source": d.get("source", "unknown"),
+            "detectors": d.get("detectors", []),
+            "policy_decision": action,
+            "risk_score": risk.get("score")
+        }
+        new_alerts.append(alert)
+
+    alerts.extend(new_alerts)
 
     with open(ALERT_FILE, "w") as f:
         json.dump(alerts, f, indent=4)
+        
     update_statistics(detections)
 
 

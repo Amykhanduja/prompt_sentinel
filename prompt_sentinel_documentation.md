@@ -52,3 +52,24 @@ We completely rewrote how the `Fusion` engine calculates and reports the severit
 - **Deterministic Agreement Bonuses**: If multiple engines catch the same attack, the Fusion engine applies algorithmic bonuses (e.g., `+20%` if the Regex engine agrees with the Semantic engine, `+10%` for Fuzzy agreement).
 - **Machine-Readable Evidence**: Every detection now ships with an `evidence` array, detailing the exact metrics and mathematical logic the engine used to reach its conclusion.
 - **Risk Engine Compatibility**: The downstream Risk Engine was patched to seamlessly parse these new percentage formats back into mathematical floats, ensuring the global severity dashboard remains fully functional.
+
+## 7. Hybrid Detection Engine (Detectors)
+The core detection logic has been unified into a hybrid engine (`detectors/engine.py`) that executes both deterministic and AI-driven analyses simultaneously.
+
+- **Regex & Heuristic Detectors**: A robust suite of 17+ specialized regex detectors (e.g., `detect_override`, `detect_dan`, `detect_tool_abuse`) quickly identifies known attack patterns, jailbreaks, and heuristic anomalies.
+- **Semantic Engine**: Analyzes the intent of the prompt using the AI embedding models and classifiers.
+- **Taxonomy Enrichment**: All detections are automatically mapped to a standardized taxonomy, enriching them with standard `name`, `severity`, and `family` classifications before fusion.
+
+## 8. Multi-Format Connectors (Data Loaders)
+To protect against indirect prompt injections (where malicious instructions are hidden in external files), we introduced a comprehensive `connectors` module.
+
+- **Format Support**: Natively extracts text from `docx`, `pdf`, `html`, `markdown`, `email`, `zip`, and plain text files.
+- **Recursive Loader**: The `recursive_loader.py` can automatically unpack archives and traverse directories, ensuring nested payloads (e.g., a PDF inside a ZIP) are successfully extracted and scanned.
+
+## 9. FastAPI Application & Pipeline (`app.py`)
+The entire PromptSentinel ecosystem is exposed via a production-ready FastAPI application (`app.py`) that orchestrates the end-to-end pipeline.
+
+- **Pipeline Orchestration**: Requests sequentially pass through: `preprocessing` -> `detection engine` (Regex + Semantic) -> `fusion` -> `risk calculation` -> `policy evaluation`.
+- **RESTful Endpoints**: Exposes `/api/v1/scan` for direct text evaluation and `/api/v1/scan-file` for uploading documents to the connector pipeline.
+- **Comprehensive Auditing**: Emits standardized JSON logs for scan events, risk breakdowns, and policy actions, providing full observability into both the scanning performance and detected threats.
+- **CLI Mode**: Can be invoked directly from the command line for local file scanning or interactive prompt testing.

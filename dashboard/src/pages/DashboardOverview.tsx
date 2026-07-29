@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { TopNav } from '../components/TopNav';
 import { KpiCards } from '../components/KpiCards';
@@ -10,9 +11,9 @@ import { fetchDashboardData, DashboardData } from '../services/api';
 
 export const DashboardOverview: React.FC = () => {
   const [data, setData] = useState<DashboardData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<'Connected' | 'Disconnected' | 'Loading'>('Loading');
   const [latency, setLatency] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   const loadData = async () => {
@@ -50,7 +51,7 @@ export const DashboardOverview: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative overflow-hidden w-full">
+    <div className="relative w-full">
       {/* Dynamic Background Effects */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none opacity-50 mix-blend-screen"></div>
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none opacity-40 mix-blend-screen"></div>

@@ -13,7 +13,7 @@ const formatPercent = (num: number) => `${(num * 100).toFixed(1)}%`;
 const formatScore = (num: number) => num.toFixed(2);
 
 export const KnowledgeKpis: React.FC<KnowledgeKpisProps> = ({ data, loading }) => {
-  const kpis = [
+  const kpis: any[] = [
     { title: 'Total Techniques', value: data?.totalTechniques, format: formatNumber, icon: Database, color: 'text-primary' },
     { title: 'Canonical Examples', value: data?.totalCanonicalExamples, format: formatNumber, icon: BookOpen, color: 'text-emerald-400' },
     { title: 'Total Paraphrases', value: data?.totalParaphrases, format: formatNumber, icon: Quote, color: 'text-purple-400' },

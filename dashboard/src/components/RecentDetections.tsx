@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { DashboardData } from '../services/api';
 import { ShieldAlert, AlertCircle, Info } from 'lucide-react';

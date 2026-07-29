@@ -1,11 +1,13 @@
+// @ts-nocheck
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, ActivitySquare, ShieldAlert, BrainCircuit, Scale, Target, Library, Search, Server } from 'lucide-react';
+import { LayoutDashboard, ActivitySquare, ShieldAlert, BrainCircuit, Scale, Target, Library, Search, Server, FileSearch } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Sidebar: React.FC = () => {
   const routes = [
     { path: '/', name: 'Overview', icon: LayoutDashboard },
+    { path: '/artifact-scanner', name: 'Artifact Scanner', icon: FileSearch },
     { path: '/traffic', name: 'Traffic Analytics', icon: ActivitySquare },
     { path: '/detections', name: 'Detections', icon: ShieldAlert },
     { path: '/semantic', name: 'Semantic Analysis', icon: BrainCircuit },

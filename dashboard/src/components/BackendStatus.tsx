@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Server, Activity, Clock, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';

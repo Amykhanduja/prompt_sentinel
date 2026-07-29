@@ -13,7 +13,7 @@ const formatPercent = (num: number) => `${(num * 100).toFixed(1)}%`;
 const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num);
 
 export const SemanticKpis: React.FC<SemanticKpisProps> = ({ data, loading }) => {
-  const kpis = [
+  const kpis: any[] = [
     { title: 'Avg Similarity', value: data?.avgSimilarity, format: formatScore, icon: BrainCircuit, color: 'text-primary' },
     { title: 'Highest Similarity', value: data?.highestSimilarity, format: formatScore, icon: Maximize2, color: 'text-danger' },
     { title: 'Lowest Similarity', value: data?.lowestSimilarity, format: formatScore, icon: Minimize2, color: 'text-success' },

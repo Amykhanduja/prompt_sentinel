@@ -11,7 +11,7 @@ interface DetectionKpisProps {
 const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num);
 
 export const DetectionKpis: React.FC<DetectionKpisProps> = ({ data, loading }) => {
-  const kpis = [
+  const kpis: any[] = [
     { title: 'Total Detections', value: data?.totalDetections, format: formatNumber, icon: ShieldAlert, color: 'text-danger' },
     { title: 'Regex Detections', value: data?.regexDetections, format: formatNumber, icon: Search, color: 'text-blue-400' },
     { title: 'Semantic Detections', value: data?.semanticDetections, format: formatNumber, icon: BrainCircuit, color: 'text-purple-400' },

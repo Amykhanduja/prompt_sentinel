@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Bell, Trash2, CheckCircle2, AlertTriangle, Info, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

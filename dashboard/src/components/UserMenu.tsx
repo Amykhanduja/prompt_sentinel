@@ -1,6 +1,5 @@
 import React from 'react';
 import { User, Settings, Palette, BookOpen, GitBranch, LogOut } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 export const UserMenu: React.FC = () => {

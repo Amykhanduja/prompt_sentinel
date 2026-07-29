@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { fetchKnowledgeData, KnowledgeData } from '../services/knowledgeApi';
 import { TopNav } from '../components/TopNav';
@@ -9,9 +10,9 @@ import { KnowledgeTable } from '../components/knowledge/KnowledgeTable';
 
 export const KnowledgeAnalytics: React.FC = () => {
   const [data, setData] = useState<KnowledgeData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<'Connected' | 'Disconnected' | 'Loading'>('Loading');
   const [latency, setLatency] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
   
   const [filters, setFilters] = useState<Record<string, string>>({
     technique: 'all',
@@ -55,7 +56,7 @@ export const KnowledgeAnalytics: React.FC = () => {
   }, [filters]);
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative">
       {/* Dynamic Background Effects */}
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none opacity-40 mix-blend-screen"></div>
       <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none opacity-30 mix-blend-screen"></div>

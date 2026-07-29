@@ -84,23 +84,40 @@ def get_overview():
             "source": a.get("source", "User")
         })
 
+    malicious = sum(1 for a in alerts if safe_action(a) == "BLOCK" or a.get("risk_score", 0) > 50)
+    benign = total - malicious
+    
+    avg_score = sum(a.get("risk_score", 0) for a in alerts) / total if total > 0 else 0
+    detection_rate = (malicious / total * 100) if total > 0 else 0
+    
+    regex = sum(1 for a in alerts if any(str(d).startswith("PT") for d in a.get("detections", [])))
+    semantic = sum(1 for a in alerts if any(str(d).startswith("SM") for d in a.get("detections", [])))
+    fusion = sum(1 for a in alerts if len(a.get("detections", [])) > 1)
+
     return {
         "kpis": {
-            "totalRequests": total,
-            "blockedRequests": blocked,
-            "avgLatency": 45,
-            "activeRules": len(tech_counts) if tech_counts else 0,
+            "totalScanned": total,
+            "malicious": malicious,
+            "benign": benign,
+            "detectionRate": round(detection_rate, 1),
+            "blocked": blocked,
+            "allowed": allowed,
+            "reviewQueue": review,
+            "averageRiskScore": round(avg_score, 1)
         },
         "gauge": {
-            "score": sum(a.get("risk_score", 0) for a in alerts) // total if total else 0,
-            "trend": 0
+            "overallRiskScore": round(avg_score, 1)
         },
-        "detectionsByType": detections_by_type,
-        "decisions": [
-            {"name": "Allowed", "value": allowed},
-            {"name": "Blocked", "value": blocked},
-            {"name": "Review", "value": review},
-        ],
+        "detectionsByType": {
+            "regex": regex,
+            "semantic": semantic,
+            "fusion": fusion
+        },
+        "decisions": {
+            "blocked": blocked,
+            "allowed": allowed,
+            "review": review
+        },
         "recentDetections": recent
     }
 

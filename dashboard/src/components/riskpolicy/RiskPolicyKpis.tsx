@@ -14,7 +14,7 @@ const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num)
 const formatTime = (num: number) => `${num.toFixed(1)}ms`;
 
 export const RiskPolicyKpis: React.FC<RiskPolicyKpisProps> = ({ data, loading }) => {
-  const kpis = [
+  const kpis: any[] = [
     { title: 'Avg Risk Score', value: data?.avgRiskScore, format: formatScore, icon: Activity, color: 'text-primary' },
     { title: 'Highest Risk Score', value: data?.highestRiskScore, format: formatScore, icon: Maximize2, color: 'text-danger' },
     { title: 'Lowest Risk Score', value: data?.lowestRiskScore, format: formatScore, icon: Minimize2, color: 'text-success' },

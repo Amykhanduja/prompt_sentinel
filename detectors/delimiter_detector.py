@@ -2,10 +2,7 @@ from utils.pattern_matcher import match_patterns
 
 PATTERNS = [
     "### system prompt ###",
-    "system prompt",
-
-    "begin instructions",
-    "end instructions",
+    "### instructions ###",
 
     "begin system prompt",
     "end system prompt",

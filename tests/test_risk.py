@@ -5,7 +5,7 @@ def test_single_detection_risk():
 
     detections = [
         {
-            "technique": "PT-009"
+            "technique": "PT-012"
         }
     ]
 
@@ -18,8 +18,8 @@ def test_single_detection_risk():
 def test_multiple_detection_risk():
 
     detections = [
-        {"technique": "PT-009"},
-        {"technique": "PT-013"}
+        {"technique": "PT-012"},
+        {"technique": "PT-031"}
     ]
 
     risk = calculate_risk(detections)

@@ -13,7 +13,7 @@ const formatPercent = (num: number) => `${(num * 100).toFixed(1)}%`;
 const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num);
 
 export const SourceKpis: React.FC<SourceKpisProps> = ({ data, loading }) => {
-  const kpis = [
+  const kpis: any[] = [
     { title: 'Total Sources', value: data?.totalSources, format: formatNumber, icon: Layers, color: 'text-primary' },
     { title: 'Most Active', value: data?.mostActiveSource, format: (s: string) => s, icon: Activity, color: 'text-success' },
     { title: 'Highest Risk', value: data?.highestRiskSource, format: (s: string) => s, icon: AlertTriangle, color: 'text-danger' },

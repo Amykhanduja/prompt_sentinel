@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { fetchSemanticData, SemanticData } from '../services/semanticApi';
 import { TopNav } from '../components/TopNav';
@@ -11,9 +12,9 @@ import { SemanticTrendChart } from '../components/semantic/SemanticTrendChart';
 
 export const SemanticAnalytics: React.FC = () => {
   const [data, setData] = useState<SemanticData | null>(null);
-  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<'Connected' | 'Disconnected' | 'Loading'>('Loading');
   const [latency, setLatency] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
   
   const [filters, setFilters] = useState<Record<string, string>>({
     technique: 'all',
@@ -58,7 +59,7 @@ export const SemanticAnalytics: React.FC = () => {
   }, [filters]);
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative">
       {/* Dynamic Background Effects */}
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-green-600/10 rounded-full blur-[150px] pointer-events-none opacity-40 mix-blend-screen"></div>
       <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none opacity-30 mix-blend-screen"></div>

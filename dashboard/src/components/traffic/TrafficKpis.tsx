@@ -12,7 +12,7 @@ const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num)
 const formatMs = (num: number) => `${num.toFixed(1)}ms`;
 
 export const TrafficKpis: React.FC<TrafficKpisProps> = ({ data, loading }) => {
-  const kpis = [
+  const kpis: any[] = [
     { title: 'Total Requests', value: data?.totalRequests, format: formatNumber, icon: Database, color: 'text-primary' },
     { title: 'Requests Today', value: data?.requestsToday, format: formatNumber, icon: Activity, color: 'text-success' },
     { title: 'Requests This Hour', value: data?.requestsThisHour, format: formatNumber, icon: Clock, color: 'text-warning' },

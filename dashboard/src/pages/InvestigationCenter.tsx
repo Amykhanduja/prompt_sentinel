@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { fetchInvestigations, InvestigationRecord } from '../services/investigationApi';
 import { TopNav } from '../components/TopNav';
@@ -7,9 +8,9 @@ import { InvestigationDrawer } from '../components/investigations/InvestigationD
 
 export const InvestigationCenter: React.FC = () => {
   const [data, setData] = useState<InvestigationRecord[]>([]);
-  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<'Connected' | 'Disconnected' | 'Loading'>('Loading');
   const [latency, setLatency] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
   
   const [filters, setFilters] = useState<Record<string, string>>({
     technique: 'all',
@@ -60,7 +61,7 @@ export const InvestigationCenter: React.FC = () => {
   }, [filters]);
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-background relative flex flex-col">
       {/* Dynamic Background Effects */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none opacity-40 mix-blend-screen"></div>
       

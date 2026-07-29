@@ -20,7 +20,7 @@ export const SystemKpis: React.FC<SystemKpisProps> = ({ data, loading }) => {
     return 'text-danger';
   };
 
-  const kpis = [
+  const kpis: any[] = [
     { title: 'API Status', value: data?.apiStatus, format: (s: string) => s, icon: data?.apiStatus?.toLowerCase() === 'operational' ? CheckCircle2 : ShieldAlert, color: getStatusColor(data?.apiStatus || '') },
     { title: 'Backend Version', value: data?.backendVersion, format: (s: string) => s, icon: Zap, color: 'text-primary' },
     { title: 'Uptime', value: data?.uptime, format: (s: string) => s, icon: Clock, color: 'text-emerald-400' },

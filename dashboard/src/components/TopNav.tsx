@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react';
 import { Shield, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

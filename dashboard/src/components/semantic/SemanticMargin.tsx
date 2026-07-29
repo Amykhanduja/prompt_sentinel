@@ -1,7 +1,7 @@
 import React from 'react';
 import { SemanticData } from '../../services/semanticApi';
 import { motion } from 'framer-motion';
-import { ArrowLeftRight, Check, X } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 
 interface SemanticMarginProps {
   data: SemanticData['margin'] | null;

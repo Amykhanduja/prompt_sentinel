@@ -6,6 +6,9 @@ PATTERNS = [
 
     "begin system prompt",
     "end system prompt",
+    
+    "begin instructions",
+    "end instructions",
 
     "<system>",
     "</system>",

@@ -5,9 +5,9 @@ from datetime import datetime, UTC
 logger = logging.getLogger("promptsentinel")
 TECHNIQUE_WEIGHTS = {
 
-    "PT-009": 30,
+    "PT-009": 60,
     "PT-012": 30,
-    "PT-013": 40,
+    "PT-013": 60,
     "PT-015": 20,
     "PT-018": 35,
     "PT-021": 20,
@@ -49,8 +49,15 @@ COMPOUND_RULES = [
             "PT-009"
         ],
         "bonus": 20
-    }
+    },
 
+    {
+        "requires": [
+            "PT-009",
+            "PT-013"
+        ],
+        "bonus": 45
+    }
 ]
 
 

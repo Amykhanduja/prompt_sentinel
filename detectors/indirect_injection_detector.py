@@ -3,11 +3,6 @@ from utils.pattern_matcher import match_patterns
 
 PATTERNS = [
 
-    "ignore previous instructions",
-    "ignore all previous instructions",
-    "forget previous instructions",
-    "forget all previous instructions",
-
     "hidden instructions",
     "hidden prompt",
 

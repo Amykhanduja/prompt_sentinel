@@ -74,6 +74,10 @@ def match_patterns(
         # Check spaceless ratio (good for extreme spacing attacks like "i g n o r e")
         spaceless_sim = fuzz.partial_ratio(spaceless_value, spaceless_text)
 
+        # Skip fuzzy matching for generic short words to prevent false positives
+        if len(spaceless_value) < 17:
+            continue
+            
         best_score = max(sim, overlap, spaceless_sim)
 
         if best_score >= min_similarity or best_score >= min_token_overlap:

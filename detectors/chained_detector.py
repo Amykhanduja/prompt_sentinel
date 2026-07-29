@@ -19,10 +19,6 @@ PATTERNS = [
     "after that",
     "finally",
 
-    "ignore previous instructions",
-    "ignore all previous instructions",
-    "disregard previous instructions",
-
     "after completing this",
     "once completed",
     "after you finish"

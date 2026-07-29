@@ -87,11 +87,11 @@ def fuse_detections(
                 evidence.append(f"Classifier probability: {probability:.3f}")
                 
             if has_regex:
-                score += 20
+                score += 50
                 evidence.append("Regex agreement")
             
             if has_fuzzy:
-                score += 10
+                score += 35
                 evidence.append("Fuzzy agreement")
                 
         score = max(0, min(100, score))

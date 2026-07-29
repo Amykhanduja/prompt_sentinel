@@ -119,6 +119,7 @@ from logs.alert_logger import log_alert
 from logs.api_logger import log_scan_event
 from connectors.recursive_loader import recursive_load
 from api.coverage import router as coverage_router
+from api.dashboard import router as dashboard_router
 from context.source import ScanSource
 
 app = FastAPI(title="PromptSentinel")
@@ -303,6 +304,10 @@ def scan(request: PromptRequest):
 app.include_router(
     coverage_router,
     prefix="/api/v1"
+)
+app.include_router(
+    dashboard_router,
+    prefix="/api/v1/dashboard"
 )
 
 

@@ -24,11 +24,7 @@ PATTERNS = [
 
     "# system",
     "# user",
-    "# assistant",
-
-    "ignore previous instructions",
-    "new instructions",
-    "override instructions"
+    "# assistant"
 
 ]
 

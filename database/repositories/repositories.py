@@ -5,6 +5,21 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select, desc, func
 from database.models.models import Scan, Detection, Alert, Statistics, ApiLog
 
+def _normalize_confidence(raw_conf: Any) -> float:
+    if isinstance(raw_conf, (int, float)):
+        return float(raw_conf)
+    if isinstance(raw_conf, str):
+        s = raw_conf.strip()
+        is_percent = s.endswith("%")
+        try:
+            val = float(s.strip("%"))
+            if is_percent:
+                return val / 100.0
+            return val
+        except ValueError:
+            return 1.0
+    return 1.0
+
 class ScanRepository:
     def __init__(self, db: Session):
         self.db = db
@@ -30,7 +45,7 @@ class ScanRepository:
                     scan_id=scan_id,
                     technique=d.get("technique"),
                     detector=d.get("detector"),
-                    confidence=d.get("confidence", 1.0),
+                    confidence=_normalize_confidence(d.get("confidence", 1.0)),
                     severity=d.get("severity", "low"),
                     evidence=d.get("evidence", [])
                 )

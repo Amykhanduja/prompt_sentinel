@@ -4,11 +4,11 @@ from app import app
 client = TestClient(app)
 
 
-def test_scan_markdown_file():
+def test_scan_markdown_file(auth_client):
 
     with open("tests/sample.md", "rb") as file:
 
-        response = client.post(
+        response = auth_client.post(
             "/api/v1/scan-file",
             files={
                 "file": (

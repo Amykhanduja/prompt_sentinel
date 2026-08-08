@@ -100,10 +100,9 @@ def test_statistics_repository(db_session):
     assert stats_updated.techniques.get("T1") == 1
     assert stats_updated.severities.get("high") == 1
 
-def test_dashboard_api():
-    client = TestClient(app)
+def test_dashboard_api(auth_client):
     # Testing endpoints to ensure they don't break with repository
-    response = client.get("/api/v1/dashboard/overview")
+    response = auth_client.get("/api/v1/dashboard/overview")
     assert response.status_code == 200
     assert "kpis" in response.json()
 

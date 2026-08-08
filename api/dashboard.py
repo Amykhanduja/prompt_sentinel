@@ -1,4 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from api.security import get_current_user
 import time
 import psutil
 import json
@@ -7,7 +8,7 @@ from datetime import datetime, timedelta, UTC
 from typing import List, Dict, Any
 from taxonomy.techniques import get_technique
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_user)])
 
 START_TIME = time.time()
 from database.connection import SessionLocal
@@ -386,6 +387,4 @@ def get_notifications():
         })
     return notifs
 
-@router.post("/logout")
-def logout():
-    return {"status": "ok", "message": "Logged out successfully"}
+

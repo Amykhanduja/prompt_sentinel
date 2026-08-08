@@ -108,8 +108,9 @@ scoring.risk_engine.calculate_risk = patched_calculate_risk
 # FastAPI Application setup
 # =============================================================================
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from pydantic import BaseModel, Field, field_validator
+from api.security import get_current_user
 
 from preprocessing.pipeline import preprocess_prompt
 from detectors.engine import run_detectors
@@ -120,6 +121,7 @@ from logs.api_logger import log_scan_event
 from connectors.recursive_loader import recursive_load
 from api.coverage import router as coverage_router
 from api.dashboard import router as dashboard_router
+from api.auth import router as auth_router
 from context.source import ScanSource
 
 app = FastAPI(title="PromptSentinel")
@@ -238,7 +240,7 @@ def health_check():
 
 
 @app.post("/api/v1/scan-file")
-async def scan_uploaded_file(file: UploadFile = File(...)):
+async def scan_uploaded_file(file: UploadFile = File(...), current_user = Depends(get_current_user)):
     import time
     from logs.api_logger import log_api_request, log_api_response
     start_time = time.time()
@@ -274,7 +276,7 @@ async def scan_uploaded_file(file: UploadFile = File(...)):
      "/api/v1/scan",
      response_model=ScanResponse
 )
-def scan(request: PromptRequest):
+def scan(request: PromptRequest, current_user = Depends(get_current_user)):
     import time
     from logs.api_logger import log_api_request, log_api_response
     start_time = time.time()
@@ -308,6 +310,10 @@ app.include_router(
 app.include_router(
     dashboard_router,
     prefix="/api/v1/dashboard"
+)
+app.include_router(
+    auth_router,
+    prefix="/api/v1/auth"
 )
 
 

@@ -4,13 +4,13 @@ from app import app
 client = TestClient(app)
 
 
-def test_prompt_too_large():
+def test_prompt_too_large(auth_client):
 
     payload = {
         "prompt": "A" * 6000
     }
 
-    response = client.post(
+    response = auth_client.post(
         "/api/v1/scan",
         json=payload
     )

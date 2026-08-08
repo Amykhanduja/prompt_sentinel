@@ -1,5 +1,5 @@
-from fastapi import APIRouter
-
+from fastapi import APIRouter, Depends
+from api.security import get_current_user
 
 router = APIRouter()
 
@@ -82,7 +82,7 @@ DETECTOR_COVERAGE = [
 
 
 @router.get("/coverage")
-def get_coverage():
+def get_coverage(current_user = Depends(get_current_user)):
 
     implemented = [
         x for x in DETECTOR_COVERAGE

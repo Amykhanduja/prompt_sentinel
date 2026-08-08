@@ -10,16 +10,41 @@ from taxonomy.techniques import get_technique
 router = APIRouter()
 
 START_TIME = time.time()
-ALERTS_FILE = "logs/alerts.json"
+from database.connection import SessionLocal
+from database.repositories.repositories import AlertRepository
 
 def load_alerts() -> List[Dict[Any, Any]]:
-    if not os.path.exists(ALERTS_FILE):
-        return []
+    db = SessionLocal()
     try:
-        with open(ALERTS_FILE, "r") as f:
-            return json.load(f)
-    except Exception:
+        repo = AlertRepository(db)
+        alerts_db = repo.get_all_alerts_with_scans()
+        result = []
+        for a in alerts_db:
+            scan = a.scan
+            if scan:
+                # Reconstruct legacy alert format for dashboard functions
+                d = {
+                    "alert_id": str(a.id),
+                    "timestamp": a.timestamp.isoformat(),
+                    "prompt": scan.prompt,
+                    "risk_score": scan.risk_score,
+                    "action": scan.action,
+                    "source": scan.source,
+                    "detections": [
+                        {
+                            "technique": det.technique,
+                            "severity": det.severity,
+                            "confidence": det.confidence,
+                        }
+                        for det in scan.detections
+                    ]
+                }
+                result.append(d)
+        return result
+    except Exception as e:
         return []
+    finally:
+        db.close()
 
 @router.get("/overview")
 def get_overview():

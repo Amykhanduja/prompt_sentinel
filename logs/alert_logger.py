@@ -1,80 +1,59 @@
 import json
-import os
+import logging
 import uuid
 from datetime import datetime, UTC
+from database.connection import SessionLocal
+from database.repositories.repositories import ScanRepository, StatisticsRepository, AlertRepository
 
-ALERT_FILE = "logs/alerts.json"
-STATS_FILE = "logs/statistics.json"
-
+logger = logging.getLogger("promptsentinel")
 
 def log_alert(prompt, detections, risk, action):
-
-    if not os.path.exists(ALERT_FILE):
-        with open(ALERT_FILE, "w") as f:
-            json.dump([], f)
-
-    with open(ALERT_FILE, "r") as f:
-        alerts = json.load(f)
-
-    new_alerts = []
-    timestamp = datetime.now(UTC).isoformat()
-    for d in detections:
-        alert = {
-            "alert_id": str(uuid.uuid4()),
-            "timestamp": timestamp,
-            "prompt": prompt,
-            "technique": d.get("technique"),
-            "severity": d.get("severity"),
-            "confidence": d.get("confidence", 1.0),
-            "source": d.get("source", "unknown"),
-            "detectors": d.get("detectors", []),
-            "policy_decision": action,
-            "risk_score": risk.get("score")
-        }
-        new_alerts.append(alert)
-
-    alerts.extend(new_alerts)
-
-    with open(ALERT_FILE, "w") as f:
-        json.dump(alerts, f, indent=4)
+    # Log archival
+    archival_alert = {
+        "timestamp": datetime.now(UTC).isoformat(),
+        "prompt": prompt,
+        "detections": detections,
+        "risk_score": risk.get("score"),
+        "action": action
+    }
+    logger.info(json.dumps(archival_alert))
+    
+    db = SessionLocal()
+    try:
+        # Use repository to save to database
+        scan_repo = ScanRepository(db)
+        alert_repo = AlertRepository(db)
         
-    update_statistics(detections)
-
-
-def update_statistics(detections):
-
-    if not os.path.exists(STATS_FILE):
-
-        with open(STATS_FILE, "w") as f:
-            json.dump({"total_alerts": 0,"techniques": {},"severities": {} }, f, indent=4)
-
-    with open(STATS_FILE, "r") as f:
-        stats = json.load(f)
-
-    stats["total_alerts"] += 1
-
-    stats.setdefault("techniques", {})
-
-    stats.setdefault("severities", {})
-
-    for detection in detections:
-
-        technique = detection["technique"]
-        severity = detection["severity"]
-
-        stats["techniques"][technique] = (
-            stats["techniques"].get(
-                technique,
-                0
-            ) + 1
+        # We need prompt length. In legacy it wasn't here, we'll calculate
+        prompt_length = len(prompt) if prompt else 0
+        
+        scan = scan_repo.create_scan(
+            prompt=prompt,
+            prompt_length=prompt_length,
+            risk_score=risk.get("score", 0),
+            severity=risk.get("severity", "low"),
+            action=action,
+            source="User",
+            detections=detections,
+            risk_summary=risk.get("summary"),
+            risk_breakdown=risk.get("breakdown")
         )
+        
+        # Save Alert
+        alert_repo.save_alert(scan.id)
+        
+        # Update statistics
+        update_statistics(detections, db)
+        
+    except Exception as e:
+        logger.error(f"Failed to persist alert to database: {e}")
+    finally:
+        db.close()
 
-        stats["severities"][severity] = (
-            stats["severities"].get(
-                severity,
-                0
-            ) + 1
-        )
-    with open(STATS_FILE, "w") as f:
-        json.dump(stats, f, indent=4)
+def update_statistics(detections, db):
+    try:
+        stats_repo = StatisticsRepository(db)
+        stats_repo.update_statistics(detections)
+    except Exception as e:
+        logger.error(f"Failed to update statistics in database: {e}")
 

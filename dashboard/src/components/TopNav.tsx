@@ -1,3 +1,4 @@
+import { apiClient } from '../services/apiClient';
 // @ts-nocheck
 import React, { useState } from 'react';
 import { Shield, X } from 'lucide-react';
@@ -19,7 +20,7 @@ export const TopNav: React.FC = () => {
     if (e.key === 'Enter' && testPrompt.trim()) {
       setIsScanning(true);
       try {
-        const res = await fetch('/api/v1/scan', {
+        const res = await apiClient('/api/v1/scan', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: testPrompt })

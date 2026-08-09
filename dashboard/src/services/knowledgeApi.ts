@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface KnowledgeData {
   kpis: {
     totalTechniques: number;
@@ -39,7 +40,7 @@ export const fetchKnowledgeData = async (filters: Record<string, string>): Promi
       if (value && value !== 'all') params.append(key, value);
     });
     
-    const response = await fetch(`/api/v1/dashboard/knowledge?${params.toString()}`);
+    const response = await apiClient(`/api/v1/dashboard/knowledge?${params.toString()}`);
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

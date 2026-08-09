@@ -1,3 +1,4 @@
+import { apiClient } from '../services/apiClient';
 // @ts-nocheck
 import React from 'react';
 import { Bell, Trash2, CheckCircle2, AlertTriangle, Info, XCircle } from 'lucide-react';
@@ -22,7 +23,7 @@ export const NotificationCenter: React.FC = () => {
   const { data, isLoading, isError } = useQuery<Notification[]>({
     queryKey: ['notifications'],
     queryFn: async () => {
-      const res = await fetch('/api/v1/dashboard/notifications');
+      const res = await apiClient('/api/v1/dashboard/notifications');
       if (!res.ok) throw new Error('Failed to fetch');
       return res.json();
     },

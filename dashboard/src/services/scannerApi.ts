@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface ScanResult {
   version: string;
   timestamp: string;
@@ -37,7 +38,7 @@ export const scanFile = async (file: File): Promise<NormalizedScanResult> => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await fetch('/api/v1/scan-file', {
+  const response = await apiClient('/api/v1/scan-file', {
     method: 'POST',
     body: formData,
   });

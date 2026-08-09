@@ -124,7 +124,18 @@ from api.dashboard import router as dashboard_router
 from api.auth import router as auth_router
 from context.source import ScanSource
 
-app = FastAPI(title="PromptSentinel")
+app = FastAPI(
+
+# Configure CORS
+origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+title="PromptSentinel")
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 logger = logging.getLogger("promptsentinel")

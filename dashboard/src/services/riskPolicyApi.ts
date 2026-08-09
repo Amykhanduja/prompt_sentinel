@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface RiskPolicyData {
   kpis: {
     avgRiskScore: number;
@@ -53,8 +54,8 @@ export const fetchRiskPolicyData = async (filters: Record<string, string>): Prom
     
     // Fetch both endpoints concurrently
     const [riskRes, policyRes] = await Promise.all([
-      fetch(`/api/v1/dashboard/risk?${queryString}`),
-      fetch(`/api/v1/dashboard/policy?${queryString}`)
+      apiClient(`/api/v1/dashboard/risk?${queryString}`),
+      apiClient(`/api/v1/dashboard/policy?${queryString}`)
     ]);
 
     if (!riskRes.ok || !policyRes.ok) {

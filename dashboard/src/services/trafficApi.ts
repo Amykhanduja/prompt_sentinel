@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface TrafficData {
   kpis: {
     totalRequests: number;
@@ -46,7 +47,7 @@ export const fetchTrafficData = async (timeRange: string, sourceFilter: string):
     if (timeRange !== 'all') params.append('range', timeRange);
     if (sourceFilter !== 'all') params.append('source', sourceFilter);
     
-    const response = await fetch(`/api/v1/dashboard/traffic?${params.toString()}`);
+    const response = await apiClient(`/api/v1/dashboard/traffic?${params.toString()}`);
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

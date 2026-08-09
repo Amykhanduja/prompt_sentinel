@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface SemanticData {
   kpis: {
     avgSimilarity: number;
@@ -49,7 +50,7 @@ export const fetchSemanticData = async (filters: Record<string, string>): Promis
       if (value && value !== 'all') params.append(key, value);
     });
     
-    const response = await fetch(`/api/v1/dashboard/semantic?${params.toString()}`);
+    const response = await apiClient(`/api/v1/dashboard/semantic?${params.toString()}`);
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface DetectionsData {
   kpis: {
     totalDetections: number;
@@ -42,7 +43,7 @@ export const fetchDetectionsData = async (filters: Record<string, string>): Prom
       if (value && value !== 'all') params.append(key, value);
     });
     
-    const response = await fetch(`/api/v1/dashboard/detections?${params.toString()}`);
+    const response = await apiClient(`/api/v1/dashboard/detections?${params.toString()}`);
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

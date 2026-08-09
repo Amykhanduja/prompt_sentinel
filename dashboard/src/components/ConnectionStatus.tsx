@@ -1,3 +1,4 @@
+import { apiClient } from '../services/apiClient';
 import React from 'react';
 import { Activity } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -6,7 +7,7 @@ export const ConnectionStatus: React.FC = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ['health'],
     queryFn: async () => {
-      const res = await fetch('/api/v1/dashboard/system');
+      const res = await apiClient('/api/v1/dashboard/system');
       if (!res.ok) throw new Error('Network response was not ok');
       return res.json();
     },

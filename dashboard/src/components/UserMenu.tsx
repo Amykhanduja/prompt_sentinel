@@ -1,15 +1,16 @@
 import React from 'react';
 import { User, Settings, Palette, BookOpen, GitBranch, LogOut } from 'lucide-react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 export const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/v1/logout', { method: 'POST' });
-      // In a real app we'd redirect to login, for now just reload
-      window.location.reload();
+      logout();
+      window.location.href = '/login';
     } catch (err) {
       console.error(err);
     }
@@ -25,7 +26,7 @@ export const UserMenu: React.FC = () => {
           <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center shadow-lg">
             <User className="w-3 h-3 text-white" />
           </div>
-          <span className="text-sm text-gray-300 font-medium hidden sm:block">Admin</span>
+          <span className="text-sm text-gray-300 font-medium hidden sm:block">{user?.username || 'User'}</span>
         </button>
       </DropdownMenu.Trigger>
 
@@ -33,8 +34,8 @@ export const UserMenu: React.FC = () => {
         <DropdownMenu.Content asChild sideOffset={8} align="end">
           <div className="radix-menu-content w-56 bg-panel border border-white/10 rounded-lg shadow-2xl overflow-hidden z-[100] backdrop-blur-xl">
             <div className="px-4 py-3 border-b border-white/10 bg-black/20">
-              <p className="text-sm font-medium text-white">Administrator</p>
-              <p className="text-xs text-gray-400">admin@promptsentinel.io</p>
+              <p className="text-sm font-medium text-white">{user?.username || 'User'}</p>
+              <p className="text-xs text-gray-400">{user?.email || ''}</p>
             </div>
             <div className="py-1">
               <DropdownMenu.Item asChild>

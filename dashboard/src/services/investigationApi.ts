@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface InvestigationRecord {
   id: string;
   timestamp: string;
@@ -33,7 +34,7 @@ export const fetchInvestigations = async (filters: Record<string, string>): Prom
       if (value && value !== 'all') params.append(key, value);
     });
     
-    const response = await fetch(`/api/v1/dashboard/recent?${params.toString()}`);
+    const response = await apiClient(`/api/v1/dashboard/recent?${params.toString()}`);
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return [];

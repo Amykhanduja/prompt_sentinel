@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface DashboardData {
   kpis: {
     totalScanned: number;
@@ -37,7 +38,7 @@ export interface DashboardData {
 
 export const fetchDashboardData = async (): Promise<DashboardData | null> => {
   try {
-    const response = await fetch('/api/v1/dashboard/overview');
+    const response = await apiClient('/api/v1/dashboard/overview');
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

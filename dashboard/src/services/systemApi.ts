@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface SystemData {
   kpis: {
     apiStatus: string;
@@ -39,7 +40,7 @@ export interface SystemData {
 
 export const fetchSystemData = async (): Promise<SystemData | null> => {
   try {
-    const response = await fetch('/api/v1/dashboard/system');
+    const response = await apiClient('/api/v1/dashboard/system');
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

@@ -1,3 +1,4 @@
+import { apiClient } from './apiClient';
 export interface SourceData {
   kpis: {
     totalSources: number;
@@ -41,7 +42,7 @@ export const fetchSourceData = async (filters: Record<string, string>): Promise<
       if (value && value !== 'all') params.append(key, value);
     });
     
-    const response = await fetch(`/api/v1/dashboard/sources?${params.toString()}`);
+    const response = await apiClient(`/api/v1/dashboard/sources?${params.toString()}`);
     if (!response.ok) {
       if (response.status === 404 || response.status === 500) {
         return null;

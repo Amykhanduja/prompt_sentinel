@@ -1,7 +1,7 @@
 import React from 'react';
 import { User, Settings, Palette, BookOpen, GitBranch, LogOut } from 'lucide-react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useAuth } from '../context/AuthContext';
 
 export const UserMenu: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);

@@ -8,6 +8,7 @@ from connectors.extraction_result import ExtractionResult
 from connectors.text_parser import parse_text
 from connectors.markdown_parser import parse_markdown
 from connectors.html_parser import parse_html
+from connectors.image_parser import parse_image
 from context.source import ScanSource
 
 import logging, json
@@ -25,7 +26,12 @@ PARSER_MAP = {
     ".markdown": parse_markdown,
     ".txt": parse_text,
     ".log": parse_text,
-    ".csv": parse_text
+    ".csv": parse_text,
+    ".png": parse_image,
+    ".jpg": parse_image,
+    ".jpeg": parse_image,
+    ".tiff": parse_image,
+    ".tif": parse_image
 }
 
 

@@ -1,6 +1,7 @@
 class ScanSource:
 
     USER = "user"
+    IMAGE = "image"
 
     # PDF
     PDF = "pdf"

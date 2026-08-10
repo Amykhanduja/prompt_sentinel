@@ -7,8 +7,8 @@ interface FileDropzoneProps {
   disabled: boolean;
 }
 
-const SUPPORTED_TYPES = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/html', 'message/rfc822', 'text/plain', 'application/zip', 'text/markdown', 'application/json', 'text/csv', 'application/xml', 'text/xml'];
-const SUPPORTED_EXTS = ['.pdf', '.docx', '.html', '.htm', '.eml', '.txt', '.zip', '.md', '.json', '.csv', '.xml'];
+const SUPPORTED_TYPES = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/html', 'message/rfc822', 'text/plain', 'application/zip', 'text/markdown', 'application/json', 'text/csv', 'application/xml', 'text/xml', 'image/png', 'image/jpeg', 'image/tiff'];
+const SUPPORTED_EXTS = ['.pdf', '.docx', '.html', '.htm', '.eml', '.txt', '.zip', '.md', '.json', '.csv', '.xml', '.png', '.jpg', '.jpeg', '.tiff', '.tif'];
 const MAX_SIZE_MB = 50;
 
 export const FileDropzone: React.FC<FileDropzoneProps> = ({ onScan, disabled }) => {

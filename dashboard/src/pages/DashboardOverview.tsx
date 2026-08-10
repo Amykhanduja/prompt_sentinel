@@ -8,6 +8,8 @@ import { DecisionsPieChart } from '../components/PieChart';
 import { RecentDetections } from '../components/RecentDetections';
 import { BackendStatus } from '../components/BackendStatus';
 import { fetchDashboardData, DashboardData } from '../services/api';
+import { useDashboardWebSocket } from '../hooks/useDashboardWebSocket';
+import { useCallback } from 'react';
 
 export const DashboardOverview: React.FC = () => {
   const [data, setData] = useState<DashboardData | null>(null);
@@ -44,10 +46,43 @@ export const DashboardOverview: React.FC = () => {
     }
   };
 
+  const handleScanCompleted = useCallback((eventData: any) => {
+    setData((prevData) => {
+      if (!prevData) return prevData;
+      
+      const action = (eventData.action || '').toLowerCase();
+      const isBlock = action === 'block';
+      const isAllow = action === 'allow';
+      const isReview = action === 'monitor';
+      
+      const newTotal = prevData.kpis.totalScanned + 1;
+      
+      return {
+        ...prevData,
+        kpis: {
+          ...prevData.kpis,
+          totalScanned: newTotal,
+          blocked: isBlock ? prevData.kpis.blocked + 1 : prevData.kpis.blocked,
+          allowed: isAllow ? prevData.kpis.allowed + 1 : prevData.kpis.allowed,
+          reviewQueue: isReview ? prevData.kpis.reviewQueue + 1 : prevData.kpis.reviewQueue,
+          malicious: isBlock ? prevData.kpis.malicious + 1 : prevData.kpis.malicious,
+          benign: isAllow ? prevData.kpis.benign + 1 : prevData.kpis.benign,
+          // Can't reliably calculate detectionRate or averageRiskScore without full data, leave unchanged
+        },
+        decisions: {
+          blocked: isBlock ? prevData.decisions.blocked + 1 : prevData.decisions.blocked,
+          allowed: isAllow ? prevData.decisions.allowed + 1 : prevData.decisions.allowed,
+          review: isReview ? prevData.decisions.review + 1 : prevData.decisions.review,
+        }
+        // recentDetections lacks ID and technique fields in the WS payload, so we leave it to be updated by the REST polling
+      };
+    });
+  }, []);
+
+  useDashboardWebSocket(handleScanCompleted, loadData);
+
   useEffect(() => {
     loadData();
-    const interval = setInterval(loadData, 30000); // Poll every 30s
-    return () => clearInterval(interval);
   }, []);
 
   return (

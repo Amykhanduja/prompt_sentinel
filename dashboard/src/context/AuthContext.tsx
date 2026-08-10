@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     initAuth();
   }, []);
 
-  const login = (token: string, userData: User) => {
+  const login = (_token: string, userData: User) => {
     setUser(userData);
   };
 

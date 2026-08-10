@@ -2,7 +2,7 @@ import { apiClient } from '../services/apiClient';
 // @ts-nocheck
 import React from 'react';
 import { Bell, Trash2, CheckCircle2, AlertTriangle, Info, XCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import * as Popover from '@radix-ui/react-popover';

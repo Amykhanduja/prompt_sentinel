@@ -108,7 +108,7 @@ scoring.risk_engine.calculate_risk = patched_calculate_risk
 # FastAPI Application setup
 # =============================================================================
 
-from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, BackgroundTasks
 from pydantic import BaseModel, Field, field_validator
 from api.security import get_current_user
 
@@ -122,12 +122,14 @@ from connectors.recursive_loader import recursive_load
 from api.coverage import router as coverage_router
 from api.dashboard import router as dashboard_router
 from api.auth import router as auth_router
+from api.websocket.routes import router as websocket_router
 from context.source import ScanSource
 
-app = FastAPI(
+app = FastAPI(title="PromptSentinel")
 
 # Configure CORS
 origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",")
+from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -135,7 +137,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-title="PromptSentinel")
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 logger = logging.getLogger("promptsentinel")
@@ -251,7 +252,7 @@ def health_check():
 
 
 @app.post("/api/v1/scan-file")
-async def scan_uploaded_file(file: UploadFile = File(...), current_user = Depends(get_current_user)):
+async def scan_uploaded_file(background_tasks: BackgroundTasks, file: UploadFile = File(...), current_user = Depends(get_current_user)):
     import time
     from logs.api_logger import log_api_request, log_api_response
     start_time = time.time()
@@ -266,8 +267,12 @@ async def scan_uploaded_file(file: UploadFile = File(...), current_user = Depend
         process_time = time.time() - start_time
         log_api_response("/api/v1/scan-file", process_time, 200, result if len(result.get("results", [])) != 1 else result["results"][0])
         
+        from api.websocket.manager import broadcast_scan_event
         if len(result.get("results", [])) == 1:
+            background_tasks.add_task(broadcast_scan_event, result["results"][0])
             return result["results"][0]
+        for res in result.get("results", []):
+            background_tasks.add_task(broadcast_scan_event, res)
         return result
     except Exception as e:
         logger.exception(json.dumps({
@@ -287,7 +292,7 @@ async def scan_uploaded_file(file: UploadFile = File(...), current_user = Depend
      "/api/v1/scan",
      response_model=ScanResponse
 )
-def scan(request: PromptRequest, current_user = Depends(get_current_user)):
+def scan(request: PromptRequest, background_tasks: BackgroundTasks, current_user = Depends(get_current_user)):
     import time
     from logs.api_logger import log_api_request, log_api_response
     start_time = time.time()
@@ -299,6 +304,8 @@ def scan(request: PromptRequest, current_user = Depends(get_current_user)):
         )
         process_time = time.time() - start_time
         log_api_response("/api/v1/scan", process_time, 200, result)
+        from api.websocket.manager import broadcast_scan_event
+        background_tasks.add_task(broadcast_scan_event, result)
         return result
     except Exception as e:
         logger.exception(json.dumps({
@@ -325,6 +332,9 @@ app.include_router(
 app.include_router(
     auth_router,
     prefix="/api/v1/auth"
+)
+app.include_router(
+    websocket_router
 )
 
 

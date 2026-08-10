@@ -1,4 +1,4 @@
-import { apiClient } from '../services/apiClient';
+
 // @ts-nocheck
 import React, { useState } from 'react';
 import { Shield, X } from 'lucide-react';
@@ -12,27 +12,9 @@ import { ThemeToggle } from './ThemeToggle';
 import { UserMenu } from './UserMenu';
 
 export const TopNav: React.FC = () => {
-  const [testPrompt, setTestPrompt] = useState('');
-  const [isScanning, setIsScanning] = useState(false);
   const [scanResult, setScanResult] = useState<any>(null);
 
-  const handleScanPrompt = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && testPrompt.trim()) {
-      setIsScanning(true);
-      try {
-        const res = await apiClient('/api/v1/scan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: testPrompt })
-        });
-        const data = await res.json();
-        setScanResult(data);
-      } catch (err) {
-        console.error("Failed to reach scanner endpoint.");
-      }
-      setIsScanning(false);
-    }
-  };
+  // handleScanPrompt and state were removed because the UI for scanning moved elsewhere
 
   return (
     <>

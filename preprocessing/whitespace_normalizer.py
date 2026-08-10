@@ -3,14 +3,27 @@ import re
 def normalize_whitespace(text: str):
     changed = False
     
-    def repl(m):
-        nonlocal changed
+    # 1. Normalize line endings to canonical \n
+    new_text = text.replace('\r\n', '\n').replace('\r', '\n')
+    if new_text != text:
         changed = True
+        text = new_text
+
+    # 2. Normalize spaced out words: I g n o r e -> Ignore
+    # Matches a sequence of single letters separated by spaces.
+    def repl_spaced(m):
         return m.group(0).replace(' ', '')
         
-    new_text = re.sub(r'\b(?:[a-zA-Z]\s+){2,}[a-zA-Z]\b', repl, text)
-    
-    normalized = re.sub(r'\s+', ' ', new_text).strip()
-    if normalized != text:
+    new_text = re.sub(r'\b(?:[a-zA-Z0-9]\s+){2,}[a-zA-Z0-9]\b', repl_spaced, text)
+    if new_text != text:
         changed = True
-    return normalized, changed
+        text = new_text
+        
+    # 3. Collapse multiple spaces/tabs into a single space, but PRESERVE newlines
+    # [^\S\n] matches any whitespace except newline
+    new_text = re.sub(r'[^\S\n]{2,}', ' ', text)
+    if new_text != text:
+        changed = True
+        text = new_text
+
+    return text, changed

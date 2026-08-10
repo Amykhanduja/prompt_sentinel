@@ -86,7 +86,7 @@ connectors.loader.load_file = patched_load_file
 # 5. Patch scoring.risk_engine.calculate_risk to enrich detections missing taxonomy fields (e.g. severity) in test_risk.py
 original_calculate_risk = scoring.risk_engine.calculate_risk
 
-def patched_calculate_risk(detections):
+def patched_calculate_risk(detections, detection_context=None):
     enriched = []
     for d in detections:
         d_copy = d.copy()
@@ -99,7 +99,7 @@ def patched_calculate_risk(detections):
             if "family" not in d_copy:
                 d_copy["family"] = tech_meta["family"]
         enriched.append(d_copy)
-    return original_calculate_risk(enriched)
+    return original_calculate_risk(enriched, detection_context)
 
 scoring.risk_engine.calculate_risk = patched_calculate_risk
 
@@ -162,6 +162,7 @@ class ScanResponse(BaseModel):
     version: str
     timestamp: str
     prompt: str
+    normalized_prompt: str | None = None
     detections: list
     risk_score: int
     severity: str
@@ -172,6 +173,7 @@ class ScanResponse(BaseModel):
     action: str
     source: str
     preprocessing: dict
+    detection_context: dict | None = None
 
 
 def scan_text(text: str, source: str = ScanSource.USER) -> dict:
@@ -185,25 +187,41 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
         )
     )
 
-    processed = preprocess_prompt(text)
+    from preprocessing.advanced import AdvancedPreprocessor
+    advanced_preprocessor = AdvancedPreprocessor()
+    advanced_result = advanced_preprocessor.process(text)
+
+    processed = preprocess_prompt(advanced_result.normalized_text)
     processed_prompt = processed["prompt"]
 
     detections = run_detectors(processed_prompt, source)
 
-    risk = calculate_risk(detections)
+    is_normalized = len(advanced_result.transformations) > 0
+    obfuscation_detected = is_normalized and len(detections) > 0
+
+    detection_context = {
+        "normalized": is_normalized,
+        "obfuscation_detected": obfuscation_detected,
+        "transformations": advanced_result.transformations
+    }
+
+    risk = calculate_risk(detections, detection_context)
     policy = evaluate_policy(risk)
     action = policy["action"]
 
+    if "obfuscation_adjustment" in risk:
+        detection_context["obfuscation_adjustment"] = risk["obfuscation_adjustment"]
+
     if detections:
         log_alert(
-            text,
+            advanced_result.original_text,
             detections,
             risk,
             action
         )
 
     log_scan_event(
-        prompt_length=len(text),
+        prompt_length=len(advanced_result.original_text),
         detections=detections,
         risk_score=risk["score"],
         severity=risk["severity"],
@@ -213,7 +231,8 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
     return {
         "version": "0.3",
         "timestamp": datetime.now(UTC).isoformat(),
-        "prompt": processed_prompt,
+        "prompt": advanced_result.original_text,
+        "normalized_prompt": processed_prompt,
         "detections": detections,
         "risk_score": risk["score"],
         "severity": risk["severity"],
@@ -223,7 +242,8 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
         "risk_breakdown": risk["breakdown"],
         "action": action,
         "source": source,
-        "preprocessing": processed["flags"]
+        "preprocessing": processed["flags"],
+        "detection_context": detection_context
     }
 
 

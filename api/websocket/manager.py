@@ -41,7 +41,9 @@ async def broadcast_scan_event(result: dict):
                 "severity": result.get("severity"),
                 "action": result.get("action"),
                 "source": result.get("source"),
-                "detections_count": len(result.get("detections", []))
+                "detections_count": len(result.get("detections", [])),
+                "obfuscation_detected": result.get("detection_context", {}).get("obfuscation_detected", False),
+                "obfuscation_adjustment": result.get("detection_context", {}).get("obfuscation_adjustment", 0)
             }
         }
         await manager.broadcast(event)

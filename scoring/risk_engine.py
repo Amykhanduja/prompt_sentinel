@@ -94,9 +94,16 @@ SOURCE_WEIGHTS = {
 
 
 FUSION_BONUS = 1.15
+MAX_RISK_SCORE = 100
 
+def calculate_obfuscation_adjustment(detection_context, detections):
+    if not detection_context:
+        return 0
+    if detection_context.get("obfuscation_detected") is True:
+        return 10
+    return 0
 
-def calculate_risk(detections):
+def calculate_risk(detections, detection_context=None):
 
     score = 0
 
@@ -272,6 +279,9 @@ def calculate_risk(detections):
         0
     )
 
+    adjustment = calculate_obfuscation_adjustment(detection_context, detections)
+    final_score = min(score + adjustment, MAX_RISK_SCORE)
+
     if duplicate_penalty:
 
         breakdown.append({
@@ -290,15 +300,15 @@ def calculate_risk(detections):
 
     )
 
-    if score >= 100:
+    if final_score >= 100:
 
         overall = "critical"
 
-    elif score >= 60:
+    elif final_score >= 60:
 
         overall = "high"
 
-    elif score >= 30:
+    elif final_score >= 30:
 
         overall = "medium"
 
@@ -308,7 +318,7 @@ def calculate_risk(detections):
 
     result = {
 
-        "score": score,
+        "score": final_score,
 
         "severity": overall,
 
@@ -330,6 +340,9 @@ def calculate_risk(detections):
         "breakdown": breakdown
 
     }
+
+    if adjustment > 0:
+        result["obfuscation_adjustment"] = adjustment
 
     logger.info(json.dumps({
         "timestamp": datetime.now(UTC).isoformat(),

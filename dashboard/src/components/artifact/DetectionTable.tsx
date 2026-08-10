@@ -127,7 +127,45 @@ export const DetectionTable: React.FC<DetectionTableProps> = ({ data }) => {
                               )}
                             </div>
                           </div>
-                          <div>
+
+                          {det.detection_context?.obfuscation_detected && (
+                            <div className="mt-4 lg:mt-0">
+                              <h4 className="text-xs font-bold text-gray-500 uppercase mb-2">Obfuscation</h4>
+                              <div className="space-y-2 text-sm text-gray-300">
+                                <div className="flex items-center gap-2 text-warning font-bold">
+                                  <span>Obfuscation detected</span>
+                                </div>
+                                {det.detection_context.transformations && det.detection_context.transformations.length > 0 && (
+                                  <div className="mt-2">
+                                    <span className="text-xs text-gray-500">Transformations:</span>
+                                    <ul className="list-disc list-inside mt-1">
+                                      {det.detection_context.transformations.map((t: string, idx: number) => {
+                                        const names: Record<string, string> = {
+                                          'LEETSPEAK_NORMALIZED': 'Leetspeak',
+                                          'CONFUSABLE_NORMALIZED': 'Unicode Confusable',
+                                          'HOMOGLYPH_NORMALIZED': 'Homoglyph',
+                                          'OCR_NORMALIZED': 'OCR Artifact',
+                                          'WHITESPACE_NORMALIZED': 'Whitespace',
+                                          'REPETITION_NORMALIZED': 'Character Repetition',
+                                          'MARKDOWN_CLEANED': 'Markdown Obfuscation',
+                                          'MIXED_LANGUAGE_NORMALIZED': 'Mixed Script'
+                                        };
+                                        return <li key={idx} className="text-gray-300">{names[t] || t}</li>;
+                                      })}
+                                    </ul>
+                                  </div>
+                                )}
+                                {det.detection_context.obfuscation_adjustment && det.detection_context.obfuscation_adjustment > 0 && (
+                                  <div className="mt-2">
+                                    <span className="text-xs text-gray-500">Risk Adjustment: </span>
+                                    <span className="text-danger font-bold">+{det.detection_context.obfuscation_adjustment}</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
+
+                          <div className={det.detection_context?.obfuscation_detected ? "lg:col-span-2 mt-4" : "mt-4 lg:mt-0"}>
                             <h4 className="text-xs font-bold text-gray-500 uppercase mb-2">Extracted Context</h4>
                             <div className="bg-black/50 p-3 rounded border border-white/10 text-xs font-mono text-gray-400 max-h-32 overflow-y-auto custom-scrollbar">
                               {det.match_text || det.sourceText.substring(0, 300) + (det.sourceText.length > 300 ? '...' : '')}

@@ -2,8 +2,7 @@ import unicodedata
 
 
 def normalize_unicode(text: str):
-
-    normalized = unicodedata.normalize("NFKC", text)
+    normalized = unicodedata.normalize("NFC", text)
 
     changed = normalized != text
 

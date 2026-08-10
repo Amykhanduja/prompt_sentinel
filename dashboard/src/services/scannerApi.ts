@@ -11,6 +11,12 @@ export interface ScanResult {
   evidence_groups: any[];
   risk_breakdown: any[];
   action: string;
+  detection_context?: {
+    normalized?: boolean;
+    obfuscation_detected?: boolean;
+    transformations?: string[];
+    obfuscation_adjustment?: number;
+  };
 }
 
 export interface FileScanResponse {

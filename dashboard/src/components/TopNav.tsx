@@ -11,10 +11,15 @@ import { NotificationCenter } from './NotificationCenter';
 import { ThemeToggle } from './ThemeToggle';
 import { UserMenu } from './UserMenu';
 
+import { useDashboardWebSocket } from '../hooks/useDashboardWebSocket';
+
 export const TopNav: React.FC = () => {
   const [scanResult, setScanResult] = useState<any>(null);
 
-  // handleScanPrompt and state were removed because the UI for scanning moved elsewhere
+  useDashboardWebSocket((data) => {
+    // Only show if it's a new scan
+    setScanResult(data);
+  });
 
   return (
     <>
@@ -68,11 +73,6 @@ export const TopNav: React.FC = () => {
               </h2>
               
               <div className="space-y-4">
-                <div className="bg-black/30 p-4 rounded-lg border border-white/10">
-                  <p className="text-sm text-gray-400 mb-1">Prompt</p>
-                  <p className="text-white font-mono text-sm">{scanResult.prompt}</p>
-                </div>
-                
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-black/30 p-4 rounded-lg border border-white/10">
                     <p className="text-sm text-gray-400 mb-1">Action Taken</p>
@@ -86,25 +86,38 @@ export const TopNav: React.FC = () => {
                   </div>
                 </div>
 
-                {scanResult.detections && scanResult.detections.length > 0 ? (
-                  <div className="bg-danger/10 border border-danger/30 p-4 rounded-lg">
-                    <p className="text-sm text-danger font-medium mb-2">Detections</p>
-                    <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
-                      {scanResult.detections.map((det: any, idx: number) => (
-                        <li key={idx}>
-                          {typeof det === 'string' ? det : `${det.technique} (${det.detector})`}
-                        </li>
-                      ))}
-                    </ul>
+                <div className="bg-black/30 p-4 rounded-lg border border-white/10">
+                  <p className="text-sm text-gray-400 font-bold mb-2">Detection</p>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase">Total Detections</p>
+                      <p className="text-white font-medium">{scanResult.detections_count || 0}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase">Source</p>
+                      <p className="text-white font-medium">{scanResult.source || 'UNKNOWN'}</p>
+                    </div>
                   </div>
-                ) : (
-                  <div className="bg-success/10 border border-success/30 p-4 rounded-lg">
-                    <p className="text-sm text-success font-medium flex items-center gap-2">
-                      <Shield className="w-4 h-4" />
-                      No threats detected. Safe to process.
-                    </p>
-                  </div>
-                )}
+                  
+                  <p className="text-sm text-gray-400 font-bold mb-2 mt-4">Obfuscation</p>
+                  {scanResult.obfuscation_detected ? (
+                    <div className="space-y-2 border-l-2 border-warning pl-3">
+                      <div className="flex items-center gap-2 text-warning font-bold">
+                        <span>Obfuscation detected</span>
+                      </div>
+                      
+                      {scanResult.obfuscation_adjustment > 0 && (
+                        <div className="text-sm text-gray-300">
+                          Obfuscation risk adjustment: <span className="text-danger font-bold">+{scanResult.obfuscation_adjustment}</span>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="text-sm text-gray-400 italic">
+                      No obfuscation detected
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           </motion.div>

@@ -47,7 +47,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         self._load()
         return self._model.encode(
             text,
-            convert_to_numpy=True,
+            convert_to_tensor=True,
             normalize_embeddings=NORMALIZE_EMBEDDINGS
         )
         
@@ -57,7 +57,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         self._load()
         return self._model.encode(
             texts,
-            convert_to_numpy=True,
+            convert_to_tensor=True,
             normalize_embeddings=NORMALIZE_EMBEDDINGS
         )
         

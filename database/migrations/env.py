@@ -27,7 +27,9 @@ from database.connection import DATABASE_URL
 
 target_metadata = Base.metadata
 
-config.set_main_option('sqlalchemy.url', DATABASE_URL)
+url = config.get_main_option('sqlalchemy.url')
+if not url or url.startswith("driver://"):
+    config.set_main_option('sqlalchemy.url', DATABASE_URL)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

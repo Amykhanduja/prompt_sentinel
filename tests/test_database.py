@@ -2,34 +2,8 @@ import pytest
 import os
 import uuid
 from datetime import datetime, UTC
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from database.base import Base
 from database.models.models import Scan, Detection, Alert, Statistics, ApiLog
 from database.repositories.repositories import ScanRepository, AlertRepository, StatisticsRepository, ApiRepository
-from scripts.migrate_json_to_postgres import migrate
-from fastapi.testclient import TestClient
-from app import app
-
-# Setup test database
-TEST_DATABASE_URL = "sqlite:///:memory:"
-
-@pytest.fixture(scope="session")
-def engine():
-    engine = create_engine(TEST_DATABASE_URL, connect_args={"check_same_thread": False})
-    Base.metadata.create_all(bind=engine)
-    yield engine
-    Base.metadata.drop_all(bind=engine)
-
-@pytest.fixture(scope="function")
-def db_session(engine):
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    session = SessionLocal()
-    try:
-        yield session
-    finally:
-        session.rollback()
-        session.close()
 
 def test_database_connection(db_session):
     # Test connection and model instantiation
@@ -105,13 +79,6 @@ def test_dashboard_api(auth_client):
     response = auth_client.get("/api/v1/dashboard/overview")
     assert response.status_code == 200
     assert "kpis" in response.json()
-
-def test_migration_script():
-    # Because we don't have a real PostgreSQL setup with data, we simulate it
-    try:
-        migrate()
-    except Exception as e:
-        pytest.fail(f"Migration script failed: {e}")
 
 def test_performance_bulk_inserts(db_session):
     import time

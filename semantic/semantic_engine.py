@@ -59,7 +59,8 @@ class SemanticEngine:
         self,
         prompt: str,
         source: str = "input",
-        top_k: int = 3
+        top_k: int = 3,
+        active_config: dict = None
     ) -> list:
 
         from semantic.embeddings import PROVIDER_VERSION
@@ -78,7 +79,7 @@ class SemanticEngine:
         if SEMANTIC_MODE == "classifier":
             return self._detect_classifier(prompt, prompt_embedding, source)
         else:
-            return self._detect_nearest_neighbor(prompt, prompt_embedding, source, top_k)
+            return self._detect_nearest_neighbor(prompt, prompt_embedding, source, top_k, active_config)
             
     def _detect_classifier(self, prompt: str, prompt_embedding, source: str) -> list:
         from semantic.classifier import predict
@@ -123,7 +124,8 @@ class SemanticEngine:
         prompt: str,
         prompt_embedding,
         source: str,
-        top_k: int
+        top_k: int,
+        active_config: dict = None
     ) -> list:
         # 1. Retrieve Top-20 candidates GLOBALLY across all techniques
         retrieval_k = 20 if ENABLE_CROSS_ENCODER else top_k
@@ -168,6 +170,9 @@ class SemanticEngine:
             best_index, best_score, best_orig_sim = candidates[0]
             
             threshold = self.semantic_index[technique].get("threshold", DEFAULT_SIMILARITY_THRESHOLD)
+            if active_config and "semantic" in active_config:
+                threshold = active_config["semantic"]
+                
             if best_orig_sim < threshold:
                 continue
                 
@@ -221,8 +226,8 @@ class SemanticEngine:
         return detections
 
 _ENGINE = SemanticEngine()
-def detect_semantic(prompt: str, source: str = "input"):
+def detect_semantic(prompt: str, source: str = "input", active_config: dict = None):
     """
     Public API.
     """
-    return _ENGINE.detect(prompt, source)
+    return _ENGINE.detect(prompt, source, active_config=active_config)

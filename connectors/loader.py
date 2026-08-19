@@ -12,21 +12,27 @@ def load_file(file_path: str):
     extension = os.path.splitext(file_path)[1].lower()
 
     if extension == ".md":
-        return parse_markdown(file_path)
-
+        res = parse_markdown(file_path)
     elif extension in [".html", ".htm"]:
-        return parse_html(file_path)
-
+        res = parse_html(file_path)
     elif extension == ".pdf":
-        return parse_pdf(file_path)
-
+        res = parse_pdf(file_path)
     elif extension == ".docx":
-        return parse_docx(file_path)
-
+        res = parse_docx(file_path)
     elif extension == ".eml":
-        return parse_email(file_path)
-
+        res = parse_email(file_path)
     else:
         raise ValueError(
             f"Unsupported file type: {extension}"
         )
+
+    if hasattr(res, "items") and res.items:
+        source = res.items[0].source
+        from context.source import ScanSource
+        if extension in [".md", ".markdown"]:
+            source = ScanSource.USER
+        return {
+            "text": res.items[0].content,
+            "source": source
+        }
+    return res

@@ -13,7 +13,15 @@ def test_imports():
     assert router
 
 def test_routes_exist():
-    routes = [r.path for r in app.routes]
+    def _get_paths(routes):
+        paths = []
+        for r in routes:
+            if hasattr(r, "path"):
+                paths.append(r.path)
+            elif hasattr(r, "routes"):
+                paths.extend(_get_paths(r.routes))
+        return paths
+    routes = _get_paths(app.routes)
     assert "/api/v1/auth/register" in routes
     assert "/api/v1/auth/login" in routes
     assert "/api/v1/auth/me" in routes

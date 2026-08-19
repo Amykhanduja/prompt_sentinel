@@ -6,104 +6,6 @@ import tempfile
 from datetime import datetime, UTC
 from typing import Dict, Any
 
-# First, import the modules we want to monkeypatch
-import policies.policy_engine
-import connectors.markdown_parser
-import connectors.html_parser
-import connectors.pdf_parser
-import fusion
-import detectors.engine
-import connectors.loader
-import scoring.risk_engine
-from taxonomy.techniques import get_technique
-
-# =============================================================================
-# Backward Compatibility Monkeypatches for Tests
-# =============================================================================
-
-# 1. Inject decide_action into policies.policy_engine
-def decide_action_compat(risk: Dict[str, Any]) -> str:
-    score = risk.get("score", 0)
-    severity = risk.get("severity", "low")
-    if score >= 100 or severity == "critical":
-        return "BLOCK"
-    elif score >= 40:
-        return "MONITOR"
-    else:
-        return "ALLOW"
-
-policies.policy_engine.decide_action = decide_action_compat
-
-# 2. Inject extract_text into connectors parsers
-def extract_text_markdown(file_path: str) -> str:
-    res = connectors.markdown_parser.parse_markdown(file_path)
-    return res.items[0].content if res.items else ""
-connectors.markdown_parser.extract_text = extract_text_markdown
-
-def extract_text_html(file_path: str) -> str:
-    res = connectors.html_parser.parse_html(file_path)
-    return res.items[0].content if res.items else ""
-connectors.html_parser.extract_text = extract_text_html
-
-def extract_text_pdf(file_path: str) -> str:
-    res = connectors.pdf_parser.parse_pdf(file_path)
-    return res.items[0].content if res.items else ""
-connectors.pdf_parser.extract_text = extract_text_pdf
-
-# 3. Patch fusion.fuse_detections to avoid KeyError when "detector" is missing
-original_fuse_detections = fusion.fuse_detections
-
-def patched_fuse_detections(regex_detections: list, semantic_detections: list):
-    for d in regex_detections:
-        if "detector" not in d:
-            d["detector"] = "regex"
-    for d in semantic_detections:
-        if "detector" not in d:
-            d["detector"] = "semantic"
-    return original_fuse_detections(regex_detections, semantic_detections)
-
-fusion.fuse_detections = patched_fuse_detections
-detectors.engine.fuse_detections = patched_fuse_detections
-
-# 4. Patch connectors.loader.load_file to convert ExtractionResult to dict for backward compatibility in test_loader.py
-original_load_file = connectors.loader.load_file
-
-def patched_load_file(file_path: str):
-    res = original_load_file(file_path)
-    if hasattr(res, "items") and res.items:
-        ext = os.path.splitext(file_path)[1].lower()
-        source = res.items[0].source
-        if ext in [".md", ".markdown"]:
-            source = ScanSource.USER
-        return {
-            "text": res.items[0].content,
-            "source": source
-        }
-    return res
-
-connectors.loader.load_file = patched_load_file
-
-# 5. Patch scoring.risk_engine.calculate_risk to enrich detections missing taxonomy fields (e.g. severity) in test_risk.py
-original_calculate_risk = scoring.risk_engine.calculate_risk
-
-def patched_calculate_risk(detections, detection_context=None):
-    enriched = []
-    for d in detections:
-        d_copy = d.copy()
-        if "technique" in d_copy:
-            tech_meta = get_technique(d_copy["technique"])
-            if "severity" not in d_copy:
-                d_copy["severity"] = tech_meta["severity"]
-            if "name" not in d_copy:
-                d_copy["name"] = tech_meta["name"]
-            if "family" not in d_copy:
-                d_copy["family"] = tech_meta["family"]
-        enriched.append(d_copy)
-    return original_calculate_risk(enriched, detection_context)
-
-scoring.risk_engine.calculate_risk = patched_calculate_risk
-
-
 # =============================================================================
 # FastAPI Application setup
 # =============================================================================
@@ -119,10 +21,6 @@ from policies.policy_engine import evaluate_policy
 from logs.alert_logger import log_alert
 from logs.api_logger import log_scan_event
 from connectors.recursive_loader import recursive_load
-from api.coverage import router as coverage_router
-from api.dashboard import router as dashboard_router
-from api.auth import router as auth_router
-from api.websocket.routes import router as websocket_router
 from context.source import ScanSource
 
 app = FastAPI(title="PromptSentinel")
@@ -341,18 +239,31 @@ def scan(request: PromptRequest, background_tasks: BackgroundTasks, current_user
         )
 
 
+from api.coverage import router as coverage_router
 app.include_router(
     coverage_router,
     prefix="/api/v1"
 )
+
+from api.dashboard import router as dashboard_router
 app.include_router(
     dashboard_router,
     prefix="/api/v1/dashboard"
 )
+
+from api.auth import router as auth_router
 app.include_router(
     auth_router,
     prefix="/api/v1/auth"
 )
+
+from api.feedback import router as feedback_router
+app.include_router(
+    feedback_router,
+    prefix="/api/v1/feedback"
+)
+
+from api.websocket.routes import router as websocket_router
 app.include_router(
     websocket_router
 )

@@ -53,10 +53,21 @@ def enrich_detection(detection: dict):
     return detection
 
 
+def get_effective_learning_config() -> dict:
+    from database.connection import SessionLocal
+    from services.learning_configuration_service import learning_configuration_service
+    try:
+        with SessionLocal() as db:
+            return learning_configuration_service.get_active_learning_config(db)
+    except Exception as e:
+        logger.error(f"Failed to fetch learning configuration: {e}")
+        return {}
+
 def run_detectors(
     prompt: str,
     source: str = "user"
 ):
+    active_config = get_effective_learning_config()
 
     logger.info(json.dumps({
         "timestamp": datetime.now(UTC).isoformat(),
@@ -117,7 +128,8 @@ def run_detectors(
 
     semantic_detections = detect_semantic(
         prompt,
-        source
+        source,
+        active_config=active_config
     )
 
     for detection in semantic_detections:

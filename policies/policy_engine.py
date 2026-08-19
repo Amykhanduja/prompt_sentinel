@@ -123,3 +123,17 @@ def evaluate_policy(risk: Dict) -> Dict:
     }))
 
     return result
+
+def decide_action(risk: Dict) -> str:
+    """
+    Legacy compatibility function for testing.
+    """
+    score = risk.get("score", 0)
+    severity = risk.get("severity", "low")
+
+    if score >= 100 or severity == "critical":
+        return "BLOCK"
+    elif score >= 40:
+        return "MONITOR"
+    else:
+        return "ALLOW"

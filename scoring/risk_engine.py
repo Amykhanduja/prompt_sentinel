@@ -105,6 +105,23 @@ def calculate_obfuscation_adjustment(detection_context, detections):
 
 def calculate_risk(detections, detection_context=None):
 
+    from taxonomy.techniques import get_technique
+
+    enriched = []
+    for d in detections:
+        d_copy = d.copy()
+        if "technique" in d_copy:
+            tech_meta = get_technique(d_copy["technique"])
+            if "severity" not in d_copy:
+                d_copy["severity"] = tech_meta.get("severity", "low")
+            if "name" not in d_copy:
+                d_copy["name"] = tech_meta.get("name", d_copy["technique"])
+            if "family" not in d_copy:
+                d_copy["family"] = tech_meta.get("family", "Unknown")
+        enriched.append(d_copy)
+    
+    detections = enriched
+
     score = 0
 
     techniques = set()

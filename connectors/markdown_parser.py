@@ -33,3 +33,7 @@ def parse_markdown(file_path: str) -> ExtractionResult:
     return ExtractionResult(
         items=items
     )
+
+def extract_text(file_path: str) -> str:
+    res = parse_markdown(file_path)
+    return res.items[0].content if res.items else ""

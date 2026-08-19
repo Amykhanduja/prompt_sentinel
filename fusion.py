@@ -8,6 +8,8 @@ def fuse_detections(
     """
     Merge detections from multiple detectors.
     """
+    regex_detections = [{**d, "detector": d.get("detector", "regex")} for d in regex_detections]
+    semantic_detections = [{**d, "detector": d.get("detector", "semantic")} for d in semantic_detections]
 
     grouped = defaultdict(list)
 

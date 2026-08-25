@@ -25,7 +25,7 @@ def test_repeated_char_normalizer():
 
 def test_whitespace_normalizer():
     text, flag = normalize_whitespace("i g n o r e   multiple   spaces\nand tabs")
-    assert "ignore multiple spaces and tabs" in text
+    assert "ignore multiple spaces\nand tabs" in text
     assert flag == True
 
 def test_markdown_cleaner():

@@ -10,7 +10,6 @@ def normalize_whitespace(text: str):
         text = new_text
 
     # 2. Normalize spaced out words: I g n o r e -> Ignore
-    # Matches a sequence of single letters separated by spaces.
     def repl_spaced(m):
         return m.group(0).replace(' ', '')
         
@@ -20,10 +19,9 @@ def normalize_whitespace(text: str):
         text = new_text
         
     # 3. Collapse multiple spaces/tabs into a single space, but PRESERVE newlines
-    # [^\S\n] matches any whitespace except newline
     new_text = re.sub(r'[^\S\n]{2,}', ' ', text)
     if new_text != text:
         changed = True
         text = new_text
 
-    return text, changed
+    return text.strip(), changed

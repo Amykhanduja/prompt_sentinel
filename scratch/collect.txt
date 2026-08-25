@@ -1,0 +1,441 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /mnt/c/Users/khand/prompt_sentinel
+plugins: anyio-4.14.0, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 317 items
+
+<Dir prompt_sentinel>
+  <Module test_auth_routes.py>
+    <Function test_imports>
+    <Function test_routes_exist>
+    <Function test_registration>
+    <Function test_duplicate_registration>
+    <Function test_login_and_me>
+    <Function test_me_unauthenticated>
+    <Function test_invalid_token>
+  <Module test_phase12_final.py>
+    <Function test_normalization>
+  <Module test_phase13_ws.py>
+    <Function test_websocket>
+  <Module test_phase13_ws_integration.py>
+    <Function test_integration>
+  <Module test_simple.py>
+    <Function test_routes>
+  <Package tests>
+    <Module test_api.py>
+      <Function test_prompt_too_large>
+    <Module test_api_response.py>
+      <Function test_api_response>
+      <Function test_send_data>
+      <Function test_user_input>
+    <Module test_api_wrapper.py>
+      <Function test_json_ignore>
+      <Function test_json_inst>
+      <Function test_nested_json>
+      <Function test_normal_json>
+    <Module test_chained.py>
+      <Function test_step_attack>
+      <Function test_first_then>
+      <Function test_finally>
+      <Function test_after_that>
+      <Function test_benign>
+    <Module test_context_switch.py>
+      <Function test_new_instructions>
+      <Function test_new_task>
+      <Function test_next_response>
+      <Function test_benign_prompt>
+    <Module test_dan.py>
+      <Function test_dan_detection>
+      <Function test_roleplay_detection>
+      <Function test_act_as_detection>
+      <Function test_you_are_now_detection>
+      <Function test_benign_prompt>
+    <Module test_database.py>
+      <Function test_database_connection>
+      <Function test_crud_scan_repository>
+      <Function test_cascade_delete>
+      <Function test_foreign_keys>
+      <Function test_transactions_and_rollback>
+      <Function test_statistics_repository>
+      <Function test_dashboard_api>
+      <Function test_performance_bulk_inserts>
+    <Module test_database_isolation.py>
+      <Function test_database_is_isolated>
+      <Function test_production_database_protection>
+    <Module test_dataset.py>
+      <Function test_dataset>
+    <Module test_delimeter.py>
+      <Function test_system_tag>
+      <Function test_assistant_tag>
+      <Function test_system_prompt>
+      <Function test_begin_instructions>
+      <Function test_end_instructions>
+      <Function test_benign>
+    <Module test_engine.py>
+      <Function test_engine_override>
+      <Function test_engine_extraction>
+    <Module test_evaluation.py>
+      <Function test_validate_dataset_valid>
+      <Function test_validate_dataset_missing_field>
+      <Function test_validate_dataset_duplicate_id>
+      <Function test_validate_dataset_invalid_pt>
+      <Function test_compute_classification_metrics>
+      <Function test_compute_overall_metrics>
+      <Function test_compute_per_technique_metrics>
+      <Function test_confusion_matrix_generation>
+      <Function test_analyze_false_positives>
+      <Function test_report_generation>
+    <Module test_evasion.py>
+      <Function test_unicode_evasion>
+      <Function test_base64_evasion>
+    <Module test_extraction.py>
+      <Function test_system_prompt_extraction>
+    <Module test_format_token.py>
+      <Function test_chatml>
+      <Function test_llama>
+      <Function test_sys>
+      <Function test_bos>
+      <Function test_normal>
+    <Module test_full_pipeline.py>
+      <Function test_full_pipeline_override>
+    <Module test_fuzzy.py>
+      <Function test_override_fuzzy_typos>
+      <Function test_override_fuzzy_spacing>
+      <Function test_override_fuzzy_transposition>
+      <Function test_override_fuzzy_substitutions>
+      <Function test_override_fuzzy_exact>
+    <Module test_hex_decoder.py>
+      <Function test_hex_decode>
+      <Function test_normal_text>
+    <Module test_html_entity_decoder.py>
+      <Function test_html_entity>
+      <Function test_normal_text>
+    <Module test_html_parser.py>
+      <Function test_html_parser>
+    <Module test_image_parser.py>
+      <Function test_png_extraction>
+      <Function test_jpg_extraction>
+      <Function test_jpeg_extraction>
+      <Function test_tiff_extraction>
+      <Function test_uppercase_extension>
+      <Function test_invalid_image>
+      <Function test_no_text_image>
+      <Function test_multiline_text>
+      <Function test_prompt_injection_text>
+    <Module test_indirect.py>
+      <Function test_embedded_instruction>
+      <Function test_hidden_instruction>
+      <Function test_html_comment>
+      <Function test_script_tag>
+      <Function test_benign>
+    <Module test_indirect_injection.py>
+      <Function test_hidden_instructions>
+      <Function test_internal_prompt>
+      <Function test_secret_prompt>
+      <Function test_safe_prompt>
+    <Module test_loader.py>
+      <Function test_markdown_loader>
+      <Function test_html_loader>
+    <Module test_markdown_parser.py>
+      <Function test_markdown_parser>
+    <Module test_metadata.py>
+      <Function test_exif_injection>
+      <Function test_pdf_metadata>
+      <Function test_docx_metadata>
+      <Function test_user_input>
+    <Module test_multi_attack.py>
+      <Function test_multiple_attacks>
+    <Module test_negative.py>
+      <Function test_benign_prompt>
+    <Module test_normalizers.py>
+      <Function test_ocr_normalizer>
+      <Function test_leetspeak_decoder>
+      <Function test_repeated_char_normalizer>
+      <Function test_whitespace_normalizer>
+      <Function test_markdown_cleaner>
+      <Function test_confusable_normalizer>
+      <Function test_homoglyph_normalizer>
+      <Function test_mixed_language_normalizer>
+    <Module test_output_leakage.py>
+      <Function test_admin_password>
+      <Function test_etc_passwd>
+      <Function test_sql_users>
+      <Function test_secret>
+      <Function test_normal>
+    <Module test_override.py>
+      <Function test_override_detection>
+      <Function test_override_negative>
+    <Module test_pdf_parser.py>
+      <Function test_pdf_parser>
+    <Module test_phase14_api.py>
+      <Function test_png_api>
+      <Function test_jpg_api>
+      <Function test_jpeg_api>
+      <Function test_tiff_api>
+      <Function test_malicious_image_api>
+      <Function test_benign_image_api>
+      <Function test_existing_txt>
+      <Function test_existing_html>
+      <Function test_existing_markdown>
+      <Function test_corrupted_image>
+      <Function test_empty_image>
+      <Function test_oversized_image>
+      <Function test_unsupported_extension>
+      <Function test_lazy_loading>
+    <Module test_phase15_advanced.py>
+      <Function test_plain_text>
+      <Function test_legitimate_unicode>
+      <Function test_injection_evasion>
+      <Function test_ocr_artifacts>
+      <Function test_markdown_cleanup>
+      <Function test_whitespace_normalization>
+      <Function test_repetition_normalization>
+      <Function test_leetspeak_normalization>
+      <Function test_mixed_scripts>
+      <Function test_original_preservation>
+      <Function test_determinism>
+      <Function test_idempotence>
+      <Function test_empty_input>
+      <Function test_code_preservation>
+      <Function test_url_preservation>
+      <Function test_ip_address_preservation>
+      <Function test_performance_baseline>
+    <Module test_phase15_integration.py>
+      <Function test_normal_prompt>
+      <Function test_direct_injection>
+      <Function test_leetspeak_injection>
+      <Function test_homoglyph_injection>
+      <Function test_confusable_injection>
+      <Function test_whitespace_attack>
+      <Function test_repetition_attack>
+      <Function test_markdown_attack>
+      <Function test_combined_obfuscation>
+      <Function test_legitimate_unicode>
+      <Function test_numeric_content>
+      <Function test_ip_address>
+      <Function test_url>
+      <Function test_json>
+      <Function test_python_code>
+      <Function test_ocr_derived_text>
+      <Function test_existing_scan_response_schema>
+      <Function test_original_text_preservation>
+      <Function test_transformation_metadata>
+      <Function test_failure_isolation>
+      <Function test_performance>
+    <Module test_phase16_detection_context.py>
+      <Function test_direct_detection>
+      <Function test_leetspeak_detection>
+      <Function test_confusable_detection>
+      <Function test_homoglyph_detection>
+      <Function test_whitespace_attack>
+      <Function test_markdown_attack>
+      <Function test_repetition_attack>
+      <Function test_ocr_artifact_attack>
+      <Function test_combined_obfuscation>
+      <Function test_harmless_normalization>
+      <Function test_numeric_content>
+      <Function test_multilingual_content>
+      <Function test_url>
+      <Function test_ip_address>
+      <Function test_json>
+      <Function test_python_code>
+      <Function test_original_preservation>
+      <Function test_transformation_metadata>
+      <Function test_api_response_compatibility>
+      <Function test_websocket_payload_safety>
+      <Function test_database_compatibility>
+      <Function test_detector_compatibility>
+      <Function test_failure_isolation>
+    <Module test_phase16_frontend.py>
+      <Function test_websocket_obfuscation_payload>
+      <Function test_websocket_direct_attack_payload>
+      <Function test_api_frontend_compatibility>
+    <Module test_phase16_risk.py>
+      <Function test_direct_attack_baseline>
+      <Function test_obfuscated_attack>
+      <Function test_obfuscated_score_gt_direct_score>
+      <Function test_harmless_whitespace_normalization>
+      <Function test_harmless_unicode_normalization>
+      <Function test_harmless_multilingual_text>
+      <Function test_numeric_content>
+      <Function test_ip_address>
+      <Function test_url>
+      <Function test_json>
+      <Function test_python_code>
+      <Function test_leetspeak_attack>
+      <Function test_confusable_attack>
+      <Function test_homoglyph_attack>
+      <Function test_repetition_attack>
+      <Function test_ocr_artifact_attack>
+      <Function test_multiple_transformations>
+      <Function test_maximum_score_cap>
+      <Function test_severity_compatibility>
+      <Function test_policy_compatibility>
+      <Function test_missing_detection_context>
+      <Function test_empty_detection_context>
+      <Function test_deterministic_scoring>
+      <Function test_existing_detector_regression>
+      <Function test_api_response_compatibility>
+      <Function test_websocket_score_compatibility>
+      <Function test_database_compatibility>
+      <Function test_failure_isolation>
+    <Module test_phase18_1_feedback.py>
+      <Function test_feedback_creation_and_retrieval>
+      <Function test_feedback_labels>
+      <Function test_invalid_label_rejected>
+      <Function test_feedback_preserves_context>
+      <Function test_duplicate_feedback_prevented>
+      <Function test_multiple_detections_independent_feedback>
+    <Module test_phase18_2_feedback_api.py>
+      <Function test_post_feedback_unauthenticated>
+      <Function test_post_feedback_authenticated_correct>
+      <Function test_post_feedback_authenticated_false_positive>
+      <Function test_post_feedback_invalid_label>
+      <Function test_post_feedback_missing_detection>
+      <Function test_post_feedback_duplicate_returns_409>
+      <Function test_post_feedback_forbids_extra_fields>
+      <Function test_get_feedback_for_detection>
+      <Function test_get_feedback_me>
+    <Module test_phase18_3_feedback_analytics.py>
+      <Function test_empty_feedback_database>
+      <Function test_summary_counts>
+      <Function test_technique_aggregation>
+      <Function test_detector_aggregation>
+      <Function test_severity_aggregation>
+      <Function test_trend_aggregation>
+      <Function test_hotspot_detection>
+      <Function test_authentication_protection>
+    <Module test_phase18_4_learning_candidates.py>
+      <Function test_generate_no_candidates>
+      <Function test_generate_insufficient_sample>
+      <Function test_generate_high_fp_candidates>
+      <Function test_deduplication>
+      <Function test_candidate_details_and_evidence>
+      <Function test_authentication_protection>
+    <Module test_phase18_5_learning_review.py>
+      <Function test_approve_candidate>
+      <Function test_reject_candidate>
+      <Function test_duplicate_review_fails>
+      <Function test_invalid_decision>
+      <Function test_missing_candidate>
+      <Function test_get_review>
+      <Function test_auth_protection>
+    <Module test_phase18_6_learning_application.py>
+      <Function test_cannot_apply_pending_candidate>
+      <Function test_cannot_apply_rejected_candidate>
+      <Function test_apply_approved_candidate>
+      <Function test_rollback_application>
+      <Function test_detect_semantic_uses_learned_config>
+    <Module test_policy.py>
+      <Function test_low_score>
+      <Function test_medium_score>
+      <Function test_high_score>
+    <Module test_privileged_identity.py>
+      <Function test_developer>
+      <Function test_admin_mode>
+      <Function test_system_prefix>
+      <Function test_authority_claim>
+      <Function test_normal_prompt>
+    <Module test_risk.py>
+      <Function test_single_detection_risk>
+      <Function test_multiple_detection_risk>
+    <Module test_scan_file_api.py>
+      <Function test_scan_markdown_file>
+    <Module test_semantic.py>
+      <Function test_override_detection>
+      <Function test_system_prompt_extraction>
+      <Function test_roleplay_detection>
+      <Function test_output_leakage>
+      <Function test_benign_prompt>
+      <Function test_override_only>
+      <Function test_website_only>
+      <Function test_stored_only>
+    <Module test_stored_injection.py>
+      <Function test_pdf>
+      <Function test_html>
+      <Function test_api>
+      <Function test_email>
+      <Function test_user>
+    <Module test_template.py>
+      <Function test_system_codeblock>
+      <Function test_assistant_codeblock>
+      <Function test_template_variable>
+      <Function test_markdown_heading>
+      <Function test_benign>
+    <Module test_thought_simulation.py>
+      <Function test_hypothetically>
+      <Function test_theoretically>
+      <Function test_if_someone>
+      <Function test_imagine>
+      <Function test_normal>
+    <Module test_tool_abuse.py>
+      <Function test_browser_tool>
+      <Function test_terminal_tool>
+      <Function test_api_tool>
+      <Function test_file_tool>
+      <Function test_benign>
+    <Module test_url_decoder.py>
+      <Function test_url_decode>
+      <Function test_normal_text>
+    <Module test_website_injection.py>
+      <Function test_html>
+      <Function test_html_comment>
+      <Function test_user>
+    <Module test_zero_width.py>
+      <Function test_zero_width>
+      <Function test_normal>
+
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/starlette/formparsers.py:12
+  /mnt/c/Users/khand/prompt_sentinel/venv/lib/python3.12/site-packages/starlette/formparsers.py:12: PendingDeprecationWarning: Please use `import python_multipart` instead.
+    import multipart
+
+api/auth.py:21
+  /mnt/c/Users/khand/prompt_sentinel/api/auth.py:21: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UserResponse(BaseModel):
+
+venv/lib/python3.12/site-packages/easyocr/detection.py:81
+venv/lib/python3.12/site-packages/easyocr/detection.py:81
+  /mnt/c/Users/khand/prompt_sentinel/venv/lib/python3.12/site-packages/easyocr/detection.py:81: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+  For migrations of users: 
+  1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+  2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+  3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+  see https://github.com/pytorch/ao/issues/2259 for more details
+    torch.quantization.quantize_dynamic(net, dtype=torch.qint8, inplace=True)
+
+venv/lib/python3.12/site-packages/torch/ao/quantization/quantize.py:570
+venv/lib/python3.12/site-packages/torch/ao/quantization/quantize.py:570
+venv/lib/python3.12/site-packages/torch/ao/quantization/quantize.py:570
+venv/lib/python3.12/site-packages/torch/ao/quantization/quantize.py:570
+  /mnt/c/Users/khand/prompt_sentinel/venv/lib/python3.12/site-packages/torch/ao/quantization/quantize.py:570: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+  For migrations of users: 
+  1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+  2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+  3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+  see https://github.com/pytorch/ao/issues/2259 for more details
+    convert(model, mapping, inplace=True)
+
+venv/lib/python3.12/site-packages/easyocr/recognition.py:177
+venv/lib/python3.12/site-packages/easyocr/recognition.py:177
+  /mnt/c/Users/khand/prompt_sentinel/venv/lib/python3.12/site-packages/easyocr/recognition.py:177: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+  For migrations of users: 
+  1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+  2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+  3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+  see https://github.com/pytorch/ao/issues/2259 for more details
+    torch.quantization.quantize_dynamic(model, dtype=torch.qint8, inplace=True)
+
+venv/lib/python3.12/site-packages/torch/ao/nn/quantized/dynamic/modules/rnn.py:162
+  /mnt/c/Users/khand/prompt_sentinel/venv/lib/python3.12/site-packages/torch/ao/nn/quantized/dynamic/modules/rnn.py:162: UserWarning: torch.quantize_per_tensor, torch.quantize_per_channel and other quantized tensor creation functions that produce tensors with dtype torch.quint8, torch.qint8, and torch.qint32 are deprecated and will be removed in a future PyTorch release. Please see https://github.com/pytorch/pytorch/issues/184982 for more information. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/quantized/Quantizer.cpp:111.)
+    w_ih = torch.quantize_per_tensor(
+
+venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:759
+venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:759
+venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:759
+  /mnt/c/Users/khand/prompt_sentinel/venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:759: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+    super().__init__(loader)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 317 tests collected in 30.27s =========================

@@ -1,6 +1,4 @@
 from abc import ABC, abstractmethod
-from sentence_transformers import SentenceTransformer
-import torch
 from config import FORCE_CPU, NORMALIZE_EMBEDDINGS
 
 class EmbeddingProvider(ABC):
@@ -28,6 +26,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         self._model = None
         
     def _get_device(self) -> str:
+        import torch
         if FORCE_CPU:
             return "cpu"
         if torch.cuda.is_available():
@@ -36,6 +35,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         
     def _load(self):
         if self._model is None:
+            from sentence_transformers import SentenceTransformer
             self._model = SentenceTransformer(
                 self._model_name,
                 device=self._get_device()
@@ -47,7 +47,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         self._load()
         return self._model.encode(
             text,
-            convert_to_tensor=True,
+            convert_to_numpy=True,
             normalize_embeddings=NORMALIZE_EMBEDDINGS
         )
         
@@ -57,7 +57,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         self._load()
         return self._model.encode(
             texts,
-            convert_to_tensor=True,
+            convert_to_numpy=True,
             normalize_embeddings=NORMALIZE_EMBEDDINGS
         )
         

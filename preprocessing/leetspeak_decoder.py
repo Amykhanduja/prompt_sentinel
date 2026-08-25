@@ -20,7 +20,7 @@ def decode_leetspeak(text: str):
         w = word.lower()
         
         # Strong substitutions
-        w = w.replace('0', 'o').replace('3', 'e').replace('4', 'a')
+        w = w.replace('0', 'o').replace('3', 'e').replace('4', 'a').replace('8', 'b')
         
         # Ambiguous substitutions
         variants = {w}

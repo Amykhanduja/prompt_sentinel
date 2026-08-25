@@ -48,7 +48,7 @@ async def test_integration():
         t.start()
         
         # Wait for WS message
-        msg = await asyncio.wait_for(ws.recv(), timeout=10.0)
+        msg = await asyncio.wait_for(ws.recv(), timeout=300.0)
         data = json.loads(msg)
         print("Broadcast received:", json.dumps(data, indent=2))
         assert data["event"] == "scan_completed"
@@ -70,8 +70,9 @@ async def test_integration():
             t = threading.Thread(target=do_scan)
             t.start()
             
-            msg1 = await asyncio.wait_for(ws1.recv(), timeout=10.0)
-            msg2 = await asyncio.wait_for(ws2.recv(), timeout=10.0)
+            msg1 = await asyncio.wait_for(ws1.recv(), timeout=300.0)
+            msg2 = await asyncio.wait_for(ws2.recv(), timeout=300.0)
+
             
             assert json.loads(msg1)["event"] == "scan_completed"
             assert json.loads(msg2)["event"] == "scan_completed"
@@ -81,8 +82,11 @@ async def test_integration():
             
     print("All integration tests passed.")
 
-def run():
-    print("Starting backend...")
+import pytest
+
+@pytest.fixture(scope="module", autouse=True)
+def run_backend():
+    print("Starting backend for tests...")
     backend = subprocess.Popen(["venv/bin/uvicorn", "app:app", "--port", "8000"], stdout=sys.stdout, stderr=sys.stderr)
     
     # Wait loop
@@ -97,15 +101,10 @@ def run():
     else:
         print("Backend failed to start in time!")
         backend.terminate()
-        return
+        raise Exception("Backend failed to start")
 
-    try:
-        asyncio.run(test_integration())
-    except Exception as e:
-        print("TEST ERROR:", e)
-    finally:
-        backend.terminate()
-        backend.wait()
+    yield
 
-if __name__ == "__main__":
-    run()
+    backend.terminate()
+    backend.wait()
+

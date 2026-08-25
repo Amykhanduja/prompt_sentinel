@@ -225,9 +225,13 @@ class SemanticEngine:
 
         return detections
 
-_ENGINE = SemanticEngine()
+_ENGINE = None
+
 def detect_semantic(prompt: str, source: str = "input", active_config: dict = None):
     """
     Public API.
     """
+    global _ENGINE
+    if _ENGINE is None:
+        _ENGINE = SemanticEngine()
     return _ENGINE.detect(prompt, source, active_config=active_config)

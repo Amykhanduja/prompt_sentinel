@@ -67,9 +67,12 @@ async def test_websocket():
     db.close()
     print("All tests passed.")
 
-def run():
-    print("Starting backend...")
-    import sys
+import pytest
+import sys
+
+@pytest.fixture(scope="module", autouse=True)
+def run_backend():
+    print("Starting backend for tests...")
     backend = subprocess.Popen(["venv/bin/uvicorn", "app:app", "--port", "8000"], stdout=sys.stdout, stderr=sys.stderr)
     
     # Wait loop
@@ -84,15 +87,10 @@ def run():
     else:
         print("Backend failed to start in time!")
         backend.terminate()
-        return
+        raise Exception("Backend failed to start")
 
-    try:
-        asyncio.run(test_websocket())
-    except Exception as e:
-        print("TEST ERROR:", e)
-    finally:
-        backend.terminate()
-        backend.wait()
+    yield
 
-if __name__ == "__main__":
-    run()
+    backend.terminate()
+    backend.wait()
+

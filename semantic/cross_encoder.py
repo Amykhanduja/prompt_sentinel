@@ -1,5 +1,3 @@
-from sentence_transformers import CrossEncoder
-import torch
 import numpy as np
 from config import CROSS_ENCODER_MODEL, FORCE_CPU
 
@@ -12,19 +10,21 @@ def _get_device() -> str:
     if FORCE_CPU:
         return "cpu"
 
+    import torch
     if torch.cuda.is_available():
         return "cuda"
 
     return "cpu"
 
 
-def load_model() -> CrossEncoder:
+def load_model():
     """
     Lazily loads and caches the cross encoder model.
     """
     global _MODEL
 
     if _MODEL is None:
+        from sentence_transformers import CrossEncoder
         device = _get_device()
         _MODEL = CrossEncoder(
             CROSS_ENCODER_MODEL,

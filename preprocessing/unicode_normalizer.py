@@ -1,8 +1,8 @@
 import unicodedata
 
-
 def normalize_unicode(text: str):
-    normalized = unicodedata.normalize("NFC", text)
+    # NFKC normalizes fullwidth, math alphanumeric, etc.
+    normalized = unicodedata.normalize("NFKC", text)
 
     changed = normalized != text
 

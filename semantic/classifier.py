@@ -44,7 +44,7 @@ def train_classifier(semantic_index: dict):
         
     _CLASSIFIER.fit(X, y)
 
-def predict(embedding) -> dict:
+def predict(embedding, allowed_techniques: list[str] = None) -> dict:
     """
     Predicts the PT technique for a given embedding.
     Returns predicted PT, probability, top-3 classes, and confidence.
@@ -58,23 +58,33 @@ def predict(embedding) -> dict:
     probs = _CLASSIFIER.predict_proba(emb_2d)[0]
     classes = _CLASSIFIER.classes_
     
-    top_indices = np.argsort(probs)[::-1]
-    
-    top_3_classes = []
-    for i in range(min(3, len(top_indices))):
-        idx = top_indices[i]
-        top_3_classes.append({
-            "technique": str(classes[idx]),
-            "probability": float(probs[idx])
-        })
+    class_probs = []
+    total_allowed_prob = 0.0
+    for cls, prob in zip(classes, probs):
+        if allowed_techniques is None or str(cls) in allowed_techniques or str(cls) == "SAFE":
+            total_allowed_prob += prob
+            class_probs.append({
+                "technique": str(cls),
+                "probability": float(prob)
+            })
+            
+    if allowed_techniques is not None and total_allowed_prob > 0:
+        for c in class_probs:
+            c["probability"] = float(c["probability"]) / float(total_allowed_prob)
+
+    if not class_probs:
+        return None
+        
+    class_probs.sort(key=lambda x: x["probability"], reverse=True)
+    top_3_classes = class_probs[:min(3, len(class_probs))]
         
     predicted_pt = top_3_classes[0]["technique"]
-    probability = top_3_classes[0]["probability"]
+    probability = float(top_3_classes[0]["probability"])
     
     if len(top_3_classes) > 1:
-        confidence = probability - top_3_classes[1]["probability"]
+        confidence = float(probability) - float(top_3_classes[1]["probability"])
     else:
-        confidence = probability
+        confidence = float(probability)
         
     return {
         "predicted_pt": predicted_pt,

@@ -6,7 +6,7 @@ Central configuration for PromptSentinel.
 # Semantic Detection
 # =============================================================================
 
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL = "BAAI/bge-base-en-v1.5"
 
 # Maximum number of texts encoded together
 EMBEDDING_BATCH_SIZE = 32

@@ -50,21 +50,16 @@ class SemanticEngine:
                  "threshold": entry.get("threshold", DEFAULT_SIMILARITY_THRESHOLD)
              }
              
-        from config import SEMANTIC_MODE
-        if SEMANTIC_MODE == "classifier":
-            from semantic.classifier import train_classifier
-            train_classifier(self.semantic_index)
+        # Always train classifier for the unified pipeline
+        from semantic.classifier import train_classifier
+        train_classifier(self.semantic_index)
 
-    def detect(
-        self,
-        prompt: str,
-        source: str = "input",
-        top_k: int = 3,
-        active_config: dict = None
-    ) -> list:
-
+    def retrieve_top_k(self, prompt: str, k: int = 20) -> list[dict]:
+        """
+        Phase 16 retrieval stage: Top-K cosine similarity candidates.
+        """
         from semantic.embeddings import PROVIDER_VERSION
-        from config import SEMANTIC_MODE
+        from taxonomy.techniques import get_technique
         
         if not hasattr(self, "provider_version") or self.provider_version != PROVIDER_VERSION:
             self.semantic_index = {}
@@ -76,15 +71,90 @@ class SemanticEngine:
 
         prompt_embedding = get_embedding(prompt)
         
-        if SEMANTIC_MODE == "classifier":
-            return self._detect_classifier(prompt, prompt_embedding, source)
-        else:
-            return self._detect_nearest_neighbor(prompt, prompt_embedding, source, top_k, active_config)
+        global_candidates = []
+        for technique, data in self.semantic_index.items():
+            if "embeddings" not in data or len(data["embeddings"]) == 0:
+                continue
+            rankings = rank_matches(prompt_embedding, data["embeddings"])
+            for idx, orig_sim in rankings[:k]:
+                global_candidates.append((technique, idx, orig_sim))
+                
+        global_candidates.sort(key=lambda x: x[2], reverse=True)
+        global_candidates = global_candidates[:k]
+
+        results = []
+        for tech, idx, orig_sim in global_candidates:
+            tech_meta = get_technique(tech)
+            results.append({
+                "technique_id": tech,
+                "technique_name": tech_meta.get("name", tech),
+                "example_text": self.semantic_index[tech]["examples"][idx],
+                "embedding_similarity": float(orig_sim)
+            })
             
-    def _detect_classifier(self, prompt: str, prompt_embedding, source: str) -> list:
-        from semantic.classifier import predict
+        return results
+
+    def rerank_candidates(self, prompt: str, candidates: list[dict], top_k: int = 3) -> list[dict]:
+        """
+        Phase 16 retrieval stage 2: Cross Encoder reranking.
+        """
+        if not candidates:
+            return []
+            
+        from semantic.cross_encoder import predict_scores
         
-        pred = predict(prompt_embedding)
+        flat_candidates = [c["example_text"] for c in candidates]
+        scores = predict_scores(prompt, flat_candidates)
+        
+        for candidate, score in zip(candidates, scores):
+            candidate["cross_encoder_score"] = float(score)
+            
+        candidates.sort(key=lambda x: x.get("cross_encoder_score", 0.0), reverse=True)
+        return candidates[:top_k]
+
+    def detect(
+        self,
+        prompt: str,
+        source: str = "input",
+        top_k: int = 3,
+        active_config: dict = None
+    ) -> list:
+        from semantic.embeddings import PROVIDER_VERSION
+        
+        if not hasattr(self, "provider_version") or self.provider_version != PROVIDER_VERSION:
+            self.semantic_index = {}
+            self._build_index()
+            self.provider_version = PROVIDER_VERSION
+
+        if not prompt.strip():
+            return []
+
+        prompt_embedding = get_embedding(prompt)
+        
+        # 1. Retrieve Top 20 candidates
+        candidates = self.retrieve_top_k(prompt, k=20)
+        
+        # 2. Cross Encoder Reranking -> Top 3
+        top_candidates = self.rerank_candidates(prompt, candidates, top_k=top_k)
+        
+        # 3. Restrict classifier allowed techniques
+        allowed_techniques = list(set([c["technique_id"] for c in top_candidates]))
+        
+        # 4. Final detection with classifier
+        return self._detect_unified(prompt_embedding, top_candidates, allowed_techniques, source, active_config)
+        
+    def _detect_unified(
+        self,
+        prompt_embedding,
+        top_candidates,
+        allowed_techniques,
+        source: str,
+        active_config: dict = None
+    ) -> list:
+        from semantic.classifier import predict
+        from config import DEFAULT_SIMILARITY_THRESHOLD
+        
+        pred = predict(prompt_embedding, allowed_techniques)
         if not pred:
             return []
             
@@ -102,127 +172,51 @@ class SemanticEngine:
             if prob < 0.16: # filter noise
                 continue
                 
-            detection = {
-                "technique": tech,
-                "confidence": round(pred["confidence"], 3),
-                "probability": round(prob, 3),
-                "top_3_classes": pred["top_3_classes"],
-                "source": source,
-                "detector": "semantic_classifier",
-                "match_explanation": {
-                    "predicted_class": predicted_pt,
-                    "probability": round(prob, 3),
-                    "confidence": round(pred["confidence"], 3)
-                }
-            }
-            detections.append(detection)
-        
-        return detections
-
-    def _detect_nearest_neighbor(
-        self,
-        prompt: str,
-        prompt_embedding,
-        source: str,
-        top_k: int,
-        active_config: dict = None
-    ) -> list:
-        # 1. Retrieve Top-20 candidates GLOBALLY across all techniques
-        retrieval_k = 20 if ENABLE_CROSS_ENCODER else top_k
-        
-        global_candidates = []
-        for technique, data in self.semantic_index.items():
-            rankings = rank_matches(prompt_embedding, data["embeddings"])
-            for idx, orig_sim in rankings[:retrieval_k]:
-                global_candidates.append((technique, idx, orig_sim))
+            # Find the best candidate for this technique
+            tech_candidates = [c for c in top_candidates if c["technique_id"] == tech]
+            if not tech_candidates:
+                continue
                 
-        global_candidates.sort(key=lambda x: x[2], reverse=True)
-        global_candidates = global_candidates[:retrieval_k]
-
-        # 2. Cross Encoder Reranking
-        if ENABLE_CROSS_ENCODER and global_candidates:
-            from semantic.cross_encoder import predict_scores
-            
-            flat_candidates = [self.semantic_index[tech]["examples"][idx] for tech, idx, _ in global_candidates]
-            
-            scores = predict_scores(prompt, flat_candidates)
-            
-            reranked_global_candidates = []
-            for (tech, idx, orig_sim), score in zip(global_candidates, scores):
-                reranked_global_candidates.append((tech, idx, score, orig_sim))
+            best_candidate = tech_candidates[0]
                 
-            reranked_global_candidates.sort(key=lambda x: x[2], reverse=True)
-            final_candidates = reranked_global_candidates[:top_k]
-        else:
-            final_candidates = [(tech, idx, sim, sim) for tech, idx, sim in global_candidates[:top_k]]
-
-        # 3. Group by technique for Detection
-        technique_groups = {}
-        for tech, idx, score, orig_sim in final_candidates:
-            if tech not in technique_groups:
-                technique_groups[tech] = []
-            technique_groups[tech].append((idx, score, orig_sim))
-
-        detections = []
-
-        # 4. Filtering and Negative Matching
-        for technique, candidates in technique_groups.items():
-            best_index, best_score, best_orig_sim = candidates[0]
-            
-            threshold = self.semantic_index[technique].get("threshold", DEFAULT_SIMILARITY_THRESHOLD)
+            threshold = self.semantic_index[tech].get("threshold", DEFAULT_SIMILARITY_THRESHOLD)
             if active_config and "semantic" in active_config:
                 threshold = active_config["semantic"]
                 
-            if best_orig_sim < threshold:
+            # Optionally check threshold against initial similarity
+            if best_candidate["embedding_similarity"] < threshold:
                 continue
                 
-            neg_embs = self.semantic_index[technique].get("negative_embeddings")
-            negative_similarity = 0.0
-            
-            if neg_embs is not None and len(neg_embs) > 0:
-                _, negative_similarity = best_match(prompt_embedding, neg_embs)
-                
-            if negative_similarity >= best_orig_sim:
-                continue
-                
-            confidence = best_orig_sim - negative_similarity
-
-            MIN_CONFIDENCE = 0.20
-            if confidence < MIN_CONFIDENCE:
-                continue
-
-            confidence = max(0.0, min(confidence, 1.0))
-
-            detections.append({
-                "technique": technique,
-                "confidence": round(confidence, 3),
-                "similarity": round(best_orig_sim, 3) if not ENABLE_CROSS_ENCODER else round(best_score, 3),
-                "initial_similarity": round(best_orig_sim, 3),
-                "reranked_score": round(best_score, 3) if ENABLE_CROSS_ENCODER else None,
-                "matched_example": self.semantic_index[technique]["examples"][best_index],
+            detection = {
+                "technique": tech,
+                "confidence": round(float(pred["confidence"]), 3),
+                "similarity": round(float(best_candidate.get("cross_encoder_score", best_candidate["embedding_similarity"])), 3),
+                "initial_similarity": round(float(best_candidate["embedding_similarity"]), 3),
+                "reranked_score": round(float(best_candidate.get("cross_encoder_score", 0.0)), 3),
+                "probability": round(float(prob), 3),
+                "top_3_classes": pred["top_3_classes"],
+                "source": source,
+                "detector": "semantic_unified",
+                "matched_example": best_candidate["example_text"],
                 "top_matches": [
                     {
-                        "example": self.semantic_index[technique]["examples"][idx],
-                        "similarity": round(score, 3),
-                        "initial_similarity": round(orig_sim, 3)
+                        "example": c["example_text"],
+                        "similarity": round(float(c.get("cross_encoder_score", c["embedding_similarity"])), 3),
+                        "initial_similarity": round(float(c["embedding_similarity"]), 3)
                     }
-                    for idx, score, orig_sim in candidates
+                    for c in top_candidates if c["technique_id"] == tech
                 ],
                 "match_explanation": {
-                    "matched_example": self.semantic_index[technique]["examples"][best_index],
-                    "similarity": round(best_orig_sim, 3) if not ENABLE_CROSS_ENCODER else round(best_score, 3),
-                    "negative_similarity": round(negative_similarity, 3),
-                    "threshold": threshold
-                },
-                "source": source,
-                "detector": "semantic"
-            })
-
-        detections.sort(
-            key=lambda detection: detection["similarity"],
-            reverse=True
-        )
-
+                    "predicted_class": predicted_pt,
+                    "probability": round(float(prob), 3),
+                    "confidence": round(float(pred["confidence"]), 3),
+                    "cross_encoder_score": round(float(best_candidate.get("cross_encoder_score", 0.0)), 3),
+                    "initial_similarity": round(float(best_candidate["embedding_similarity"]), 3)
+                }
+            }
+            detections.append(detection)
+            
+        detections.sort(key=lambda x: x["probability"], reverse=True)
         return detections
 
 _ENGINE = None

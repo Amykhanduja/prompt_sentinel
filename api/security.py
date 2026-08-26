@@ -72,8 +72,8 @@ def decode_access_token(token: str) -> Dict[str, Any]:
             detail="Token has expired",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    except jwt.InvalidTokenError:
-        logger.warning("Token decoding failed: Invalid token")
+    except jwt.InvalidTokenError as e:
+        logger.warning(f"Token decoding failed: Invalid token - {e}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",

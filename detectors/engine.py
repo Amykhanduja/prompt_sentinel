@@ -159,4 +159,11 @@ def run_detectors(
         "total_detections": len(detections)
     }))
 
+    # ------------------------------------------
+    # LLM Judge (Phase 17.3)
+    # ------------------------------------------
+    
+    from llm.judge import evaluate_with_judge
+    detections = evaluate_with_judge(prompt, detections)
+
     return detections

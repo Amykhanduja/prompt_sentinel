@@ -1,5 +1,5 @@
 import logging
-from config import LLM_JUDGE_ENABLED
+import config
 from taxonomy.techniques import get_technique
 
 logger = logging.getLogger("promptsentinel")
@@ -39,7 +39,7 @@ def validate_provider_output(output: dict) -> dict:
     }
 
 def should_invoke_llm_judge(detections: list) -> bool:
-    if not LLM_JUDGE_ENABLED:
+    if not config.LLM_JUDGE_ENABLED:
         return False
     if not detections:
         return False

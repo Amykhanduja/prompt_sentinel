@@ -2,13 +2,13 @@ import pytest
 import json
 from unittest.mock import patch, MagicMock
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "")
+@patch("config.LLM_JUDGE_API_KEY", "")
 def test_missing_api_key():
     with pytest.raises(ValueError, match="LLM_JUDGE_API_KEY is not set."):
         from llm.gemini_provider import GeminiProvider
         GeminiProvider()
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("google.genai.Client")
 def test_provider_lazy_initialization(mock_client_cls):
     from llm.gemini_provider import GeminiProvider
@@ -17,7 +17,7 @@ def test_provider_lazy_initialization(mock_client_cls):
     mock_client_cls.assert_called_once()
     assert provider.model_name is not None
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("llm.provider.LLM_JUDGE_PROVIDER", "gemini")
 @patch("google.genai.Client")
 def test_factory_returns_gemini(mock_client):
@@ -25,7 +25,7 @@ def test_factory_returns_gemini(mock_client):
     provider = get_llm_provider()
     assert provider.__class__.__name__ == "GeminiProvider"
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("google.genai.Client")
 def test_valid_malicious_response(mock_client_cls):
     mock_client = MagicMock()
@@ -43,7 +43,7 @@ def test_valid_malicious_response(mock_client_cls):
     assert result["confidence"] == 0.9
     assert result["technique_id"] == "PT-001"
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("google.genai.Client")
 def test_valid_safe_response(mock_client_cls):
     mock_client = MagicMock()
@@ -60,7 +60,7 @@ def test_valid_safe_response(mock_client_cls):
     assert result["decision"] == "SAFE"
     assert result["confidence"] == 0.99
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("google.genai.Client")
 def test_malformed_json(mock_client_cls):
     mock_client = MagicMock()
@@ -75,7 +75,7 @@ def test_malformed_json(mock_client_cls):
     with pytest.raises(Exception, match="GeminiProvider evaluation failed: Expecting value: line 1 column 1"):
         provider.evaluate("test", {})
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("google.genai.Client")
 def test_timeout_network_exception(mock_client_cls):
     mock_client = MagicMock()
@@ -88,7 +88,7 @@ def test_timeout_network_exception(mock_client_cls):
     with pytest.raises(Exception, match="GeminiProvider evaluation failed: Timeout occurred"):
         provider.evaluate("test", {})
 
-@patch("llm.gemini_provider.LLM_JUDGE_API_KEY", "fake_key")
+@patch("config.LLM_JUDGE_API_KEY", "fake_key")
 @patch("google.genai.Client")
 def test_api_key_not_in_logs(mock_client_cls, caplog):
     mock_client = MagicMock()

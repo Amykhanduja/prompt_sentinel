@@ -5,7 +5,7 @@ from llm.judge import merge_judge_decision
 
 patch_semantic = patch("detectors.engine.detect_semantic", return_value=[])
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", False)
+@patch("config.LLM_JUDGE_ENABLED", False)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_judge_disabled(mock_fuse, mock_get_provider):
@@ -16,7 +16,7 @@ def test_judge_disabled(mock_fuse, mock_get_provider):
         assert len(res) == 1
         assert res[0]["technique"] == "PT-009"
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_high_confidence(mock_fuse, mock_get_provider):
@@ -26,7 +26,7 @@ def test_high_confidence(mock_fuse, mock_get_provider):
         mock_get_provider.assert_not_called()
         assert len(res) == 1
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_medium_confidence(mock_fuse, mock_get_provider):
@@ -39,7 +39,7 @@ def test_medium_confidence(mock_fuse, mock_get_provider):
         provider_mock.evaluate.assert_called_once()
         assert res[0]["judge_used"] is True
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_low_confidence(mock_fuse, mock_get_provider):
@@ -52,7 +52,7 @@ def test_low_confidence(mock_fuse, mock_get_provider):
         provider_mock.evaluate.assert_called_once()
         assert res[0]["judge_used"] is True
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_judge_malicious(mock_fuse, mock_get_provider):
@@ -66,7 +66,7 @@ def test_judge_malicious(mock_fuse, mock_get_provider):
         assert res[0]["judge_decision"] == "MALICIOUS"
         assert "judge_confidence" in res[0]
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_judge_safe(mock_fuse, mock_get_provider):
@@ -78,7 +78,7 @@ def test_judge_safe(mock_fuse, mock_get_provider):
         res = run_detectors("ambiguous prompt")
         assert len(res) == 0
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_provider_failure(mock_fuse, mock_get_provider):
@@ -91,7 +91,7 @@ def test_provider_failure(mock_fuse, mock_get_provider):
         assert len(res) == 1
         assert "judge_decision" not in res[0]
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_invalid_judge_result(mock_fuse, mock_get_provider):
@@ -111,7 +111,7 @@ def test_strong_regex_safe_judge():
     assert len(res) == 1
     assert res[0]["judge_decision"] == "SAFE"
 
-@patch("llm.judge.LLM_JUDGE_ENABLED", True)
+@patch("config.LLM_JUDGE_ENABLED", True)
 @patch("llm.provider.get_llm_provider")
 @patch("detectors.engine.fuse_detections")
 def test_no_detections(mock_fuse, mock_get_provider):

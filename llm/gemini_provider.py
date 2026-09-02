@@ -4,7 +4,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 from llm.provider import BaseLLMProvider
-from config import LLM_JUDGE_API_KEY, LLM_JUDGE_MODEL, LLM_JUDGE_TIMEOUT
+import config
 
 logger = logging.getLogger("promptsentinel")
 
@@ -16,7 +16,7 @@ class JudgeResponseSchema(BaseModel):
 
 class GeminiProvider(BaseLLMProvider):
     def __init__(self):
-        if not LLM_JUDGE_API_KEY:
+        if not config.LLM_JUDGE_API_KEY:
             raise ValueError("LLM_JUDGE_API_KEY is not set.")
         
         # Lazy initialization is requested, so we import google.genai here? 
@@ -30,11 +30,13 @@ class GeminiProvider(BaseLLMProvider):
             raise RuntimeError("google-genai SDK is not installed.")
 
         # HttpOptions is accessible via types.HttpOptions
+        # google-genai SDK expects timeout in milliseconds as an integer
+        timeout_ms = int(float(config.LLM_JUDGE_TIMEOUT) * 1000)
         self.client = genai.Client(
-            api_key=LLM_JUDGE_API_KEY, 
-            http_options={"timeout": float(LLM_JUDGE_TIMEOUT)}
+            api_key=config.LLM_JUDGE_API_KEY, 
+            http_options={"timeout": timeout_ms}
         )
-        self.model_name = LLM_JUDGE_MODEL
+        self.model_name = config.LLM_JUDGE_MODEL
         self.types = types
 
     def evaluate(self, prompt: str, context: dict) -> dict:

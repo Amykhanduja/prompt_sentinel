@@ -55,3 +55,5 @@ import os
 LLM_JUDGE_ENABLED = os.getenv("LLM_JUDGE_ENABLED", "false").lower() == "true"
 LLM_JUDGE_PROVIDER = os.getenv("LLM_JUDGE_PROVIDER", "mock")
 LLM_JUDGE_TIMEOUT = int(os.getenv("LLM_JUDGE_TIMEOUT", "10"))
+LLM_JUDGE_API_KEY = os.getenv("LLM_JUDGE_API_KEY", "")
+LLM_JUDGE_MODEL = os.getenv("LLM_JUDGE_MODEL", "gemini-2.5-flash")

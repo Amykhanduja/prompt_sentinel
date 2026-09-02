@@ -28,5 +28,8 @@ def get_llm_provider() -> BaseLLMProvider:
     if LLM_JUDGE_PROVIDER == "mock":
         from llm.mock_provider import MockLLMProvider
         return MockLLMProvider()
+    elif LLM_JUDGE_PROVIDER == "gemini":
+        from llm.gemini_provider import GeminiProvider
+        return GeminiProvider()
     
     raise ValueError(f"Unknown LLM provider: {LLM_JUDGE_PROVIDER}")

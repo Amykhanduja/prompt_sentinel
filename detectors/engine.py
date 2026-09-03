@@ -65,7 +65,8 @@ def get_effective_learning_config() -> dict:
 
 def run_detectors(
     prompt: str,
-    source: str = "user"
+    source: str = "user",
+    judge_info: dict = None
 ):
     active_config = get_effective_learning_config()
 
@@ -164,6 +165,6 @@ def run_detectors(
     # ------------------------------------------
     
     from llm.judge import evaluate_with_judge
-    detections = evaluate_with_judge(prompt, detections)
+    detections = evaluate_with_judge(prompt, detections, judge_info)
 
     return detections

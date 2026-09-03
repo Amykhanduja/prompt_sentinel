@@ -20,6 +20,7 @@ class Scan(Base):
     preprocessing_flags: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
     risk_summary: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
     risk_breakdown: Mapped[Optional[list]] = mapped_column(JSONB, nullable=True)
+    judge_metadata: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
 
     detections: Mapped[List["Detection"]] = relationship("Detection", back_populates="scan", cascade="all, delete-orphan")
     alert: Mapped[Optional["Alert"]] = relationship("Alert", back_populates="scan", cascade="all, delete-orphan", uselist=False)

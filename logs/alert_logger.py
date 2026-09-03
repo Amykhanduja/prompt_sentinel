@@ -7,7 +7,7 @@ from database.repositories.repositories import ScanRepository, StatisticsReposit
 
 logger = logging.getLogger("promptsentinel")
 
-def log_alert(prompt, detections, risk, action):
+def log_alert(prompt, detections, risk, action, judge_metadata=None):
     # Log archival
     archival_alert = {
         "timestamp": datetime.now(UTC).isoformat(),
@@ -16,6 +16,8 @@ def log_alert(prompt, detections, risk, action):
         "risk_score": risk.get("score"),
         "action": action
     }
+    if judge_metadata:
+        archival_alert["judge"] = judge_metadata
     logger.info(json.dumps(archival_alert))
     
     db = SessionLocal()
@@ -36,7 +38,8 @@ def log_alert(prompt, detections, risk, action):
             source="User",
             detections=detections,
             risk_summary=risk.get("summary"),
-            risk_breakdown=risk.get("breakdown")
+            risk_breakdown=risk.get("breakdown"),
+            judge_metadata=judge_metadata
         )
         
         # Save Alert

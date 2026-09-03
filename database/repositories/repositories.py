@@ -24,7 +24,7 @@ class ScanRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def create_scan(self, prompt: str, prompt_length: int, risk_score: int, severity: str, action: str, source: str, detections: List[Dict[str, Any]], risk_summary: dict = None, risk_breakdown: list = None, preprocessing_flags: dict = None) -> Scan:
+    def create_scan(self, prompt: str, prompt_length: int, risk_score: int, severity: str, action: str, source: str, detections: List[Dict[str, Any]], risk_summary: dict = None, risk_breakdown: list = None, preprocessing_flags: dict = None, judge_metadata: dict = None) -> Scan:
         scan_id = uuid.uuid4()
         scan = Scan(
             id=scan_id,
@@ -36,7 +36,8 @@ class ScanRepository:
             source=source,
             preprocessing_flags=preprocessing_flags,
             risk_summary=risk_summary,
-            risk_breakdown=risk_breakdown
+            risk_breakdown=risk_breakdown,
+            judge_metadata=judge_metadata
         )
         try:
             self.db.add(scan)

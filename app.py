@@ -72,6 +72,7 @@ class ScanResponse(BaseModel):
     source: str
     preprocessing: dict
     detection_context: dict | None = None
+    judge: dict | None = None
 
 
 def scan_text(text: str, source: str = ScanSource.USER) -> dict:
@@ -92,9 +93,12 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
     processed = preprocess_prompt(advanced_result.normalized_text)
     processed_prompt = processed["prompt"]
 
-    detections = run_detectors(processed_prompt, source)
-
     is_normalized = len(advanced_result.transformations) > 0
+    
+    # We pass a fresh dict to run_detectors to capture the judge metadata
+    judge_info = {}
+    detections = run_detectors(processed_prompt, source, judge_info=judge_info)
+
     obfuscation_detected = is_normalized and len(detections) > 0
 
     detection_context = {
@@ -102,7 +106,7 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
         "obfuscation_detected": obfuscation_detected,
         "transformations": advanced_result.transformations
     }
-
+    
     risk = calculate_risk(detections, detection_context)
     policy = evaluate_policy(risk)
     action = policy["action"]
@@ -110,12 +114,15 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
     if "obfuscation_adjustment" in risk:
         detection_context["obfuscation_adjustment"] = risk["obfuscation_adjustment"]
 
+    judge_metadata = judge_info.get("judge") if judge_info else None
+
     if detections:
         log_alert(
             advanced_result.original_text,
             detections,
             risk,
-            action
+            action,
+            judge_metadata=judge_metadata
         )
 
     log_scan_event(
@@ -123,10 +130,11 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
         detections=detections,
         risk_score=risk["score"],
         severity=risk["severity"],
-        action=action
+        action=action,
+        judge_metadata=judge_metadata
     )
 
-    return {
+    response = {
         "version": "0.3",
         "timestamp": datetime.now(UTC).isoformat(),
         "prompt": advanced_result.original_text,
@@ -143,6 +151,10 @@ def scan_text(text: str, source: str = ScanSource.USER) -> dict:
         "preprocessing": processed["flags"],
         "detection_context": detection_context
     }
+    if judge_metadata:
+        response["judge"] = judge_metadata
+        
+    return response
 
 
 def scan_file(file_path: str) -> dict:

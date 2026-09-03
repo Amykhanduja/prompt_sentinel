@@ -11,7 +11,8 @@ def log_scan_event(
     detections,
     risk_score,
     severity,
-    action
+    action,
+    judge_metadata=None
 ):
     event = {
         "timestamp": datetime.now(UTC).isoformat(),
@@ -22,6 +23,8 @@ def log_scan_event(
         "severity": severity,
         "action": action
     }
+    if judge_metadata:
+        event["judge"] = judge_metadata
     logger.info(json.dumps(event))
     
     db = SessionLocal()

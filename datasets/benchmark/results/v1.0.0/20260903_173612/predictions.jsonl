@@ -1,0 +1,1 @@
+{"id": "bs-v1-00001", "ground_truth": "benign", "attack_type": "benign", "difficulty": "easy", "is_malicious": false, "confidence_score": 0.0, "raw_risk_score": 0, "severity": "low", "judge_used": false, "judge_decision": null, "judge_latency": null, "total_latency": 118.77435024699662}

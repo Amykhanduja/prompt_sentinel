@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "dataset_version": "v1.0.0",
+    "evaluator_version": "1.0",
+    "system_version": "dfcbf561",
+    "total_samples": 5000
+  },
+  "overall": {
+    "tp": 2115,
+    "tn": 1264,
+    "fp": 86,
+    "fn": 1535,
+    "accuracy": 0.6758,
+    "precision": 0.9609268514311676,
+    "recall": 0.5794520547945206,
+    "f1": 0.7229533413091779,
+    "support": 5000,
+    "roc_auc": 0.7705751395230848
+  },
+  "by_category": {
+    "benign": {
+      "tp": 0,
+      "tn": 914,
+      "fp": 86,
+      "fn": 0,
+      "accuracy": 0.914,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1000,
+      "roc_auc": null
+    },
+    "direct_adversarial": {
+      "tp": 465,
+      "tn": 0,
+      "fp": 0,
+      "fn": 335,
+      "accuracy": 0.58125,
+      "precision": 1.0,
+      "recall": 0.58125,
+      "f1": 0.7351778656126483,
+      "support": 800,
+      "roc_auc": null
+    },
+    "typo": {
+      "tp": 261,
+      "tn": 0,
+      "fp": 0,
+      "fn": 239,
+      "accuracy": 0.522,
+      "precision": 1.0,
+      "recall": 0.522,
+      "f1": 0.6859395532194481,
+      "support": 500,
+      "roc_auc": null
+    },
+    "unicode": {
+      "tp": 287,
+      "tn": 0,
+      "fp": 0,
+      "fn": 213,
+      "accuracy": 0.574,
+      "precision": 1.0,
+      "recall": 0.574,
+      "f1": 0.7293519695044473,
+      "support": 500,
+      "roc_auc": null
+    },
+    "indirect_injection": {
+      "tp": 476,
+      "tn": 0,
+      "fp": 0,
+      "fn": 124,
+      "accuracy": 0.7933333333333333,
+      "precision": 1.0,
+      "recall": 0.7933333333333333,
+      "f1": 0.8847583643122676,
+      "support": 600,
+      "roc_auc": null
+    },
+    "roleplay": {
+      "tp": 500,
+      "tn": 0,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 500,
+      "roc_auc": null
+    },
+    "stored_injection": {
+      "tp": 126,
+      "tn": 0,
+      "fp": 0,
+      "fn": 274,
+      "accuracy": 0.315,
+      "precision": 1.0,
+      "recall": 0.315,
+      "f1": 0.47908745247148293,
+      "support": 400,
+      "roc_auc": null
+    },
+    "multilingual": {
+      "tp": 0,
+      "tn": 350,
+      "fp": 0,
+      "fn": 350,
+      "accuracy": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 700,
+      "roc_auc": 0.5
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "tp": 465,
+      "tn": 476,
+      "fp": 42,
+      "fn": 335,
+      "accuracy": 0.7139605462822458,
+      "precision": 0.9171597633136095,
+      "recall": 0.58125,
+      "f1": 0.7115531752104056,
+      "support": 1318
+    },
+    "medium": {
+      "tp": 863,
+      "tn": 788,
+      "fp": 44,
+      "fn": 637,
+      "accuracy": 0.7079759862778731,
+      "precision": 0.9514884233737596,
+      "recall": 0.5753333333333334,
+      "f1": 0.7170751973410885,
+      "support": 2332
+    },
+    "hard": {
+      "tp": 787,
+      "tn": 0,
+      "fp": 0,
+      "fn": 563,
+      "accuracy": 0.582962962962963,
+      "precision": 1.0,
+      "recall": 0.582962962962963,
+      "f1": 0.7365465605989706,
+      "support": 1350
+    }
+  }
+}

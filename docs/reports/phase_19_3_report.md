@@ -1,45 +1,75 @@
-# Phase 19.3: Evaluation Engine Integration Report
+# Phase 19.3-A: Benchmark Execution Architecture & Local-Only Baseline
 
 ## Executive Summary
 * **Dataset Version**: v1.0.0
-* **Evaluated Samples**: 0 (Full run aborted due to critical blocker)
+* **Judge Mode**: `disabled` (Local Baseline)
+* **Samples Attempted**: 5000
+* **Successful Evaluations**: 5000
 * **Failures**: 0
-* **Overall Accuracy**: N/A
-* **Precision**: N/A
-* **Recall**: N/A
-* **F1**: N/A
-* **ROC-AUC**: N/A
+* **Overall Accuracy**: 0.6758
+* **Precision**: 0.9609
+* **Recall**: 0.5795
+* **F1**: 0.7230
+* **ROC-AUC**: 0.7706
 
-## BLOCKER REPORT: Unacceptable API Cost & Rate Limit Throttling
-In accordance with the safety directives, the full 5,000-sample evaluation run was halted. The smoke test revealed that execution time is severely throttled by the environment's CPU load (Semantic CrossEncoder batches take ~10 seconds per sample). Consequently, running 5,000 samples would take roughly 14 hours. 
+## Previously Completed (Phase 19.3 partial)
+* Benchmark Evaluation Schema (`BenchmarkSample`, `BenchmarkDatasetVersion`)
+* Metric Engine (`BenchmarkEvaluator` with TPR/FPR, Precision/Recall/F1, ROC-AUC)
+* Integration Unit Tests (Schema isolation, logic verification)
 
-Furthermore, because `LLM_JUDGE_ENABLED` is true, thousands of samples (which are specifically generated as adversarial and typos) would fall into the "Medium" confidence threshold and trigger the Gemini Judge. At a standard 15 RPM free-tier rate limit (or even a standard paid tier lacking massive concurrency), this produces an unacceptable external API rate-limit blocker and cost overrun. 
+## Newly Completed (Phase 19.3-A)
+* **Local Benchmark Architecture**: Introduced `judge-mode` CLI toggle ensuring LLM Judge defaults to disabled for baseline execution, avoiding catastrophic rate-limiting and external cost overhead.
+* **Model Lifecycle Optimization**: Explicitly validated that `SemanticEngine` gracefully caches its embeddings/cross-encoder allocations, preventing duplicate model instantiation per sample.
+* **Performance Instrumentation**: Added warmup cycles, latency percentiles (mean, median, p95, p99), and throughput (samples/sec) monitoring.
+* **Full 5,000-Sample Execution**: Effectively evaluated all samples against the real local detector pipeline without resorting to mocks or static label spoofing.
 
-Following the strict rule: *"If the existing Judge configuration would cause an unacceptable external API cost or rate-limit problem, stop before the full run and report the blocker rather than silently substituting mocks,"* the full evaluation was aborted.
+## Confusion Matrix (Global)
+* TP: 2115
+* TN: 1264
+* FP: 86
+* FN: 1535
 
-## Confusion Matrix
-* TP: N/A
-* TN: N/A
-* FP: N/A
-* FN: N/A
+## Category Performance
+| Category | Support | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|---|
+| benign | 1000 | 0.9140 | 0.0000 | 0.0000 | 0.0000 |
+| direct_adversarial | 800 | 0.5813 | 1.0000 | 0.5813 | 0.7352 |
+| typo | 500 | 0.5220 | 1.0000 | 0.5220 | 0.6859 |
+| unicode | 500 | 0.5740 | 1.0000 | 0.5740 | 0.7294 |
+| indirect_injection | 600 | 0.7933 | 1.0000 | 0.7933 | 0.8848 |
+| roleplay | 500 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| stored_injection | 400 | 0.3150 | 1.0000 | 0.3150 | 0.4791 |
+| multilingual | 700 | 0.5000 | 0.0000 | 0.0000 | 0.0000 |
 
-## Category & Difficulty Performance
-* Skipped due to blocker.
+## Difficulty Performance
+| Difficulty | Support | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|---|
+| easy | 1318 | 0.7140 | 0.9172 | 0.5813 | 0.7116 |
+| medium | 2332 | 0.7080 | 0.9515 | 0.5753 | 0.7171 |
+| hard | 1350 | 0.5830 | 1.0000 | 0.5830 | 0.7365 |
 
 ## Benign False Positives & Malicious False Negatives
-* Skipped due to blocker.
+* **Benign False Positives**: Total 86 FP. Many benign security-related queries (e.g., 'Explain authentication with examples') are incorrectly flagged by the cross-encoder as output leakage or metadata extraction due to semantic similarity.
+* **Malicious False Negatives**: Total 1535 FN. Weakest categories are Multilingual (Hindi entirely bypassed) and Obfuscated prompts (Unicode/Typos bypass regex and semantic embeddings entirely).
+
+## Language & Obfuscation Analysis
+* **English vs Hindi**: English (Accuracy 70.44%, TP: 2115, TN: 914, FP: 86, FN: 1185) vs Hindi (Accuracy 50.00%, TP: 0, TN: 350, FP: 0, FN: 350)
+* **No Obfuscation vs Obfuscated**: Clean (Accuracy 70.77%, TP: 1567, TN: 1264, FP: 86, FN: 1083) vs Obfuscated (Accuracy 54.80%, TP: 548, TN: 0, FP: 0, FN: 452)
 
 ## Judge Analysis
-* Skipped due to blocker.
+* Judge was intentionally disabled (`LLM_JUDGE_ENABLED=False`) to establish a pure Phase 16/18 baseline constraint.
+
+## Performance
+* **Total Runtime**: 745.10s
+* **Throughput**: 6.71 samples/s
+* **Latencies**: Mean (0.1490s), Median (0.1477s), p95 (0.1918s), p99 (0.2110s).
+* **Warmup Duration**: ~117s
 
 ## Phase 18 Isolation
-The evaluation script (`scripts/run_benchmark.py`) was structurally designed to call `run_detectors` and `calculate_risk` directly in a read-only capacity. It strictly avoids calling the application's `log_alert` or `scan_text` endpoints, which write heavily to `ScanRepository` and subsequently trigger Phase 18 analytics queues. 
-Unit testing confirms that the Benchmark evaluation remains isolated and does not instantiate `LearningCandidate` models. Database state remains unchanged.
+The benchmark executes through a sandboxed architectural path directly targeting `run_detectors` and `calculate_risk`. Database state (`LearningCandidate`, `ScanRepository`, `StatisticsRepository`) remains entirely pristine.
 
 ## Reproducibility
-* **Dataset version**: v1.0.0
-* **Commit**: Evaluator built dynamically.
-* **Configuration**: Judge Enabled (Blocked by rate limits).
+* **Git Commit**: dfcbf561
+* **Semantic Model**: BAAI/bge-base-en-v1.5
+* **CrossEncoder Model**: cross-encoder/ms-marco-MiniLM-L-6-v2
 
-## Conclusion
-The evaluation engine, schemas, metric reporting, and pipeline integration tests are complete and passing. However, the system's current architecture cannot physically scale to 5,000 sequential offline evaluations without catastrophic API rate limits or timeout exhaustion. Optimization (or batching architecture) is required before a full execution can succeed.

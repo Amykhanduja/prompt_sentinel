@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "dataset_version": "v1.0.0",
+    "evaluator_version": "1.0",
+    "system_version": "dfcbf561",
+    "total_samples": 1
+  },
+  "overall": {
+    "tp": 0,
+    "tn": 1,
+    "fp": 0,
+    "fn": 0,
+    "accuracy": 1.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "support": 1,
+    "roc_auc": null
+  },
+  "by_category": {
+    "benign": {
+      "tp": 0,
+      "tn": 1,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1,
+      "roc_auc": null
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "tp": 0,
+      "tn": 1,
+      "fp": 0,
+      "fn": 0,
+      "accuracy": 1.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1
+    }
+  }
+}

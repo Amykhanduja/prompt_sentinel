@@ -2,6 +2,14 @@ import { apiClient } from './apiClient';
 export interface DashboardData {
   kpis: {
     totalScanned: number;
+    productionScans: number;
+    benchmarkEvaluations: number;
+    benchmarkData: {
+      dataset_version: string;
+      samples: number;
+      successful: number;
+      failed: number;
+    };
     malicious: number;
     benign: number;
     detectionRate: number;

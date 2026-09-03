@@ -120,9 +120,41 @@ def get_overview():
     semantic = sum(1 for a in alerts if any(str(d).startswith("SM") for d in a.get("detections", [])))
     fusion = sum(1 for a in alerts if len(a.get("detections", [])) > 1)
 
+
+    import glob, json, os
+    benchmark_evaluations = 0
+    benchmark_data = {
+        "dataset_version": "N/A",
+        "samples": 0,
+        "successful": 0,
+        "failed": 0
+    }
+    
+    try:
+        runs = sorted([d for d in glob.glob("datasets/benchmark/results/v1.0.0/*") if os.path.isdir(d) and not d.endswith("analysis")])
+        if runs:
+            latest = runs[-1]
+            manifest_path = os.path.join(latest, "manifest.json")
+            if os.path.exists(manifest_path):
+                with open(manifest_path) as mf:
+                    manifest = json.load(mf)
+                    benchmark_evaluations = manifest.get("sample_count", 0)
+                    benchmark_data = {
+                        "dataset_version": manifest.get("dataset_version", "v1.0.0"),
+                        "samples": manifest.get("sample_count", 0),
+                        "successful": manifest.get("successful_count", 0),
+                        "failed": manifest.get("failed_count", 0)
+                    }
+    except Exception as e:
+        pass
+
     return {
         "kpis": {
             "totalScanned": total,
+            "productionScans": total,
+            "benchmarkEvaluations": benchmark_evaluations,
+            "benchmarkData": benchmark_data,
+
             "malicious": malicious,
             "benign": benign,
             "detectionRate": round(detection_rate, 1),
@@ -388,3 +420,43 @@ def get_notifications():
     return notifs
 
 
+
+@router.get("/stats")
+def get_stats():
+    alerts = load_alerts()
+    production_scans = len(alerts)
+    
+    benchmark_evaluations = 0
+    benchmark_data = {
+        "dataset_version": "N/A",
+        "samples": 0,
+        "successful": 0,
+        "failed": 0
+    }
+    
+    try:
+        import glob
+        import json
+        import os
+        runs = sorted([d for d in glob.glob("datasets/benchmark/results/v1.0.0/*") if os.path.isdir(d) and not d.endswith("analysis")])
+        if runs:
+            latest = runs[-1]
+            manifest_path = os.path.join(latest, "manifest.json")
+            if os.path.exists(manifest_path):
+                with open(manifest_path) as mf:
+                    manifest = json.load(mf)
+                    benchmark_evaluations = manifest.get("sample_count", 0)
+                    benchmark_data = {
+                        "dataset_version": manifest.get("dataset_version", "v1.0.0"),
+                        "samples": manifest.get("sample_count", 0),
+                        "successful": manifest.get("successful_count", 0),
+                        "failed": manifest.get("failed_count", 0)
+                    }
+    except Exception as e:
+        pass
+
+    return {
+        "production_scans": production_scans,
+        "benchmark_evaluations": benchmark_evaluations,
+        "benchmark": benchmark_data
+    }

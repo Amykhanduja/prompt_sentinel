@@ -7,6 +7,7 @@ import { DetectionsDonutChart } from '../components/DonutChart';
 import { DecisionsPieChart } from '../components/PieChart';
 import { RecentDetections } from '../components/RecentDetections';
 import { BackendStatus } from '../components/BackendStatus';
+import { BenchmarkDetails } from '../components/BenchmarkDetails';
 import { fetchDashboardData, DashboardData } from '../services/api';
 import { useDashboardWebSocket } from '../hooks/useDashboardWebSocket';
 import { useCallback } from 'react';
@@ -55,13 +56,13 @@ export const DashboardOverview: React.FC = () => {
       const isAllow = action === 'allow';
       const isReview = action === 'monitor';
       
-      const newTotal = prevData.kpis.totalScanned + 1;
+      const newTotal = prevData.kpis.productionScans + 1;
       
       return {
         ...prevData,
         kpis: {
           ...prevData.kpis,
-          totalScanned: newTotal,
+          productionScans: newTotal,
           blocked: isBlock ? prevData.kpis.blocked + 1 : prevData.kpis.blocked,
           allowed: isAllow ? prevData.kpis.allowed + 1 : prevData.kpis.allowed,
           reviewQueue: isReview ? prevData.kpis.reviewQueue + 1 : prevData.kpis.reviewQueue,
@@ -116,9 +117,12 @@ export const DashboardOverview: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="lg:col-span-2 h-[400px]">
               <RecentDetections data={data?.recentDetections || null} loading={loading} />
+            </div>
+            <div className="lg:col-span-1 h-[400px]">
+              <BenchmarkDetails data={data?.kpis?.benchmarkData || null} loading={loading} />
             </div>
             <div className="lg:col-span-1 h-[400px]">
               <BackendStatus status={status} latency={latency} lastUpdated={lastUpdated} />

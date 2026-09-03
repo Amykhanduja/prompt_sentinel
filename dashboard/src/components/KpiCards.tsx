@@ -12,7 +12,8 @@ const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num)
 
 export const KpiCards: React.FC<KpiCardsProps> = ({ data, loading }) => {
   const kpis = [
-    { title: 'Total Prompts Scanned', value: data?.totalScanned, icon: Activity, color: 'text-primary' },
+    { title: 'Production Scans', value: data?.productionScans, icon: Activity, color: 'text-primary' },
+    { title: 'Benchmark Evaluations', value: data?.benchmarkEvaluations, icon: Target, color: 'text-purple-400' },
     { title: 'Malicious Prompts', value: data?.malicious, icon: ShieldAlert, color: 'text-danger' },
     { title: 'Benign Prompts', value: data?.benign, icon: ShieldCheck, color: 'text-success' },
     { title: 'Detection Rate', value: data?.detectionRate !== undefined ? `${data.detectionRate}%` : undefined, icon: Target, color: 'text-warning' },

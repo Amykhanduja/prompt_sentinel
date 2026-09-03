@@ -1,0 +1,22 @@
+{
+  "dataset_version": "1.0.0-subset",
+  "benchmark_runner_version": "v1.0.0",
+  "git_commit": "7fbf45fd",
+  "timestamp": "2026-09-03T18:34:22.778656+00:00",
+  "judge_mode": "disabled",
+  "semantic_model": "intfloat/multilingual-e5-base",
+  "cross_encoder_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+  "sample_count": 347,
+  "successful_count": 347,
+  "failed_count": 0,
+  "runtime": 329.1251131030149,
+  "throughput": 1.0543103099257891,
+  "latency": {
+    "mean": 0.9484738106646452,
+    "median": 0.34119792201090604,
+    "p95": 0.44957815803354606,
+    "p99": 0.5203069869894534,
+    "min": 0.20355138997547328,
+    "max": 210.57526647299528
+  }
+}

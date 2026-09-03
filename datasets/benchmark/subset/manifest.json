@@ -1,0 +1,7 @@
+{
+  "dataset_version": "1.0.0-subset",
+  "generated_at": "2026-09-03T00:00:00Z",
+  "description": "Subset for Phase 19.5 semantic testing",
+  "total_samples": 347,
+  "categories": {}
+}

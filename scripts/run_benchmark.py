@@ -69,8 +69,12 @@ def main():
     parser.add_argument("--judge-mode", type=str, default="disabled", choices=["enabled", "disabled"])
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--embedding-model", type=str, default=None)
+    parser.add_argument("--cross-encoder-model", type=str, default=None)
     args = parser.parse_args()
     
+    if args.cross_encoder_model:
+        config.CROSS_ENCODER_MODEL = args.cross_encoder_model
+
     if args.embedding_model:
         config.EMBEDDING_MODEL = args.embedding_model
 

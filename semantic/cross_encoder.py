@@ -1,5 +1,5 @@
 import numpy as np
-from config import CROSS_ENCODER_MODEL, FORCE_CPU
+from config import FORCE_CPU
 
 _MODEL = None
 
@@ -26,8 +26,9 @@ def load_model():
     if _MODEL is None:
         from sentence_transformers import CrossEncoder
         device = _get_device()
+        import config
         _MODEL = CrossEncoder(
-            CROSS_ENCODER_MODEL,
+            config.CROSS_ENCODER_MODEL,
             device=device
         )
 

@@ -27,6 +27,7 @@ CLASSIFIER_TYPE = "logistic_regression"
 # =============================================================================
 
 ENABLE_CROSS_ENCODER = True
+TAXONOMY_VERSION = "v1"
 CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
 # Force CPU even if CUDA is available

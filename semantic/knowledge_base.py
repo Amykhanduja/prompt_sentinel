@@ -4,7 +4,11 @@ from pathlib import Path
 from taxonomy.techniques import TECHNIQUES
 
 
-EXAMPLES_DIR = Path(__file__).parent / "examples"
+def get_examples_dir():
+    import config
+    version = getattr(config, "TAXONOMY_VERSION", "v1")
+    if version == "v1": return Path(__file__).parent / "examples"
+    return Path(__file__).parent / f"examples_{version}"
 
 VALID_TECHNIQUES = set(TECHNIQUES.keys())
 
@@ -22,7 +26,7 @@ def load_knowledge_base() -> dict:
     }
 
     for file_path in sorted(
-        EXAMPLES_DIR.glob("*.json")
+        get_examples_dir().glob("*.json")
     ):
 
         with open(
@@ -110,22 +114,23 @@ def load_knowledge_base() -> dict:
     return knowledge_base
 
 
-KNOWLEDGE_BASE = load_knowledge_base()
+_KNOWLEDGE_BASE_CACHE = {}
 
 
 def get_knowledge_base() -> dict:
-    """
-    Returns the complete semantic knowledge base.
-    """
+    import config
+    version = getattr(config, "TAXONOMY_VERSION", "v1")
+    if version not in _KNOWLEDGE_BASE_CACHE:
+        _KNOWLEDGE_BASE_CACHE[version] = load_knowledge_base()
+    return _KNOWLEDGE_BASE_CACHE[version]
 
-    return KNOWLEDGE_BASE
 
 def get_technique(technique: str) -> dict | None:
     """
     Returns the semantic entry for a technique.
     """
 
-    return KNOWLEDGE_BASE.get(technique)
+    return get_knowledge_base().get(technique)
 
 
 def get_examples(technique: str) -> list[str]:
@@ -149,7 +154,7 @@ def techniques() -> list[str]:
     Returns all loaded technique IDs.
     """
 
-    return sorted(KNOWLEDGE_BASE.keys())
+    return sorted(get_knowledge_base().keys())
 
 ALL_EXAMPLE_FIELDS = (
     "canonical_examples",

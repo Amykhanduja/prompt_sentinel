@@ -70,8 +70,12 @@ def main():
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--embedding-model", type=str, default=None)
     parser.add_argument("--cross-encoder-model", type=str, default=None)
+    parser.add_argument("--taxonomy-version", type=str, default=None)
     args = parser.parse_args()
     
+    if args.taxonomy_version:
+        config.TAXONOMY_VERSION = args.taxonomy_version
+
     if args.cross_encoder_model:
         config.CROSS_ENCODER_MODEL = args.cross_encoder_model
 
@@ -118,7 +122,7 @@ def main():
     
     for i, s in enumerate(samples):
         if (i+1) % 100 == 0:
-            print(f"Processed {i+1}/{len(samples)}...")
+            print(f"Processed {i+1}/{len(samples)}...", flush=True)
         try:
             pred = process_sample(s)
             pred["processing_status"] = "success"
@@ -179,6 +183,7 @@ def main():
             "judge_mode": args.judge_mode,
             "semantic_model": config.EMBEDDING_MODEL,
             "cross_encoder_model": config.CROSS_ENCODER_MODEL,
+            "taxonomy_version": getattr(config, "TAXONOMY_VERSION", "v1"),
             "sample_count": len(samples),
             "successful_count": len(successful_preds),
             "failed_count": failures,

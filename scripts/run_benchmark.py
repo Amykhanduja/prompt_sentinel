@@ -68,8 +68,12 @@ def main():
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--judge-mode", type=str, default="disabled", choices=["enabled", "disabled"])
     parser.add_argument("--warmup", type=int, default=3)
+    parser.add_argument("--embedding-model", type=str, default=None)
     args = parser.parse_args()
     
+    if args.embedding_model:
+        config.EMBEDDING_MODEL = args.embedding_model
+
     if args.judge_mode == "disabled":
         config.LLM_JUDGE_ENABLED = False
     

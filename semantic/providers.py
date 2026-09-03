@@ -45,6 +45,7 @@ class SentenceTransformerProvider(EmbeddingProvider):
         if not text:
             return None
         self._load()
+        # Ensure it returns numpy with normalization
         return self._model.encode(
             text,
             convert_to_numpy=True,
@@ -81,3 +82,7 @@ class BGEProvider(SentenceTransformerProvider):
 class GTEProvider(SentenceTransformerProvider):
     def __init__(self):
         super().__init__("thenlper/gte-large")
+
+class GenericProvider(SentenceTransformerProvider):
+    def __init__(self, model_name: str):
+        super().__init__(model_name)

@@ -1,9 +1,8 @@
 from config import EMBEDDING_MODEL
-from semantic.providers import MiniLMProvider, BGEProvider, GTEProvider
+from semantic.providers import MiniLMProvider, BGEProvider, GTEProvider, GenericProvider
 
 _PROVIDER = None
 PROVIDER_VERSION = 0
-
 
 def set_provider(model_name: str):
     """
@@ -13,15 +12,16 @@ def set_provider(model_name: str):
     global _PROVIDER, PROVIDER_VERSION
     name_lower = model_name.lower()
     
-    if "bge" in name_lower:
+    if model_name == "BAAI/bge-base-en-v1.5":
         _PROVIDER = BGEProvider()
-    elif "gte" in name_lower:
+    elif model_name == "thenlper/gte-large":
         _PROVIDER = GTEProvider()
-    else:
+    elif model_name == "sentence-transformers/all-MiniLM-L6-v2":
         _PROVIDER = MiniLMProvider()
+    else:
+        _PROVIDER = GenericProvider(model_name)
         
     PROVIDER_VERSION += 1
-
 
 def load_provider():
     """
@@ -29,9 +29,9 @@ def load_provider():
     """
     global _PROVIDER
     if _PROVIDER is None:
-        set_provider(EMBEDDING_MODEL)
+        import config
+        set_provider(config.EMBEDDING_MODEL)
     return _PROVIDER
-
 
 def get_embedding(text: str):
     """
@@ -42,7 +42,6 @@ def get_embedding(text: str):
     provider = load_provider()
     return provider.get_embedding(text)
 
-
 def get_embeddings(texts: list[str]):
     """
     Returns embeddings for multiple texts.
@@ -52,14 +51,12 @@ def get_embeddings(texts: list[str]):
     provider = load_provider()
     return provider.get_embeddings(texts)
 
-
 def model_name() -> str:
     """
     Returns the currently configured embedding model.
     """
     provider = load_provider()
     return provider.get_name()
-
 
 def unload_model():
     """

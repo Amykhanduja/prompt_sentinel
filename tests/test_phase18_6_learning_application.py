@@ -11,8 +11,40 @@ from config import DEFAULT_SIMILARITY_THRESHOLD
 from services.learning_configuration_service import learning_configuration_service
 from services.learning_application_service import learning_application_service
 
+
+@pytest.fixture(autouse=True)
+def cleanup(db_session):
+    from database.models.learning import LearningCandidateReview, LearningCandidate, candidate_evidence_table, LearningApplication, LearningConfig, LearningRule
+    from database.models.feedback import Feedback
+    from database.models.models import User, Scan, Detection
+    
+    db_session.query(LearningApplication).delete()
+    db_session.query(LearningRule).delete()
+    db_session.query(LearningConfig).delete()
+    db_session.query(LearningCandidateReview).delete()
+    db_session.query(LearningCandidate).delete()
+    db_session.execute(candidate_evidence_table.delete())
+    db_session.query(Feedback).delete()
+    db_session.query(Detection).delete()
+    db_session.query(Scan).delete()
+    db_session.commit()
+    
+    yield
+    
+    db_session.query(LearningApplication).delete()
+    db_session.query(LearningRule).delete()
+    db_session.query(LearningConfig).delete()
+    db_session.query(LearningCandidateReview).delete()
+    db_session.query(LearningCandidate).delete()
+    db_session.execute(candidate_evidence_table.delete())
+    db_session.query(Feedback).delete()
+    db_session.query(Detection).delete()
+    db_session.query(Scan).delete()
+    db_session.commit()
+
+
 def test_cannot_apply_pending_candidate(db_session):
-    user = User(username="admin", hashed_password="hash", role="admin")
+    user = User(username=f"admin_{uuid4()}", email=f"admin_{uuid4()}@example.com", hashed_password="hash")
     db_session.add(user)
     db_session.commit()
     
@@ -32,7 +64,7 @@ def test_cannot_apply_pending_candidate(db_session):
         learning_application_service.apply_candidate(db_session, str(candidate.id), user.id)
 
 def test_cannot_apply_rejected_candidate(db_session):
-    user = User(username="admin", hashed_password="hash", role="admin")
+    user = User(username=f"admin_{uuid4()}", email=f"admin_{uuid4()}@example.com", hashed_password="hash")
     db_session.add(user)
     db_session.commit()
     
@@ -52,7 +84,7 @@ def test_cannot_apply_rejected_candidate(db_session):
         learning_application_service.apply_candidate(db_session, str(candidate.id), user.id)
 
 def test_apply_approved_candidate(db_session):
-    user = User(username="admin", hashed_password="hash", role="admin")
+    user = User(username=f"admin_{uuid4()}", email=f"admin_{uuid4()}@example.com", hashed_password="hash")
     db_session.add(user)
     db_session.commit()
     
@@ -79,7 +111,7 @@ def test_apply_approved_candidate(db_session):
     assert config.get("semantic") == 0.85
     
 def test_rollback_application(db_session):
-    user = User(username="admin", hashed_password="hash", role="admin")
+    user = User(username=f"admin_{uuid4()}", email=f"admin_{uuid4()}@example.com", hashed_password="hash")
     db_session.add(user)
     db_session.commit()
     
@@ -111,7 +143,7 @@ def test_detect_semantic_uses_learned_config(db_session):
     baseline_result = run_detectors("This is a semantic test prompt")
     
     # Let's mock the active config in db
-    user = User(username="admin", hashed_password="hash", role="admin")
+    user = User(username=f"admin_{uuid4()}", email=f"admin_{uuid4()}@example.com", hashed_password="hash")
     db_session.add(user)
     
     candidate = LearningCandidate(

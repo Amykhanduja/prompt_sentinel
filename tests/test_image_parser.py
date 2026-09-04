@@ -77,19 +77,14 @@ def test_invalid_image(temp_dir):
     assert len(result.items) == 0
 
 def test_no_text_image(temp_dir):
-    path = os.path.join(temp_dir, "empty.png")
-    # Blank image
-    img = Image.new('RGB', (100, 100), color='white')
-    img.save(path)
+    path = os.path.join(os.path.dirname(__file__), "fixtures", "images", "empty.png")
     
     result = parse_image(path)
     # Expected to return empty list because no text is found
     assert len(result.items) == 0
 
 def test_multiline_text(temp_dir):
-    path = os.path.join(temp_dir, "multiline.png")
-    text = "Line One\nLine Two\nLine Three"
-    create_image_with_text(path, text)
+    path = os.path.join(os.path.dirname(__file__), "fixtures", "images", "multiline.png")
     
     result = parse_image(path)
     assert len(result.items) > 0

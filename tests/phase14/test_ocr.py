@@ -1,11 +1,8 @@
 import easyocr
-from PIL import Image, ImageDraw
+import os
 
 def test_ocr():
-    img = Image.new('RGB', (400, 200), color='white')
-    d = ImageDraw.Draw(img)
-    d.text((10,10), "Line One\nLine Two\nLine Three", fill=(0,0,0))
-    img.save("multiline.png")
+    path = os.path.join(os.path.dirname(__file__), "..", "fixtures", "images", "multiline.png")
     r = easyocr.Reader(['en'], gpu=False)
-    print("detail=0:", r.readtext("multiline.png", detail=0))
-    print("detail=1:", r.readtext("multiline.png", detail=1))
+    print("detail=0:", r.readtext(path, detail=0))
+    print("detail=1:", r.readtext(path, detail=1))
